@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
-import DashboardClient from '@/components/DashboardClient'
+import ArtisanDashboardClient from '@/components/ArtisanDashboardClient'
 
 export default async function Dashboard() {
     const supabase = await createClient()
@@ -29,7 +29,7 @@ export default async function Dashboard() {
 
     return (
         <div className="min-h-screen bg-[#faf7f2] pt-20 pb-12 px-4 sm:px-6 lg:px-8">
-            <DashboardClient user={clientUser} initialProducts={products || []} />
+            <ArtisanDashboardClient user={clientUser} initialProducts={products || []} />
         </div>
     )
 }
