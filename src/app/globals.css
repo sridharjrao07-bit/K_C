@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #faf7f2;
+  --foreground: #3e2723;
+  --primary: #b87d4b;
+  --primary-foreground: #ffffff;
+  --secondary: #a68a64;
+  --secondary-foreground: #ffffff;
+  --accent: #d4776f;
+  --accent-foreground: #ffffff;
+  --clay: #d4776f;
+  --terracotta: #c65d51;
+  --cream: #faf7f2;
+  --sand: #e5d1bf;
+  --bark: #6f5c46;
+  --muted: #f5f0e8;
+  --muted-foreground: #625442;
+  --border: #e8dcc9;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: #332b23;
+  --foreground: #faf7f2;
+  --muted: #4a3f32;
+  --muted-foreground: #d1c0a3;
+  --border: #625442;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Glass morphism utility */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-dark {
+  background: rgba(62, 39, 35, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, #d4a574 0%, #d4776f 50%, #a68a64 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animated gradient background with earthy tones */
+.gradient-animate {
+  background: linear-gradient(-45deg,
+      #b87d4b,
+      #d4776f,
+      #a68a64,
+      #c65d51);
+  background-size: 400% 400%;
+  animation: gradient 20s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--clay);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--terracotta);
+}
+
+/* Smooth transitions */
+@layer utilities {
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}

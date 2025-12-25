@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Artisan Launchpad</title>
+  <link rel="stylesheet" href="css/01-style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="01-index.html" class="logo">Artisan Launchpad</a>
+      <nav>
+        <ul>
+          <li><a href="01-index.html">Home</a></li>
+          <li><a href="03-login.html">Login</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="auth-section">
+    <div class="container">
+      <div class="form-container">
+        <div class="auth-header">
+          <h2>Join Artisan Launchpad</h2>
+          <p>Start your journey to e-commerce success</p>
+        </div>
+                
+        <form id="registerForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fullName">Full Name *</label>
+              <input type="text" id="fullName" name="fullName" required>
+            </div>
+                        
+            <div class="form-group">
+              <label for="craftType">Primary Craft *</label>
+              <select id="craftType" name="craftType" required>
+                <option value="">Select your craft</option>
+                <option value="textiles">Textiles & Weaving</option>
+                <option value="pottery">Pottery & Ceramics</option>
+                <option value="woodwork">Woodwork</option>
+                <option value="jewelry">Jewelry</option>
+                <option value="metalwork">Metalwork</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+                    
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+                        
+            <div class="form-group">
+              <label for="phone">Phone Number *</label>
+              <input type="tel" id="phone" name="phone" required>
+            </div>
+          </div>
+                    
+          <div class="form-group">
+            <label for="location">Location *</label>
+            <input type="text" id="location" name="location" placeholder="City, State" required>
+          </div>
+                    
+          <div class="form-row">
+            <div class="form-group">
+              <label for="password">Password *</label>
+              <input type="password" id="password" name="password" required>
+              <div class="password-strength">
+                <div class="password-strength-meter"></div>
+              </div>
+              <div class="password-requirements">
+                <small>Password must contain:</small>
+                <ul>
+                  <li id="lengthreq">At least 8 characters</li>
+                  <li id="upperreq">One uppercase letter</li>
+                  <li id="lowerreq">One lowercase letter</li>
+                  <li id="numberreq">One number</li>
+                </ul>
+              </div>
+            </div>
+                        
+            <div class="form-group">
+              <label for="confirmPassword">Confirm Password *</label>
+              <input type="password" id="confirmPassword" name="confirmPassword" required>
+              <div id="passwordMatch"></div>
+            </div>
+          </div>
+                    
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="terms" required>
+              <span>I agree to the <a href="#" class="link">Terms of Service</a> and <a href="#" class="link">Privacy Policy</a></span>
+            </label>
+          </div>
+                    
+          <button type="submit" class="btn btn-large btn-block">Create Account</button>
+        </form>
+                
+        <div class="auth-footer">
+          <p>Already have an account? <a href="03-login.html">Login here</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/02-auth.js"></script>
+</body>
+</html>

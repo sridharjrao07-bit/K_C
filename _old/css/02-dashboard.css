@@ -1,0 +1,4 @@
+/* dashboard.css — dashboard specific styles (prefixed filename) */
+body { background: linear-gradient(180deg,#f4f6fb 0%, #ffffff 100%); }
+#dashboardMain { padding:24px; }
+.card { background:#fff; border-radius:8px; padding:16px; box-shadow:0 6px 18px rgba(11,19,38,0.06); margin-bottom:16px; }

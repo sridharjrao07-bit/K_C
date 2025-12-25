@@ -1,0 +1,54 @@
+/* style.css — basic site styles (prefixed filename to control ordering) */
+:root {
+  --bg: #f7f7f9;
+  --card: #ffffff;
+  --accent: #2b6cb0;
+  --text: #1a202c;
+  --muted: #6b7280;
+}
+
+/* Animations and reveal styles */
+:root {
+  --anim-ease: cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+.animate-on-scroll { opacity: 0; transform: translateY(14px); will-change: transform, opacity; }
+.animate-on-scroll.animated { opacity: 1; transform: translateY(0); transition: opacity 520ms var(--anim-ease), transform 520ms var(--anim-ease); }
+
+/* Stagger helper: set --delay inline or via JS */
+.stagger { animation-fill-mode: both; animation-name: none; }
+.stagger.animated { animation-name: fadeUp; animation-duration: 520ms; animation-timing-function: var(--anim-ease); animation-delay: var(--delay, 0ms); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Subtle hover lift for feature cards */
+.feature-card { transition: transform 260ms var(--anim-ease), box-shadow 260ms var(--anim-ease); }
+.feature-card:hover { transform: translateY(-6px); box-shadow: 0 14px 34px rgba(11,19,38,0.08); }
+
+/* Hero entrance */
+.hero { opacity: 0; transform: translateY(8px); }
+.hero.animated { opacity: 1; transform: translateY(0); transition: opacity 600ms var(--anim-ease), transform 600ms var(--anim-ease); }
+
+/* Counters */
+.stat-number { transition: transform 420ms var(--anim-ease); }
+
+/* Respect user's reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  :root { --anim-ease: linear; }
+  .animate-on-scroll { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .stagger { animation: none !important; }
+  .hero { opacity: 1 !important; transform: none !important; }
+  .feature-card:hover { transform: none !important; box-shadow: none !important; }
+  .stat-number { transition: none !important; }
+}
+
+* { box-sizing: border-box; }
+html,body { height:100%; margin:0; font-family:Segoe UI, system-ui, Arial, sans-serif; background:var(--bg); color:var(--text); }
+header { background:var(--card); padding:16px 20px; box-shadow:0 1px 0 rgba(0,0,0,0.04); }
+nav a { color:var(--accent); text-decoration:none; margin-right:8px; }
+main { padding:20px; }
+button { background:var(--accent); color:white; border:none; padding:8px 12px; border-radius:4px; cursor:pointer; }
+input { padding:6px 8px; border:1px solid #ddd; border-radius:4px; margin:4px 0; }
