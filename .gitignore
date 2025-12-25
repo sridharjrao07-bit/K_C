@@ -35,3 +35,14 @@ next-env.d.ts
 # IDE
 .vscode/
 .idea/
+
+# Nested repos and backup folders
+Kaarigar-Connect/
+src_backup/
+_old/
+
+# Debug files
+*.txt
+*.sql
+*.png
+fix_filenames.py
