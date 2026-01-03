@@ -1,4 +1,4 @@
-```
+
 import { createBrowserClient } from '@supabase/ssr'
 
 export function createClient() {
@@ -11,4 +11,3 @@ export function createClient() {
 
     return createBrowserClient(url, key)
 }
-```
