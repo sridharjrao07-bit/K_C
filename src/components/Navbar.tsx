@@ -74,7 +74,7 @@ export default function Navbar() {
                 )}
                 <button
                   onClick={handleLogout}
-                  className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
+                  className="text-white/80 hover:text-white transition-colors flex items-center gap-2"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
                 </button>
@@ -91,7 +91,7 @@ export default function Navbar() {
                 <button
                   key={lang.code}
                   onClick={() => setLanguage(lang.code)}
-                  className={`text-xs font-bold px-2 py-1 rounded transition-all ${language === lang.code ? 'bg-white text-black' : 'text-gray-400 hover:text-white'}`}
+                  className={`text-xs font-bold px-2 py-1 rounded transition-all ${language === lang.code ? 'bg-white text-black' : 'text-gray-200 hover:text-white'}`}
                 >
                   {lang.name}
                 </button>
