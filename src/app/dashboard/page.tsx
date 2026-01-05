@@ -10,6 +10,10 @@ export default async function Dashboard() {
         redirect('/login')
     }
 
+    if (user.user_metadata?.role === 'customer') {
+        redirect('/shop');
+    }
+
     // Fetch Products
     const { data: products } = await supabase
         .from('products')

@@ -67,9 +67,11 @@ export default function Navbar() {
             </Link>
             {user ? (
               <>
-                <Link href="/dashboard" className={`nav-link font-bold text-white bg-white/10 px-6 py-2 rounded-full hover:bg-white/20 transition-all ${isActive('/dashboard') ? 'bg-[#c65d51]' : ''}`}>
-                  {t("nav.dashboard")}
-                </Link>
+                {user.user_metadata?.role !== 'customer' && (
+                  <Link href="/dashboard" className={`nav-link font-bold text-white bg-white/10 px-6 py-2 rounded-full hover:bg-white/20 transition-all ${isActive('/dashboard') ? 'bg-[#c65d51]' : ''}`}>
+                    {t("nav.dashboard")}
+                  </Link>
+                )}
                 <button
                   onClick={handleLogout}
                   className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
@@ -127,9 +129,11 @@ export default function Navbar() {
             </Link>
             {user ? (
               <>
-                <Link href="/dashboard" className="block px-4 py-4 text-lg font-bold text-[#c65d51] hover:bg-white/5 rounded-xl border border-[#c65d51]/30 transition-all uppercase tracking-wider" onClick={() => setIsMenuOpen(false)}>
-                  {t("nav.dashboard")}
-                </Link>
+                {user.user_metadata?.role !== 'customer' && (
+                  <Link href="/dashboard" className="block px-4 py-4 text-lg font-bold text-[#c65d51] hover:bg-white/5 rounded-xl border border-[#c65d51]/30 transition-all uppercase tracking-wider" onClick={() => setIsMenuOpen(false)}>
+                    {t("nav.dashboard")}
+                  </Link>
+                )}
                 <button
                   onClick={handleLogout}
                   className="w-full text-left px-4 py-4 text-lg font-medium text-gray-400 hover:text-white transition-all uppercase tracking-wider"
