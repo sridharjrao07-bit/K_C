@@ -56,7 +56,7 @@ export default function Navbar() {
   ];
 
   // Dynamic colors based on scroll
-  const navClasses = `sticky top-0 z-50 transition-all duration-300 ${isScrolled
+  const navClasses = `sticky top-0 z-50 transition-all duration-300 animate-slide-down ${isScrolled
     ? "glass-dark shadow-md border-b border-white/10"
     : "glass-dark border-b border-white/10"
     }`;
@@ -82,16 +82,18 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="/about" className={`font-medium transition-all ${isActive('/about') ? 'text-[#c65d51] font-bold' : `${textColor} ${hoverColor}`}`}>
+            <Link href="/about" className={`font-medium transition-all relative group ${isActive('/about') ? 'text-[#c65d51] font-bold' : `${textColor} ${hoverColor}`}`}>
               {t("nav.about")}
+              <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-[#c65d51] transition-all duration-300 group-hover:w-full ${isActive('/about') ? 'w-full' : ''}`}></span>
             </Link>
-            <Link href="/shop" className={`font-medium transition-all ${isActive('/shop') ? 'text-[#c65d51] font-bold' : `${textColor} ${hoverColor}`}`}>
+            <Link href="/shop" className={`font-medium transition-all relative group ${isActive('/shop') ? 'text-[#c65d51] font-bold' : `${textColor} ${hoverColor}`}`}>
               {t("nav.shop")}
+              <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-[#c65d51] transition-all duration-300 group-hover:w-full ${isActive('/shop') ? 'w-full' : ''}`}></span>
             </Link>
             {user ? (
               <>
                 {user.user_metadata?.role !== 'customer' && (
-                  <Link href="/dashboard" className={`nav-link font-bold text-white bg-white/10 px-6 py-2 rounded-full hover:bg-white/20 transition-all ${isActive('/dashboard') ? 'bg-[#c65d51]' : ''}`}>
+                  <Link href="/dashboard" className={`nav-link font-bold text-white bg-white/10 px-6 py-2 rounded-full hover:bg-white/20 transition-all active:scale-95 ${isActive('/dashboard') ? 'bg-[#c65d51]' : ''}`}>
                     {t("nav.dashboard")}
                   </Link>
                 )}
