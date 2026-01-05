@@ -1,19 +1,26 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
+import { useLanguage } from "@/context/language-context";
 
-export default function UpdatePassword() {
+export default function UpdatePasswordPage() {
+    const { t } = useLanguage();
     const router = useRouter();
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+
         setIsLoading(true);
-        setError(null);
 
         try {
             const supabase = createClient();
@@ -22,13 +29,15 @@ export default function UpdatePassword() {
             });
 
             if (error) {
-                setError(error.message);
+                alert(error.message);
             } else {
-                alert("Password updated successfully!");
+                alert(t("auth.passwordUpdated"));
                 router.push("/dashboard");
+                router.refresh();
             }
-        } catch (err: any) {
-            setError(err.message);
+        } catch (error) {
+            console.error(error);
+            alert("An error occurred.");
         } finally {
             setIsLoading(false);
         }
@@ -36,38 +45,49 @@ export default function UpdatePassword() {
 
     return (
         <div className="min-h-screen bg-[#faf7f2] flex items-center justify-center p-4">
-            <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg border border-[#e5d1bf] animate-slide-up">
+            <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 border border-[#e8dcc9]">
                 <div className="text-center mb-8">
-                    <h1 className="text-3xl font-display font-bold text-[#6f5c46] mb-2">New Password</h1>
-                    <p className="text-gray-600">Enter your new secure password</p>
+                    <h2 className="text-2xl font-bold text-[#6f5c46]">{t("auth.updatePassword")}</h2>
+                    <p className="text-gray-500 mt-2">Enter your new password below.</p>
                 </div>
-
-                {error && (
-                    <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-lg border border-red-200 text-sm">
-                        {error}
-                    </div>
-                )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
-                        <label className="block text-sm font-medium text-[#6f5c46] mb-2">New Password</label>
+                        <label htmlFor="password" className="block text-sm font-medium text-[#6f5c46] mb-2">
+                            {t("auth.newPassword")}
+                        </label>
                         <input
+                            id="password"
                             type="password"
                             required
                             minLength={6}
-                            className="w-full px-4 py-3 rounded-lg border border-[#e5d1bf] focus:ring-2 focus:ring-[#c65d51]/20 focus:border-[#c65d51] outline-none transition-all"
-                            placeholder="••••••••"
+                            className="w-full px-4 py-3 rounded-lg bg-[#faf7f2] border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f]"
+                            placeholder={t("auth.placeholderPassword")}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
-
+                    <div>
+                        <label htmlFor="confirmPassword" className="block text-sm font-medium text-[#6f5c46] mb-2">
+                            {t("auth.confirmPassword")}
+                        </label>
+                        <input
+                            id="confirmPassword"
+                            type="password"
+                            required
+                            minLength={6}
+                            className="w-full px-4 py-3 rounded-lg bg-[#faf7f2] border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f]"
+                            placeholder={t("auth.placeholderPassword")}
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                        />
+                    </div>
                     <button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full bg-[#6f5c46] text-white py-3 rounded-lg font-semibold hover:bg-[#5a4a38] transition-smooth disabled:opacity-70"
+                        className="w-full bg-gradient-to-r from-[#b87d4b] to-[#d4776f] text-white py-3 rounded-full font-bold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all disabled:opacity-70"
                     >
-                        {isLoading ? "Updating..." : "Update Password"}
+                        {isLoading ? "Updating..." : t("auth.updatePassword")}
                     </button>
                 </form>
             </div>

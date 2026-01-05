@@ -116,7 +116,7 @@ export default function LoginPage() {
                                 <label htmlFor="password" className="text-sm font-medium text-[#6f5c46]">
                                     {t("auth.password")}
                                 </label>
-                                <Link href="#" className="text-sm font-medium text-[#c65d51] hover:text-[#a84e44]">
+                                <Link href="/forgot-password" className="text-sm font-medium text-[#c65d51] hover:text-[#a84e44]">
                                     {t("auth.forgotPassword")}
                                 </Link>
                             </div>
