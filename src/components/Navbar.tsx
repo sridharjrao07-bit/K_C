@@ -11,10 +11,19 @@ import { User } from "@supabase/supabase-js";
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const supabase = createClient();
   const { language, setLanguage, t } = useLanguage();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -46,35 +55,51 @@ export default function Navbar() {
     { code: "kn" as Language, name: "ಕ" },
   ];
 
+  // Dynamic colors based on scroll
+  const navClasses = `sticky top-0 z-50 transition-all duration-300 ${isScrolled
+      ? "bg-[#faf7f2]/95 backdrop-blur-md shadow-md border-b border-[#e5d1bf]"
+      : "glass-dark border-b border-white/10"
+    }`;
+
+  const textColor = isScrolled ? "text-[#6f5c46]" : "text-white";
+  const mutedTextColor = isScrolled ? "text-[#6f5c46]/70" : "text-white/80";
+  const hoverColor = isScrolled ? "hover:text-[#c65d51]" : "hover:text-white";
+  const activeLangBg = isScrolled ? "bg-[#6f5c46] text-white" : "bg-white text-black";
+  const inactiveLangText = isScrolled ? "text-[#6f5c46]/70 hover:text-[#6f5c46]" : "text-white/80 hover:text-white";
+  const logoColor = isScrolled ? "text-[#6f5c46]" : "text-white";
+
   return (
-    <nav className="sticky top-0 z-50 glass-dark border-b border-white/10">
+    <nav className={navClasses}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center group">
-            <span className="text-2xl font-display font-bold text-white tracking-widest group-hover:text-[#c65d51] transition-colors">
-              KAARIGAR<span className="text-[#c65d51] group-hover:text-white transition-colors">.</span>
+            <span className={`text-2xl font-display font-bold tracking-widest transition-colors ${logoColor} group-hover:text-[#c65d51]`}>
+              KAARIGAR<span className="text-[#c65d51] group-hover:text-[#6f5c46] transition-colors">.</span>
             </span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="/about" className={`nav-link ${isActive('/about') ? 'active' : ''}`}>
+            <Link href="/about" className={`font-medium transition-all ${isActive('/about') ? 'text-[#c65d51] font-bold' : `${textColor} ${hoverColor}`}`}>
               {t("nav.about")}
             </Link>
-            <Link href="/shop" className={`nav-link ${isActive('/shop') ? 'active' : ''}`}>
+            <Link href="/shop" className={`font-medium transition-all ${isActive('/shop') ? 'text-[#c65d51] font-bold' : `${textColor} ${hoverColor}`}`}>
               {t("nav.shop")}
             </Link>
             {user ? (
               <>
                 {user.user_metadata?.role !== 'customer' && (
-                  <Link href="/dashboard" className={`nav-link font-bold text-white bg-white/10 px-6 py-2 rounded-full hover:bg-white/20 transition-all ${isActive('/dashboard') ? 'bg-[#c65d51]' : ''}`}>
+                  <Link href="/dashboard" className={`font-bold px-6 py-2 rounded-full transition-all ${isActive('/dashboard')
+                      ? 'bg-[#c65d51] text-white'
+                      : isScrolled ? 'bg-[#e5d1bf] text-[#6f5c46] hover:bg-[#d4a574] hover:text-white' : 'bg-white/10 text-white hover:bg-white/20'
+                    }`}>
                     {t("nav.dashboard")}
                   </Link>
                 )}
                 <button
                   onClick={handleLogout}
-                  className="text-white/80 hover:text-white transition-colors flex items-center gap-2"
+                  className={`${mutedTextColor} ${hoverColor} transition-colors flex items-center gap-2`}
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
                 </button>
@@ -86,12 +111,12 @@ export default function Navbar() {
             )}
 
             {/* Desktop Language Switcher */}
-            <div className="flex items-center gap-2 border-l border-white/10 pl-6 ml-6">
+            <div className={`flex items-center gap-2 border-l pl-6 ml-6 ${isScrolled ? 'border-[#e5d1bf]' : 'border-white/10'}`}>
               {languages.map((lang) => (
                 <button
                   key={lang.code}
                   onClick={() => setLanguage(lang.code)}
-                  className={`text-xs font-bold px-2 py-1 rounded transition-all ${language === lang.code ? 'bg-white text-black' : 'text-gray-200 hover:text-white'}`}
+                  className={`text-xs font-bold px-2 py-1 rounded transition-all ${language === lang.code ? activeLangBg : inactiveLangText}`}
                 >
                   {lang.name}
                 </button>
@@ -103,7 +128,7 @@ export default function Navbar() {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-400 hover:text-white focus:outline-none p-2"
+              className={`${textColor} hover:text-[#c65d51] focus:outline-none p-2`}
             >
               <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {isMenuOpen ? (
@@ -119,24 +144,24 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="md:hidden animate-slide-up bg-[#1a1a1a] border-b border-white/10">
+        <div className="md:hidden animate-slide-up bg-[#faf7f2] border-b border-[#e5d1bf] shadow-xl">
           <div className="px-4 pt-2 pb-6 space-y-2">
-            <Link href="/about" className="block px-4 py-4 text-lg font-medium text-gray-300 hover:text-white hover:bg-white/5 rounded-xl border border-transparent hover:border-white/10 transition-all uppercase tracking-wider" onClick={() => setIsMenuOpen(false)}>
+            <Link href="/about" className="block px-4 py-4 text-lg font-medium text-[#6f5c46] hover:text-[#c65d51] hover:bg-[#e5d1bf]/20 rounded-xl transition-all uppercase tracking-wider" onClick={() => setIsMenuOpen(false)}>
               {t("nav.about")}
             </Link>
-            <Link href="/shop" className="block px-4 py-4 text-lg font-medium text-gray-300 hover:text-white hover:bg-white/5 rounded-xl border border-transparent hover:border-white/10 transition-all uppercase tracking-wider" onClick={() => setIsMenuOpen(false)}>
+            <Link href="/shop" className="block px-4 py-4 text-lg font-medium text-[#6f5c46] hover:text-[#c65d51] hover:bg-[#e5d1bf]/20 rounded-xl transition-all uppercase tracking-wider" onClick={() => setIsMenuOpen(false)}>
               {t("nav.shop")}
             </Link>
             {user ? (
               <>
                 {user.user_metadata?.role !== 'customer' && (
-                  <Link href="/dashboard" className="block px-4 py-4 text-lg font-bold text-[#c65d51] hover:bg-white/5 rounded-xl border border-[#c65d51]/30 transition-all uppercase tracking-wider" onClick={() => setIsMenuOpen(false)}>
+                  <Link href="/dashboard" className="block px-4 py-4 text-lg font-bold text-[#c65d51] hover:bg-[#e5d1bf]/20 rounded-xl border border-[#c65d51]/30 transition-all uppercase tracking-wider" onClick={() => setIsMenuOpen(false)}>
                     {t("nav.dashboard")}
                   </Link>
                 )}
                 <button
                   onClick={handleLogout}
-                  className="w-full text-left px-4 py-4 text-lg font-medium text-gray-400 hover:text-white transition-all uppercase tracking-wider"
+                  className="w-full text-left px-4 py-4 text-lg font-medium text-gray-400 hover:text-[#c65d51] transition-all uppercase tracking-wider"
                 >
                   Log Out
                 </button>
@@ -148,7 +173,7 @@ export default function Navbar() {
             )}
 
             {/* Mobile Language Switcher */}
-            <div className="flex items-center justify-center gap-4 pt-6 border-t border-white/10 mt-6">
+            <div className="flex items-center justify-center gap-4 pt-6 border-t border-[#e5d1bf] mt-6">
               {languages.map((lang) => (
                 <button
                   key={lang.code}
@@ -156,7 +181,10 @@ export default function Navbar() {
                     setLanguage(lang.code);
                     setIsMenuOpen(false);
                   }}
-                  className={`text-sm font-bold px-4 py-2 rounded-lg transition-all border ${language === lang.code ? 'bg-white text-black border-white' : 'text-gray-400 border-white/10'}`}
+                  className={`text-sm font-bold px-4 py-2 rounded-lg transition-all border ${language === lang.code
+                      ? 'bg-[#6f5c46] text-white border-[#6f5c46]'
+                      : 'text-[#6f5c46] border-[#e5d1bf]'
+                    }`}
                 >
                   {lang.name}
                 </button>
