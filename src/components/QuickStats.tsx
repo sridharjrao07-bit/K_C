@@ -8,9 +8,9 @@ export default function QuickStats({ artisanId }: { artisanId: string }) {
   const { t } = useLanguage();
   const [stats, setStats] = useState({
     totalEarnings: 0,
-    storeViews: 42, // Mock for now
+    storeViews: 0,
     activeProducts: 0,
-    unseenMessages: 2 // Mock for now
+    unseenMessages: 0
   });
   const [loading, setLoading] = useState(true);
 
