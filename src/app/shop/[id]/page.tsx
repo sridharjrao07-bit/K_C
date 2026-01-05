@@ -15,8 +15,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
             *,
             profiles (
                 full_name,
-                craft,
-                email
+                craft
             )
         `)
         .eq('id', id)
