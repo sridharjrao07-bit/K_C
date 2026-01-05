@@ -8,6 +8,7 @@ import { createClient } from "@/lib/supabase/client";
 export default function Register() {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
+    const [role, setRole] = useState<"artisan" | "customer">("artisan");
     const [formData, setFormData] = useState({
         fullName: "",
         email: "",
@@ -29,8 +30,9 @@ export default function Register() {
                 options: {
                     data: {
                         full_name: formData.fullName,
-                        phone: formData.phone,
-                        craft: formData.craft
+                        phone: role === "artisan" ? formData.phone : null,
+                        craft: role === "artisan" ? formData.craft : null,
+                        role: role
                     }
                 }
             });
@@ -56,23 +58,18 @@ export default function Register() {
             {/* Left Side - Image/Decorative */}
             <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-[#6f5c46] via-[#332b23] to-[#5a3b25] relative overflow-hidden items-center justify-center">
                 <div className="absolute inset-0 bg-texture-pattern opacity-10"></div>
-
-                {/* Decorative floating elements */}
                 <div className="absolute top-20 left-20 w-64 h-64 bg-[#d4776f] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse-slow"></div>
                 <div className="absolute bottom-20 right-20 w-64 h-64 bg-[#b87d4b] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float"></div>
 
                 <div className="relative z-10 text-center px-12 animate-fade-in">
                     <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-                        Join the <br />
-                        <span className="bg-gradient-to-r from-[#e5d1bf] to-[#d4a574] bg-clip-text text-transparent">
-                            Kaarigar Community
-                        </span>
+                        {role === "artisan" ? "Join the Kaarigar Community" : "Discover Authentic Crafts"}
                     </h2>
                     <p className="text-lg text-[#e5d1bf]/80 max-w-md mx-auto leading-relaxed">
-                        Start your digital journey today. Showcase your craft to the world and connect with millions of customers.
+                        {role === "artisan"
+                            ? "Start your digital journey today. Showcase your craft to the world."
+                            : "Support traditional artisans and buy unique, handcrafted products directly."}
                     </p>
-
-
                 </div>
             </div>
 
@@ -86,6 +83,31 @@ export default function Register() {
                             </span>
                         </Link>
                         <h2 className="text-3xl font-bold text-[#6f5c46]">Create Account</h2>
+
+                        {/* Role Switcher */}
+                        <div className="mt-6 flex bg-white p-1 rounded-xl border border-[#e8dcc9] mb-6">
+                            <button
+                                type="button"
+                                onClick={() => setRole("artisan")}
+                                className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${role === "artisan"
+                                        ? "bg-[#6f5c46] text-white shadow-md"
+                                        : "text-gray-500 hover:text-[#6f5c46]"
+                                    }`}
+                            >
+                                I am an Artisan
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setRole("customer")}
+                                className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${role === "customer"
+                                        ? "bg-[#c65d51] text-white shadow-md"
+                                        : "text-gray-500 hover:text-[#c65d51]"
+                                    }`}
+                            >
+                                I am a Shopper
+                            </button>
+                        </div>
+
                         <p className="mt-2 text-gray-600">
                             Already have an account?{" "}
                             <Link href="/login" className="font-medium text-[#c65d51] hover:text-[#a84e44] transition-smooth">
@@ -96,7 +118,7 @@ export default function Register() {
 
                     <form className="space-y-6" onSubmit={handleSubmit}>
                         {/* Name Input */}
-                        <div className="space-y-2 opacity-0 animate-fade-in" style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}>
+                        <div className="space-y-2">
                             <label htmlFor="fullName" className="text-sm font-medium text-[#6f5c46]">
                                 Full Name
                             </label>
@@ -104,52 +126,55 @@ export default function Register() {
                                 id="fullName"
                                 type="text"
                                 required
-                                className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] focus:border-transparent transition-smooth"
+                                className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] transition-smooth"
                                 placeholder="Enter your full name"
                                 value={formData.fullName}
                                 onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                             />
                         </div>
 
-                        {/* Craft & Location Row */}
-                        <div className="grid grid-cols-2 gap-4">
-                            <div className="space-y-2 opacity-0 animate-fade-in" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
-                                <label htmlFor="craft" className="text-sm font-medium text-[#6f5c46]">
-                                    Craft Type
-                                </label>
-                                <select
-                                    id="craft"
-                                    className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] focus:border-transparent transition-smooth"
-                                    value={formData.craft}
-                                    onChange={(e) => setFormData({ ...formData, craft: e.target.value })}
-                                >
-                                    <option value="">Select Craft</option>
-                                    <option value="pottery">Pottery</option>
-                                    <option value="textiles">Textiles</option>
-                                    <option value="jewelry">Jewelry</option>
-                                    <option value="woodwork">Woodwork</option>
-                                    <option value="metalwork">Metalwork</option>
-                                    <option value="other">Other</option>
-                                </select>
+                        {/* Artisan Only Fields */}
+                        {role === "artisan" && (
+                            <div className="grid grid-cols-2 gap-4 animate-fade-in">
+                                <div className="space-y-2">
+                                    <label htmlFor="craft" className="text-sm font-medium text-[#6f5c46]">
+                                        Craft Type
+                                    </label>
+                                    <select
+                                        id="craft"
+                                        className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] transition-smooth"
+                                        value={formData.craft}
+                                        onChange={(e) => setFormData({ ...formData, craft: e.target.value })}
+                                        required={role === "artisan"}
+                                    >
+                                        <option value="">Select Craft</option>
+                                        <option value="pottery">Pottery</option>
+                                        <option value="textiles">Textiles</option>
+                                        <option value="jewelry">Jewelry</option>
+                                        <option value="woodwork">Woodwork</option>
+                                        <option value="metalwork">Metalwork</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div className="space-y-2">
+                                    <label htmlFor="phone" className="text-sm font-medium text-[#6f5c46]">
+                                        Phone Number
+                                    </label>
+                                    <input
+                                        id="phone"
+                                        type="tel"
+                                        required={role === "artisan"}
+                                        className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] transition-smooth"
+                                        placeholder="+91..."
+                                        value={formData.phone}
+                                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                    />
+                                </div>
                             </div>
-                            <div className="space-y-2 opacity-0 animate-fade-in" style={{ animationDelay: '250ms', animationFillMode: 'forwards' }}>
-                                <label htmlFor="phone" className="text-sm font-medium text-[#6f5c46]">
-                                    Phone Number
-                                </label>
-                                <input
-                                    id="phone"
-                                    type="tel"
-                                    required
-                                    className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] focus:border-transparent transition-smooth"
-                                    placeholder="+91..."
-                                    value={formData.phone}
-                                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                />
-                            </div>
-                        </div>
+                        )}
 
                         {/* Email Input */}
-                        <div className="space-y-2 opacity-0 animate-fade-in" style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}>
+                        <div className="space-y-2">
                             <label htmlFor="email" className="text-sm font-medium text-[#6f5c46]">
                                 Email Address
                             </label>
@@ -157,7 +182,7 @@ export default function Register() {
                                 id="email"
                                 type="email"
                                 required
-                                className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] focus:border-transparent transition-smooth"
+                                className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] transition-smooth"
                                 placeholder="you@example.com"
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -165,7 +190,7 @@ export default function Register() {
                         </div>
 
                         {/* Password Input */}
-                        <div className="space-y-2 opacity-0 animate-fade-in" style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}>
+                        <div className="space-y-2">
                             <label htmlFor="password" className="text-sm font-medium text-[#6f5c46]">
                                 Password
                             </label>
@@ -173,7 +198,7 @@ export default function Register() {
                                 id="password"
                                 type="password"
                                 required
-                                className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] focus:border-transparent transition-smooth"
+                                className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] transition-smooth"
                                 placeholder="••••••••"
                                 value={formData.password}
                                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
@@ -181,11 +206,14 @@ export default function Register() {
                         </div>
 
                         {/* Submit Button */}
-                        <div className="pt-4 opacity-0 animate-fade-in" style={{ animationDelay: '500ms', animationFillMode: 'forwards' }}>
+                        <div className="pt-4">
                             <button
                                 type="submit"
                                 disabled={isLoading}
-                                className="w-full bg-gradient-to-r from-[#b87d4b] to-[#d4776f] text-white py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
+                                className={`w-full text-white py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center ${role === "artisan"
+                                        ? "bg-gradient-to-r from-[#b87d4b] to-[#d4776f]"
+                                        : "bg-gradient-to-r from-[#c65d51] to-[#e89b87]"
+                                    }`}
                             >
                                 {isLoading ? (
                                     <>
@@ -196,7 +224,7 @@ export default function Register() {
                                         Creating Account...
                                     </>
                                 ) : (
-                                    "Register Kaarigar"
+                                    role === "artisan" ? "Register Kaarigar" : "Start Shopping"
                                 )}
                             </button>
                         </div>
