@@ -122,7 +122,15 @@ export const translations = {
       forgotPassword: "Forgot password?",
       signingIn: "Signing In...",
       placeholderEmail: "you@example.com",
-      placeholderPassword: "••••••••"
+      placeholderPassword: "••••••••",
+      resetPassword: "Reset Password",
+      sendResetLink: "Send Reset Link",
+      backToLogin: "Back to Login",
+      updatePassword: "Update Password",
+      newPassword: "New Password",
+      confirmPassword: "Confirm Password",
+      passwordUpdated: "Password updated successfully!",
+      checkEmail: "Check your email for the reset link."
     },
     training: {
       title: "Artisan Academy",
@@ -256,7 +264,15 @@ export const translations = {
       forgotPassword: "पासवर्ड भूल गए?",
       signingIn: "साइन इन हो रहा है...",
       placeholderEmail: "aap@example.com",
-      placeholderPassword: "••••••••"
+      placeholderPassword: "••••••••",
+      resetPassword: "पासवर्ड रीसेट करें",
+      sendResetLink: "रीसेट लिंक भेजें",
+      backToLogin: "लॉगिन पर वापस जाएं",
+      updatePassword: "पासवर्ड अपडेट करें",
+      newPassword: "नया पासवर्ड",
+      confirmPassword: "पासवर्ड की पुष्टि करें",
+      passwordUpdated: "पासवर्ड सफलतापूर्वक अपडेट किया गया!",
+      checkEmail: "रीसेट लिंक के लिए अपना ईमेल देखें।"
     },
     training: {
       title: "कारीगर अकादमी",
@@ -390,7 +406,15 @@ export const translations = {
       forgotPassword: "ಪಾಸ್ವರ್ಡ್ ಮರೆತಿರಾ?",
       signingIn: "ಸೈನ್ ಇನ್ ಆಗುತ್ತಿದೆ...",
       placeholderEmail: "neeve@example.com",
-      placeholderPassword: "••••••••"
+      placeholderPassword: "••••••••",
+      resetPassword: "ಪಾಸ್‌ವರ್ಡ್ ಮರುಹೊಂದಿಸಿ",
+      sendResetLink: "ಮರುಹೊಂದಿಸುವ ಲಿಂಕ್ ಕಳುಹಿಸಿ",
+      backToLogin: "ಲಾಗಿನ್‌ಗೆ ಹಿಂತಿರುಗಿ",
+      updatePassword: "ಪಾಸ್‌ವರ್ಡ್ ನವೀಕರಿಸಿ",
+      newPassword: "ಹೊಸ ಪಾಸ್‌ವರ್ಡ್",
+      confirmPassword: "ಪಾಸ್‌ವರ್ಡ್ ದೃಢೀಕರಿಸಿ",
+      passwordUpdated: "ಪಾಸ್‌ವರ್ಡ್ ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ!",
+      checkEmail: "ಮರುಹೊಂದಿಸುವ ಲಿಂಕ್‌ಗಾಗಿ ನಿಮ್ಮ ಇಮೇಲ್ ಪರಿಶೀಲಿಸಿ."
     },
     training: {
       title: "ಕುಶಲಕರ್ಮಿ ಅಕಾಡೆಮಿ",
