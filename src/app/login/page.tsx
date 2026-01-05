@@ -4,9 +4,11 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { useLanguage } from "@/context/language-context";
 
 export default function LoginPage() {
     const router = useRouter();
+    const { t } = useLanguage();
     const [isLoading, setIsLoading] = useState(false);
     const [formData, setFormData] = useState({
         email: "",
@@ -64,10 +66,10 @@ export default function LoginPage() {
                         </div>
                     </div>
                     <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-                        Welcome Back
+                        {t("auth.welcomeBack")}
                     </h2>
                     <p className="text-lg text-[#e5d1bf]/80 max-w-md mx-auto leading-relaxed">
-                        Your craft, your story, your marketplace. Continue your journey with Kaarigar Connect.
+                        {t("auth.welcomeSubtitle")}
                     </p>
                 </div>
             </div>
@@ -81,11 +83,11 @@ export default function LoginPage() {
                                 Kaarigar Connect
                             </span>
                         </Link>
-                        <h2 className="text-3xl font-bold text-[#6f5c46]">Sign In</h2>
+                        <h2 className="text-3xl font-bold text-[#6f5c46]">{t("auth.signIn")}</h2>
                         <p className="mt-2 text-gray-600">
-                            New to Kaarigar Connect?{" "}
+                            {t("auth.newTo")}{" "}
                             <Link href="/register" className="font-medium text-[#c65d51] hover:text-[#a84e44] transition-smooth">
-                                Create an account
+                                {t("auth.createAccount")}
                             </Link>
                         </p>
                     </div>
@@ -94,7 +96,7 @@ export default function LoginPage() {
                         {/* Email Input */}
                         <div className="space-y-2 opacity-0 animate-fade-in" style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}>
                             <label htmlFor="email" className="text-sm font-medium text-[#6f5c46]">
-                                Email Address
+                                {t("auth.email")}
                             </label>
                             <input
                                 id="email"
@@ -102,7 +104,7 @@ export default function LoginPage() {
                                 type="email"
                                 required
                                 className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] focus:border-transparent transition-smooth"
-                                placeholder="you@example.com"
+                                placeholder={t("auth.placeholderEmail")}
                                 value={formData.email}
                                 onChange={handleChange}
                             />
@@ -112,10 +114,10 @@ export default function LoginPage() {
                         <div className="space-y-2 opacity-0 animate-fade-in" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
                             <div className="flex justify-between items-center">
                                 <label htmlFor="password" className="text-sm font-medium text-[#6f5c46]">
-                                    Password
+                                    {t("auth.password")}
                                 </label>
                                 <Link href="#" className="text-sm font-medium text-[#c65d51] hover:text-[#a84e44]">
-                                    Forgot password?
+                                    {t("auth.forgotPassword")}
                                 </Link>
                             </div>
                             <input
@@ -124,7 +126,7 @@ export default function LoginPage() {
                                 type="password"
                                 required
                                 className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] focus:border-transparent transition-smooth"
-                                placeholder="••••••••"
+                                placeholder={t("auth.placeholderPassword")}
                                 value={formData.password}
                                 onChange={handleChange}
                             />
@@ -143,10 +145,10 @@ export default function LoginPage() {
                                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                         </svg>
-                                        Signing In...
+                                        {t("auth.signingIn")}
                                     </>
                                 ) : (
-                                    "Sign In"
+                                    t("auth.signIn")
                                 )}
                             </button>
                         </div>

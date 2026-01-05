@@ -111,6 +111,19 @@ export const translations = {
       activeProducts: "Active Products",
       pendingItems: "Pending Items"
     },
+    auth: {
+      signIn: "Sign In",
+      welcomeBack: "Welcome Back",
+      welcomeSubtitle: "Your craft, your story, your marketplace. Continue your journey with Kaarigar Connect.",
+      newTo: "New to Kaarigar Connect?",
+      createAccount: "Create an account",
+      email: "Email Address",
+      password: "Password",
+      forgotPassword: "Forgot password?",
+      signingIn: "Signing In...",
+      placeholderEmail: "you@example.com",
+      placeholderPassword: "••••••••"
+    },
     training: {
       title: "Artisan Academy",
       subtitle: "Master the skills needed to succeed in the digital marketplace.",
@@ -232,6 +245,19 @@ export const translations = {
       activeProducts: "सक्रिय उत्पाद",
       pendingItems: "लंबित आइटम"
     },
+    auth: {
+      signIn: "साइन इन करें",
+      welcomeBack: "वापसी पर स्वागत है",
+      welcomeSubtitle: "आपका शिल्प, आपकी कहानी, आपका बाजार। कारीगर कनेक्ट के साथ अपनी यात्रा जारी रखें।",
+      newTo: "कारीगर कनेक्ट पर नए हैं?",
+      createAccount: "खाता बनाएं",
+      email: "ईमेल पता",
+      password: "पासवर्ड",
+      forgotPassword: "पासवर्ड भूल गए?",
+      signingIn: "साइन इन हो रहा है...",
+      placeholderEmail: "aap@example.com",
+      placeholderPassword: "••••••••"
+    },
     training: {
       title: "कारीगर अकादमी",
       subtitle: "डिजिटल मार्केटप्लेस में सफल होने के लिए आवश्यक कौशल में महारत हासिल करें।",
@@ -352,6 +378,19 @@ export const translations = {
       storeViews: "ಮಳಿಗೆಯ ವೀಕ್ಷಣೆಗಳು",
       activeProducts: "ಸಕ್ರಿಯ ಉತ್ಪನ್ನಗಳು",
       pendingItems: "ಬಾಕಿ ಇರುವ ಐಟಂಗಳು"
+    },
+    auth: {
+      signIn: "ಸೈನ್ ಇನ್",
+      welcomeBack: "ಮರಳಿ ಸ್ವಾಗತ",
+      welcomeSubtitle: "ನಿಮ್ಮ ಕರಕುಶಲ, ನಿಮ್ಮ ಕಥೆ, ನಿಮ್ಮ ಮಾರುಕಟ್ಟೆ. ಕುಶಲಕರ್ಮಿ ಕನೆಕ್ಟ್‌ನೊಂದಿಗೆ ನಿಮ್ಮ ಪ್ರಯಾಣವನ್ನು ಮುಂದುವರಿಸಿ.",
+      newTo: "ಕುಶಲಕರ್ಮಿ ಕನೆಕ್ಟ್‌ಗೆ ಹೊಸಬರೇ?",
+      createAccount: "ಖಾತೆ ತೆರೆಯಿರಿ",
+      email: "ಇಮೇಲ್ ವಿಳಾಸ",
+      password: "ಪಾಸ್ವರ್ಡ್",
+      forgotPassword: "ಪಾಸ್ವರ್ಡ್ ಮರೆತಿರಾ?",
+      signingIn: "ಸೈನ್ ಇನ್ ಆಗುತ್ತಿದೆ...",
+      placeholderEmail: "neeve@example.com",
+      placeholderPassword: "••••••••"
     },
     training: {
       title: "ಕುಶಲಕರ್ಮಿ ಅಕಾಡೆಮಿ",
