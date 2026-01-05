@@ -14,7 +14,7 @@ export default function Home() {
                 {/* Animated background with texture */}
                 <div className="absolute inset-0 bg-texture-pattern opacity-10"></div>
 
-                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+                <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
                     <div className="text-center animate-fade-in">
                         <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6 animate-slide-up">
                             {t("hero.titlePart1")}{" "}
