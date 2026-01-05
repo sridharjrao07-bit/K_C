@@ -21,7 +21,7 @@ export default function LoginPage() {
 
         try {
             const supabase = createClient();
-            const { error } = await supabase.auth.signInWithPassword({
+            const { data, error } = await supabase.auth.signInWithPassword({
                 email: formData.email,
                 password: formData.password,
             });
@@ -31,7 +31,11 @@ export default function LoginPage() {
                 return;
             }
 
-            router.push("/dashboard");
+            if (data.user?.user_metadata?.role === 'customer') {
+                router.push("/shop");
+            } else {
+                router.push("/dashboard");
+            }
             router.refresh();
 
         } catch (error) {
