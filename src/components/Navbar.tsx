@@ -57,15 +57,15 @@ export default function Navbar() {
 
   // Dynamic colors based on scroll
   const navClasses = `sticky top-0 z-50 transition-all duration-300 ${isScrolled
-      ? "bg-[#faf7f2]/95 backdrop-blur-md shadow-md border-b border-[#e5d1bf]"
-      : "glass-dark border-b border-white/10"
+    ? "bg-[#faf7f2]/95 backdrop-blur-md shadow-md border-b border-[#e5d1bf]"
+    : "glass-dark border-b border-white/10"
     }`;
 
   const textColor = isScrolled ? "text-[#6f5c46]" : "text-white";
-  const mutedTextColor = isScrolled ? "text-[#6f5c46]/70" : "text-white/80";
-  const hoverColor = isScrolled ? "hover:text-[#c65d51]" : "hover:text-white";
+  const mutedTextColor = isScrolled ? "text-[#6f5c46]" : "text-white"; // Force full white
+  const hoverColor = isScrolled ? "hover:text-[#c65d51]" : "hover:text-primary-200";
   const activeLangBg = isScrolled ? "bg-[#6f5c46] text-white" : "bg-white text-black";
-  const inactiveLangText = isScrolled ? "text-[#6f5c46]/70 hover:text-[#6f5c46]" : "text-white/80 hover:text-white";
+  const inactiveLangText = isScrolled ? "text-[#6f5c46] hover:text-[#6f5c46]" : "text-white hover:text-white"; // Force full white
   const logoColor = isScrolled ? "text-[#6f5c46]" : "text-white";
 
   return (
@@ -91,8 +91,8 @@ export default function Navbar() {
               <>
                 {user.user_metadata?.role !== 'customer' && (
                   <Link href="/dashboard" className={`font-bold px-6 py-2 rounded-full transition-all ${isActive('/dashboard')
-                      ? 'bg-[#c65d51] text-white'
-                      : isScrolled ? 'bg-[#e5d1bf] text-[#6f5c46] hover:bg-[#d4a574] hover:text-white' : 'bg-white/10 text-white hover:bg-white/20'
+                    ? 'bg-[#c65d51] text-white'
+                    : isScrolled ? 'bg-[#e5d1bf] text-[#6f5c46] hover:bg-[#d4a574] hover:text-white' : 'bg-white/10 text-white hover:bg-white/20'
                     }`}>
                     {t("nav.dashboard")}
                   </Link>
@@ -182,8 +182,8 @@ export default function Navbar() {
                     setIsMenuOpen(false);
                   }}
                   className={`text-sm font-bold px-4 py-2 rounded-lg transition-all border ${language === lang.code
-                      ? 'bg-[#6f5c46] text-white border-[#6f5c46]'
-                      : 'text-[#6f5c46] border-[#e5d1bf]'
+                    ? 'bg-[#6f5c46] text-white border-[#6f5c46]'
+                    : 'text-[#6f5c46] border-[#e5d1bf]'
                     }`}
                 >
                   {lang.name}
