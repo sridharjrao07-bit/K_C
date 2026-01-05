@@ -22,6 +22,17 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         .eq('id', id)
         .single();
 
+    // Debug logging
+    console.log(`[ProductPage] Fetching product: ${id}`);
+    if (error) {
+        console.error(`[ProductPage] Supabase Error:`, error);
+    }
+    if (!product) {
+        console.error(`[ProductPage] No product found for ID: ${id}`);
+    } else {
+        console.log(`[ProductPage] Found product:`, product.title);
+    }
+
     if (error || !product) {
         notFound();
     }
