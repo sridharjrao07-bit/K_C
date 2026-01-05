@@ -68,23 +68,21 @@ const config: Config = {
                 display: ['var(--font-outfit)', 'system-ui', 'sans-serif'],
             },
             animation: {
-                'fade-in': 'fadeIn 0.8s ease-in-out',
-                'slide-up': 'slideUp 0.6s ease-out',
-                'slide-down': 'slideDown 0.3s ease-out',
-                'scale-in': 'scaleIn 0.5s ease-out',
-                'shimmer': 'shimmer 2s linear infinite',
-                'float': 'float 3s ease-in-out infinite',
-                'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                'bounce-slow': 'bounce 2s infinite',
-                'spin-slow': 'spin 8s linear infinite',
+                'fade-in': 'fadeIn 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+                'slide-up': 'slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+                'slide-down': 'slideDown 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+                'scale-in': 'scaleIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+                'float': 'float 6s ease-in-out infinite',
+                'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                'shimmer': 'shimmer 2.5s linear infinite',
             },
             keyframes: {
                 fadeIn: {
-                    '0%': { opacity: '0', transform: 'translateY(10px)' },
-                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                    '0%': { opacity: '0' },
+                    '100%': { opacity: '1' },
                 },
                 slideUp: {
-                    '0%': { transform: 'translateY(30px)', opacity: '0' },
+                    '0%': { transform: 'translateY(40px)', opacity: '0' },
                     '100%': { transform: 'translateY(0)', opacity: '1' },
                 },
                 slideDown: {
@@ -101,7 +99,7 @@ const config: Config = {
                 },
                 float: {
                     '0%, 100%': { transform: 'translateY(0px)' },
-                    '50%': { transform: 'translateY(-10px)' },
+                    '50%': { transform: 'translateY(-15px)' },
                 },
             },
             backgroundImage: {
