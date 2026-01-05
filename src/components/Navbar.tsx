@@ -75,9 +75,11 @@ export default function Navbar() {
         <div className="flex justify-between h-20 items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center group">
-            <span className={`text-2xl font-display font-bold tracking-widest transition-colors ${logoColor} group-hover:text-[#c65d51]`}>
-              KAARIGAR<span className="text-[#c65d51] group-hover:text-[#6f5c46] transition-colors">.</span>
-            </span>
+            <img
+              src="/logo.jpg"
+              alt="Kaarigar Logo"
+              className="h-12 w-auto transition-transform duration-300 group-hover:scale-105 rounded-lg"
+            />
           </Link>
 
           {/* Desktop Navigation */}
