@@ -57,16 +57,17 @@ export default function Navbar() {
 
   // Dynamic colors based on scroll
   const navClasses = `sticky top-0 z-50 transition-all duration-300 ${isScrolled
-    ? "bg-[#faf7f2]/95 backdrop-blur-md shadow-md border-b border-[#e5d1bf]"
+    ? "glass-dark shadow-md border-b border-white/10"
     : "glass-dark border-b border-white/10"
     }`;
 
-  const textColor = isScrolled ? "text-[#6f5c46]" : "text-white";
-  const mutedTextColor = isScrolled ? "text-[#6f5c46]" : "text-white"; // Force full white
-  const hoverColor = isScrolled ? "hover:text-[#c65d51]" : "hover:text-primary-200";
-  const activeLangBg = isScrolled ? "bg-[#6f5c46] text-white" : "bg-white text-black";
-  const inactiveLangText = isScrolled ? "text-[#6f5c46] hover:text-[#6f5c46]" : "text-white hover:text-white"; // Force full white
-  const logoColor = isScrolled ? "text-[#6f5c46]" : "text-white";
+  // Always use White/Light text for Dark Background
+  const textColor = "text-white";
+  const mutedTextColor = "text-white/90";
+  const hoverColor = "hover:text-[#c65d51]";
+  const activeLangBg = "bg-white text-black";
+  const inactiveLangText = "text-white hover:text-white";
+  const logoColor = "text-white";
 
   return (
     <nav className={navClasses}>
@@ -90,10 +91,7 @@ export default function Navbar() {
             {user ? (
               <>
                 {user.user_metadata?.role !== 'customer' && (
-                  <Link href="/dashboard" className={`font-bold px-6 py-2 rounded-full transition-all ${isActive('/dashboard')
-                    ? 'bg-[#c65d51] text-white'
-                    : isScrolled ? 'bg-[#e5d1bf] text-[#6f5c46] hover:bg-[#d4a574] hover:text-white' : 'bg-white/10 text-white hover:bg-white/20'
-                    }`}>
+                  <Link href="/dashboard" className={`nav-link font-bold text-white bg-white/10 px-6 py-2 rounded-full hover:bg-white/20 transition-all ${isActive('/dashboard') ? 'bg-[#c65d51]' : ''}`}>
                     {t("nav.dashboard")}
                   </Link>
                 )}
@@ -111,7 +109,7 @@ export default function Navbar() {
             )}
 
             {/* Desktop Language Switcher */}
-            <div className={`flex items-center gap-2 border-l pl-6 ml-6 ${isScrolled ? 'border-[#e5d1bf]' : 'border-white/10'}`}>
+            <div className="flex items-center gap-2 border-l pl-6 ml-6 border-white/10">
               {languages.map((lang) => (
                 <button
                   key={lang.code}
@@ -144,12 +142,12 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="md:hidden animate-slide-up bg-[#faf7f2] border-b border-[#e5d1bf] shadow-xl">
+        <div className="md:hidden animate-slide-up bg-[#1a1a1a] border-b border-white/10 shadow-xl">
           <div className="px-4 pt-2 pb-6 space-y-2">
-            <Link href="/about" className="block px-4 py-4 text-lg font-medium text-[#6f5c46] hover:text-[#c65d51] hover:bg-[#e5d1bf]/20 rounded-xl transition-all uppercase tracking-wider" onClick={() => setIsMenuOpen(false)}>
+            <Link href="/about" className="block px-4 py-4 text-lg font-medium text-gray-300 hover:text-white hover:bg-white/5 rounded-xl border border-transparent hover:border-white/10 transition-all uppercase tracking-wider" onClick={() => setIsMenuOpen(false)}>
               {t("nav.about")}
             </Link>
-            <Link href="/shop" className="block px-4 py-4 text-lg font-medium text-[#6f5c46] hover:text-[#c65d51] hover:bg-[#e5d1bf]/20 rounded-xl transition-all uppercase tracking-wider" onClick={() => setIsMenuOpen(false)}>
+            <Link href="/shop" className="block px-4 py-4 text-lg font-medium text-gray-300 hover:text-white hover:bg-white/5 rounded-xl border border-transparent hover:border-white/10 transition-all uppercase tracking-wider" onClick={() => setIsMenuOpen(false)}>
               {t("nav.shop")}
             </Link>
             {user ? (
@@ -173,7 +171,7 @@ export default function Navbar() {
             )}
 
             {/* Mobile Language Switcher */}
-            <div className="flex items-center justify-center gap-4 pt-6 border-t border-[#e5d1bf] mt-6">
+            <div className="flex items-center justify-center gap-4 pt-6 border-t border-white/10 mt-6">
               {languages.map((lang) => (
                 <button
                   key={lang.code}
@@ -182,8 +180,8 @@ export default function Navbar() {
                     setIsMenuOpen(false);
                   }}
                   className={`text-sm font-bold px-4 py-2 rounded-lg transition-all border ${language === lang.code
-                    ? 'bg-[#6f5c46] text-white border-[#6f5c46]'
-                    : 'text-[#6f5c46] border-[#e5d1bf]'
+                    ? 'bg-white text-black border-white'
+                    : 'text-white/80 border-white/20'
                     }`}
                 >
                   {lang.name}

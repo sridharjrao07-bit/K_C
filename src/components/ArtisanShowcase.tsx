@@ -2,33 +2,42 @@
 
 import { useLanguage } from "@/context/language-context";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 
-const artisans = [
-  {
-    name: "Ramesh Sharma",
-    craft: "Blue Pottery",
-    location: "Jaipur, Rajasthan",
-    image: "https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&q=80&w=400",
-    bio: "Preserving the 14th-century tradition of Jaipur Blue Pottery with natural quartz."
-  },
-  {
-    name: "Nandini Rao",
-    craft: "Silk Weaving",
-    location: "Kanchipuram, TN",
-    image: "https://images.unsplash.com/photo-1610116303244-6239f8134730?auto=format&fit=crop&q=80&w=400",
-    bio: "Award-winning weaver specializing in gold-border temple sarees."
-  },
-  {
-    name: "Abdul Karim",
-    craft: "Bidriware",
-    location: "Bidar, Karnataka",
-    image: "https://images.unsplash.com/photo-1617196034183-421b4917c92d?auto=format&fit=crop&q=80&w=400",
-    bio: "Mastering the art of silver inlay on zinc and copper alloys for 40 years."
-  }
-];
-
-export default function ArtisanShowcase() {
+const ArtisanShowcase = () => {
   const { t } = useLanguage();
+  const [artisans, setArtisans] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const supabase = createClient();
+
+  useEffect(() => {
+    const fetchArtisans = async () => {
+      try {
+        // Fetch profiles that have a craft (Proxy for Artisans)
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('full_name, craft, location, avatar_url, bio')
+          .not('craft', 'is', null)
+          .neq('full_name', 'Ramesh Sharma')
+          .neq('full_name', 'Nandini Rao')
+          .neq('full_name', 'Abdul Karim')
+          .limit(3);
+
+        if (error) throw error;
+        setArtisans(data || []);
+      } catch (error) {
+        console.error('Error fetching artisans:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchArtisans();
+  }, [supabase]);
+
+  if (loading) return null; // Or a skeleton
+  if (artisans.length === 0) return null; // Hide if no artisans
 
   return (
     <section className="py-24 bg-white relative overflow-hidden">
@@ -55,13 +64,13 @@ export default function ArtisanShowcase() {
             <div key={idx} className="group cursor-pointer">
               <div className="relative aspect-[3/4] rounded-3xl overflow-hidden mb-6 shadow-xl border border-[#e5d1bf]">
                 <img
-                  src={artisan.image}
-                  alt={artisan.name}
+                  src={artisan.avatar_url || 'https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&q=80&w=400'}
+                  alt={artisan.full_name}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
                 <div className="absolute bottom-0 left-0 right-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform">
-                  <h3 className="text-2xl font-bold text-white mb-1">{artisan.name}</h3>
+                  <h3 className="text-2xl font-bold text-white mb-1">{artisan.full_name}</h3>
                   <p className="text-[#c65d51] font-medium mb-4">{artisan.craft}</p>
                   <p className="text-gray-300 text-sm line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity">
                     {artisan.bio}
@@ -78,3 +87,5 @@ export default function ArtisanShowcase() {
     </section>
   );
 }
+
+export default ArtisanShowcase;

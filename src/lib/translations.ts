@@ -141,6 +141,13 @@ export const translations = {
       certSubtitle: "Complete all basic modules to earn a 'Digital Ready' badge on your public profile.",
       modulesComplete: "Modules Complete",
       read: "read"
+    },
+    home: {
+      artisanShowcase: {
+        title: "Meet Our Master Artisans",
+        subtitle: "Discover the stories and skills of traditional craftsmen from across the country.",
+        explore: "Explore All Artisans"
+      }
     }
   },
   hi: {
@@ -283,6 +290,13 @@ export const translations = {
       certSubtitle: "अपने सार्वजनिक प्रोफाइल पर 'डिजिटल रेडी' बैज अर्जित करने के लिए सभी बुनियादी मॉड्यूल पूरे करें।",
       modulesComplete: "मॉड्यूल पूरे हुए",
       read: "पढ़ें"
+    },
+    home: {
+      artisanShowcase: {
+        title: "हमारे मास्टर कारीगरों से मिलें",
+        subtitle: "देश भर के पारंपरिक शिल्पकारों की कहानियों और कौशल की खोज करें।",
+        explore: "सभी कारीगरों का अन्वेषण करें"
+      }
     }
   },
   kn: {
@@ -425,6 +439,13 @@ export const translations = {
       certSubtitle: "ನಿಮ್ಮ ಸಾರ್ವಜನಿಕ ಪ್ರೊಫೈಲ್‌ನಲ್ಲಿ 'ಡಿಜಿಟಲ್ ರೆಡಿ' ಬ್ಯಾಡ್ಜ್ ಪಡೆಯಲು ಎಲ್ಲಾ ಮೂಲಭೂತ ತರಬೇತಿಗಳನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ.",
       modulesComplete: "ತರಬೇತಿಗಳು ಪೂರ್ಣಗೊಂಡಿವೆ",
       read: "ಓದಿ"
+    },
+    home: {
+      artisanShowcase: {
+        title: "ನಮ್ಮ ಮಾಸ್ಟರ್ ಕುಶಲಕರ್ಮಿಗಳನ್ನು ಭೇಟಿ ಮಾಡಿ",
+        subtitle: "ದೇಶಾದ್ಯಂತದ ಸಾಂಪ್ರದಾಯಿಕ ಕುಶಲಕರ್ಮಿಗಳ ಕಥೆಗಳು ಮತ್ತು ಕೌಶಲ್ಯಗಳನ್ನು ಅನ್ವೇಷಿಸಿ.",
+        explore: "ಎಲ್ಲಾ ಕುಶಲಕರ್ಮಿಗಳನ್ನು ಅನ್ವೇಷಿಸಿ"
+      }
     }
   }
 };
