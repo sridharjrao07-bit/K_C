@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { LanguageProvider } from "@/context/language-context";
+import { CartProvider } from "@/context/cart-context";
+import CartDrawer from "@/components/CartDrawer";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -27,8 +30,6 @@ export const metadata: Metadata = {
     },
 };
 
-import { LanguageProvider } from "@/context/language-context";
-
 export default function RootLayout({
     children,
 }: Readonly<{
@@ -38,10 +39,14 @@ export default function RootLayout({
         <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
             <body className="min-h-screen">
                 <LanguageProvider>
-                    <Navbar />
-                    <main>{children}</main>
+                    <CartProvider>
+                        <Navbar />
+                        <main>{children}</main>
+                        <CartDrawer />
+                    </CartProvider>
                 </LanguageProvider>
             </body>
         </html>
     );
 }
+

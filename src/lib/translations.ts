@@ -148,6 +148,40 @@ export const translations = {
         subtitle: "Discover the stories and skills of traditional craftsmen from across the country.",
         explore: "Explore All Artisans"
       }
+    },
+    reviews: {
+      title: "Customer Reviews",
+      writeReview: "Write a Review",
+      yourReview: "Your Review",
+      noReviews: "No reviews yet. Be the first to review!",
+      loginPrompt: "Log in to leave a review"
+    },
+    favorites: {
+      title: "Your Favorites",
+      noFavorites: "No favorites yet",
+      addedTo: "Added to favorites",
+      removedFrom: "Removed from favorites"
+    },
+    contact: {
+      title: "Contact Artisan",
+      button: "Contact",
+      sendTo: "Send a message to",
+      subject: "Subject",
+      message: "Message",
+      send: "Send Message",
+      cancel: "Cancel",
+      success: "Message Sent!",
+      successDesc: "The artisan will receive your message soon.",
+      loginRequired: "Please log in to send a message"
+    },
+    gallery: {
+      title: "Behind the Scenes",
+      subtitle: "A glimpse into the creative process",
+      manage: "Behind the Scenes Gallery"
+    },
+    messages: {
+      inbox: "Messages",
+      noMessages: "No messages yet"
     }
   },
   hi: {
@@ -297,6 +331,40 @@ export const translations = {
         subtitle: "देश भर के पारंपरिक शिल्पकारों की कहानियों और कौशल की खोज करें।",
         explore: "सभी कारीगरों का अन्वेषण करें"
       }
+    },
+    reviews: {
+      title: "ग्राहक समीक्षाएं",
+      writeReview: "समीक्षा लिखें",
+      yourReview: "आपकी समीक्षा",
+      noReviews: "अभी तक कोई समीक्षा नहीं। पहले समीक्षक बनें!",
+      loginPrompt: "समीक्षा देने के लिए लॉगिन करें"
+    },
+    favorites: {
+      title: "आपके पसंदीदा",
+      noFavorites: "अभी तक कोई पसंदीदा नहीं",
+      addedTo: "पसंदीदा में जोड़ा गया",
+      removedFrom: "पसंदीदा से हटाया गया"
+    },
+    contact: {
+      title: "कारीगर से संपर्क करें",
+      button: "संपर्क करें",
+      sendTo: "संदेश भेजें",
+      subject: "विषय",
+      message: "संदेश",
+      send: "संदेश भेजें",
+      cancel: "रद्द करें",
+      success: "संदेश भेजा गया!",
+      successDesc: "कारीगर को जल्द ही आपका संदेश मिलेगा।",
+      loginRequired: "संदेश भेजने के लिए लॉगिन करें"
+    },
+    gallery: {
+      title: "बनने की कहानी",
+      subtitle: "रचनात्मक प्रक्रिया की एक झलक",
+      manage: "बनने की कहानी गैलरी"
+    },
+    messages: {
+      inbox: "संदेश",
+      noMessages: "अभी तक कोई संदेश नहीं"
     }
   },
   kn: {
@@ -446,6 +514,40 @@ export const translations = {
         subtitle: "ದೇಶಾದ್ಯಂತದ ಸಾಂಪ್ರದಾಯಿಕ ಕುಶಲಕರ್ಮಿಗಳ ಕಥೆಗಳು ಮತ್ತು ಕೌಶಲ್ಯಗಳನ್ನು ಅನ್ವೇಷಿಸಿ.",
         explore: "ಎಲ್ಲಾ ಕುಶಲಕರ್ಮಿಗಳನ್ನು ಅನ್ವೇಷಿಸಿ"
       }
+    },
+    reviews: {
+      title: "ಗ್ರಾಹಕ ವಿಮರ್ಶೆಗಳು",
+      writeReview: "ವಿಮರ್ಶೆ ಬರೆಯಿರಿ",
+      yourReview: "ನಿಮ್ಮ ವಿಮರ್ಶೆ",
+      noReviews: "ಇನ್ನೂ ಯಾವುದೇ ವಿಮರ್ಶೆಗಳಿಲ್ಲ. ಮೊದಲ ವಿಮರ್ಶಕರಾಗಿ!",
+      loginPrompt: "ವಿಮರ್ಶೆ ನೀಡಲು ಲಾಗಿನ್ ಮಾಡಿ"
+    },
+    favorites: {
+      title: "ನಿಮ್ಮ ಮೆಚ್ಚಿನವುಗಳು",
+      noFavorites: "ಇನ್ನೂ ಮೆಚ್ಚಿನವುಗಳಿಲ್ಲ",
+      addedTo: "ಮೆಚ್ಚಿನವುಗಳಿಗೆ ಸೇರಿಸಲಾಗಿದೆ",
+      removedFrom: "ಮೆಚ್ಚಿನವುಗಳಿಂದ ತೆಗೆದುಹಾಕಲಾಗಿದೆ"
+    },
+    contact: {
+      title: "ಕುಶಲಕರ್ಮಿಯನ್ನು ಸಂಪರ್ಕಿಸಿ",
+      button: "ಸಂಪರ್ಕಿಸಿ",
+      sendTo: "ಸಂದೇಶ ಕಳುಹಿಸಿ",
+      subject: "ವಿಷಯ",
+      message: "ಸಂದೇಶ",
+      send: "ಸಂದೇಶ ಕಳುಹಿಸಿ",
+      cancel: "ರದ್ದುಮಾಡಿ",
+      success: "ಸಂದೇಶ ಕಳುಹಿಸಲಾಗಿದೆ!",
+      successDesc: "ಕುಶಲಕರ್ಮಿಗೆ ಶೀಘ್ರದಲ್ಲೇ ನಿಮ್ಮ ಸಂದೇಶ ಸಿಗುತ್ತದೆ.",
+      loginRequired: "ಸಂದೇಶ ಕಳುಹಿಸಲು ಲಾಗಿನ್ ಮಾಡಿ"
+    },
+    gallery: {
+      title: "ಹಿಂದಿನ ಕಥೆ",
+      subtitle: "ಸೃಜನಾತ್ಮಕ ಪ್ರಕ್ರಿಯೆಯ ಒಂದು ನೋಟ",
+      manage: "ಹಿಂದಿನ ಕಥೆ ಗ್ಯಾಲರಿ"
+    },
+    messages: {
+      inbox: "ಸಂದೇಶಗಳು",
+      noMessages: "ಇನ್ನೂ ಯಾವುದೇ ಸಂದೇಶಗಳಿಲ್ಲ"
     }
   }
 };

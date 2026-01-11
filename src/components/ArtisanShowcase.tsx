@@ -2,14 +2,15 @@
 
 import { useLanguage } from "@/context/language-context";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { createClient } from "@/lib/supabase/client";
+import FavoriteButton from "@/components/FavoriteButton";
 
 const ArtisanShowcase = () => {
   const { t } = useLanguage();
   const [artisans, setArtisans] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
 
   useEffect(() => {
     const fetchArtisans = async () => {
@@ -17,17 +18,17 @@ const ArtisanShowcase = () => {
         // Fetch profiles that have a craft (Proxy for Artisans)
         const { data, error } = await supabase
           .from('profiles')
-          .select('full_name, craft, location, avatar_url, bio')
+          .select('id, full_name, craft, location, avatar_url, bio')
           .not('craft', 'is', null)
-          .neq('full_name', 'Ramesh Sharma')
-          .neq('full_name', 'Nandini Rao')
-          .neq('full_name', 'Abdul Karim')
-          .limit(3);
+          .limit(6);
 
-        if (error) throw error;
+        if (error) {
+          console.error('Supabase error:', error.message);
+          return;
+        }
         setArtisans(data || []);
-      } catch (error) {
-        console.error('Error fetching artisans:', error);
+      } catch (error: any) {
+        console.error('Error fetching artisans:', error?.message || error);
       } finally {
         setLoading(false);
       }
@@ -36,8 +37,8 @@ const ArtisanShowcase = () => {
     fetchArtisans();
   }, [supabase]);
 
-  if (loading) return null; // Or a skeleton
-  if (artisans.length === 0) return null; // Hide if no artisans
+  if (loading) return null;
+  if (artisans.length === 0) return null;
 
   return (
     <section className="py-24 bg-white relative overflow-hidden">
@@ -61,8 +62,13 @@ const ArtisanShowcase = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {artisans.map((artisan, idx) => (
-            <div key={idx} className="group cursor-pointer">
+            <Link key={artisan.id || idx} href={`/artisan/${artisan.id}`} className="group cursor-pointer block">
               <div className="relative aspect-[3/4] rounded-3xl overflow-hidden mb-6 shadow-xl border border-[#e5d1bf]">
+                {/* Favorite Button */}
+                <div className="absolute top-4 right-4 z-10">
+                  <FavoriteButton artisanId={artisan.id} artisanName={artisan.full_name} size="sm" />
+                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={artisan.avatar_url || 'https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&q=80&w=400'}
                   alt={artisan.full_name}
@@ -77,7 +83,7 @@ const ArtisanShowcase = () => {
                   </p>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

@@ -4,6 +4,10 @@ import { notFound } from 'next/navigation'
 import ArtisanQRCode from '@/components/ArtisanQRCode'
 import ShareProfile from '@/components/ShareProfile'
 import ArtisanStory from '@/components/ArtisanStory'
+import CustomerReviews from '@/components/CustomerReviews'
+import BehindTheScenes from '@/components/BehindTheScenes'
+import FavoriteButton from '@/components/FavoriteButton'
+import ArtisanProfileClient from '@/components/ArtisanProfileClient'
 
 export const revalidate = 0;
 
@@ -29,6 +33,13 @@ export default async function ArtisanProfile({ params }: { params: Promise<{ id:
         .eq('artisan_id', id)
         .order('created_at', { ascending: false });
 
+    // 3. Fetch Gallery Items
+    const { data: galleryItems } = await supabase
+        .from('gallery_items')
+        .select('*')
+        .eq('artisan_id', id)
+        .order('display_order', { ascending: true });
+
     return (
         <div className="min-h-screen bg-[#faf7f2]">
             {/* Artisan Hero */}
@@ -49,6 +60,7 @@ export default async function ArtisanProfile({ params }: { params: Promise<{ id:
                     <p className="text-xl text-[#e5d1bf] mb-4 uppercase tracking-wider font-semibold">{artisan.craft || "Master Artisan"}</p>
                     <div className="flex flex-col items-center gap-6">
                         <ShareProfile artisanId={id} artisanName={artisan.full_name} />
+                        <ArtisanProfileClient artisanId={id} artisanName={artisan.full_name} />
                         <div className="inline-block bg-white/10 backdrop-blur-md px-6 py-2 rounded-full border border-white/20">
                             <span className="text-sm">Verified Kaarigar Connect Partner</span>
                         </div>
@@ -64,6 +76,9 @@ export default async function ArtisanProfile({ params }: { params: Promise<{ id:
             {/* Content Section */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <ArtisanStory artisan={artisan} />
+
+                {/* Behind the Scenes Gallery */}
+                <BehindTheScenes galleryItems={galleryItems || []} />
 
                 {/* Collection Grid */}
                 <div className="flex items-center justify-between mb-8">
@@ -106,6 +121,9 @@ export default async function ArtisanProfile({ params }: { params: Promise<{ id:
                         <p className="text-gray-500 mb-4">No products listed in this collection yet.</p>
                     </div>
                 )}
+
+                {/* Customer Reviews */}
+                <CustomerReviews artisanId={id} />
             </div>
         </div>
     )

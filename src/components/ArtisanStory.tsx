@@ -32,7 +32,7 @@ export default function ArtisanStory({ artisan }: { artisan: any }) {
           </div>
           <div>
             <p className="text-xs text-gray-400 uppercase tracking-widest font-bold mb-1">Partnership</p>
-            <p className="text-[#6f5c46] font-medium">Verified since 2024</p>
+            <p className="text-[#6f5c46] font-medium">Verified since {artisan.created_at ? new Date(artisan.created_at).getFullYear() : '2024'}</p>
           </div>
           <div>
             <p className="text-xs text-gray-400 uppercase tracking-widest font-bold mb-1">Support</p>

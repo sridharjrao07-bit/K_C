@@ -7,6 +7,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { User } from "@supabase/supabase-js";
+import CartIcon from "@/components/CartIcon";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -109,6 +110,9 @@ export default function Navbar() {
                 {t("nav.login")}
               </Link>
             )}
+
+            {/* Cart Icon */}
+            <CartIcon />
 
             {/* Desktop Language Switcher */}
             <div className="flex items-center gap-2 border-l pl-6 ml-6 border-white/10">

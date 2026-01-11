@@ -3,9 +3,21 @@
 import Link from "next/link";
 import ArtisanShowcase from "@/components/ArtisanShowcase";
 import { useLanguage } from "@/context/language-context";
+import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 
 export default function Home() {
     const { t } = useLanguage();
+    const [user, setUser] = useState<any>(null);
+    const supabase = createClient();
+
+    useEffect(() => {
+        const checkUser = async () => {
+            const { data: { user } } = await supabase.auth.getUser();
+            setUser(user);
+        };
+        checkUser();
+    }, []);
 
     return (
         <div className="min-h-screen">
@@ -26,12 +38,21 @@ export default function Home() {
                             {t("hero.description")}
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                            <Link
-                                href="/register"
-                                className="bg-gradient-to-r from-[#d4776f] to-[#c65d51] text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-smooth shadow-lg"
-                            >
-                                {t("hero.startJourney")}
-                            </Link>
+                            {user ? (
+                                <Link
+                                    href="/dashboard"
+                                    className="bg-gradient-to-r from-[#d4776f] to-[#c65d51] text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-smooth shadow-lg"
+                                >
+                                    {t("nav.dashboard") || "Go to Dashboard"}
+                                </Link>
+                            ) : (
+                                <Link
+                                    href="/register"
+                                    className="bg-gradient-to-r from-[#d4776f] to-[#c65d51] text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-smooth shadow-lg"
+                                >
+                                    {t("hero.startJourney")}
+                                </Link>
+                            )}
                             <Link
                                 href="/about"
                                 className="glass text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/20 transition-smooth"
@@ -158,12 +179,21 @@ export default function Home() {
                     <p className="text-xl mb-8 opacity-90">
                         {t("cta.subtitle")}
                     </p>
-                    <Link
-                        href="/register"
-                        className="inline-block bg-white text-[#6f5c46] px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-smooth hover:bg-[#e5d1bf]"
-                    >
-                        {t("cta.button")}
-                    </Link>
+                    {user ? (
+                        <Link
+                            href="/dashboard"
+                            className="inline-block bg-white text-[#6f5c46] px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-smooth hover:bg-[#e5d1bf]"
+                        >
+                            {t("nav.dashboard") || "Go to Dashboard"}
+                        </Link>
+                    ) : (
+                        <Link
+                            href="/register"
+                            className="inline-block bg-white text-[#6f5c46] px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-smooth hover:bg-[#e5d1bf]"
+                        >
+                            {t("cta.button")}
+                        </Link>
+                    )}
                 </div>
             </section>
 
@@ -181,8 +211,9 @@ export default function Home() {
                             <h4 className="text-white font-semibold mb-4">Quick Links</h4>
                             <ul className="space-y-2 text-sm">
                                 <li><Link href="/about" className="hover:text-white transition-smooth">{t("nav.about")}</Link></li>
-                                <li><Link href="/register" className="hover:text-white transition-smooth">{t("nav.getStarted")}</Link></li>
-                                <li><Link href="/login" className="hover:text-white transition-smooth">{t("nav.login")}</Link></li>
+                                {!user && <li><Link href="/register" className="hover:text-white transition-smooth">{t("nav.getStarted")}</Link></li>}
+                                {!user && <li><Link href="/login" className="hover:text-white transition-smooth">{t("nav.login")}</Link></li>}
+                                {user && <li><Link href="/dashboard" className="hover:text-white transition-smooth">{t("nav.dashboard")}</Link></li>}
                             </ul>
                         </div>
                         <div>

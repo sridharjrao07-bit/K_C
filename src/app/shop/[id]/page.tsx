@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import ProductPageClient from '@/components/ProductPageClient'
 
 export const revalidate = 0;
 
@@ -20,17 +21,6 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         `)
         .eq('id', id)
         .single();
-
-    // Debug logging
-    console.log(`[ProductPage] Fetching product: ${id}`);
-    if (error) {
-        console.error(`[ProductPage] Supabase Error:`, error);
-    }
-    if (!product) {
-        console.error(`[ProductPage] No product found for ID: ${id}`);
-    } else {
-        console.log(`[ProductPage] Found product:`, product.title);
-    }
 
     if (error || !product) {
         notFound();
@@ -111,9 +101,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                                 </div>
                             </div>
 
-                            <button className="w-full bg-[#6f5c46] text-white py-4 rounded-xl font-bold text-lg hover:bg-[#5a4a38] hover:shadow-lg transition-all transform hover:-translate-y-1">
-                                Add to Cart
-                            </button>
+                            <ProductPageClient product={product} />
                             <p className="text-xs text-center text-gray-400 mt-4">
                                 Direct support to Indian Artisans. 100% Secure Checkout.
                             </p>
@@ -140,3 +128,4 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         </div>
     )
 }
+
