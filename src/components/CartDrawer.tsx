@@ -134,7 +134,6 @@ export default function CartDrawer() {
               onClick={closeCart}
               className="block w-full bg-[#6f5c46] text-white text-center py-4 rounded-xl font-bold hover:bg-[#5a4a38] transition-colors mb-3"
             >
-              data-test="checkout-button"
               Proceed to Checkout
             </Link>
             <button
