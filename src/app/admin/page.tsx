@@ -1,179 +1,155 @@
-"use client";
+"use client"
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
-
-interface VerificationRequest {
-    id: string;
-    user_id: string;
-    id_proof_url: string;
-    work_sample_urls: string[];
-    signed_id_url?: string;
-    signed_sample_urls?: string[];
-    status: string;
-    submitted_at: string;
-    profiles: {
-        full_name: string;
-        email: string;
-        craft: string;
-    };
-}
+import { useLanguage } from "@/context/language-context";
 
 export default function AdminDashboard() {
     const router = useRouter();
-    const [requests, setRequests] = useState<VerificationRequest[]>([]);
+    const { t } = useLanguage();
     const [loading, setLoading] = useState(true);
+    const [verifications, setVerifications] = useState<any[]>([]);
 
     useEffect(() => {
-        const fetchRequests = async () => {
-            const supabase = createClient();
+        checkAdmin();
+    }, []);
 
-            // Check if admin
-            const { data: { user } } = await supabase.auth.getUser();
-            if (!user) {
-                router.push('/login');
-                return;
-            }
+    const checkAdmin = async () => {
+        const supabase = createClient();
+        const { data: { user } } = await supabase.auth.getUser();
 
-            // Fetch pending requests
-            // Note: RLS must allow this. You need to run admin_policies.sql
-            const { data, error } = await supabase
-                .from('verifications')
-                .select(`
-                    *,
-                    profiles (full_name, email, craft)
-                `)
-                .eq('status', 'pending');
+        if (!user) {
+            router.push('/login');
+            return;
+        }
 
-            if (error) {
-                console.error("Error fetching requests:", error);
-            } else if (data) {
-                // Generate Signed URLs for private bucket access
-                const enrichedRequests = await Promise.all(data.map(async (req: any) => {
-                    const { data: idData } = await supabase.storage
-                        .from('documents')
-                        .createSignedUrl(req.id_proof_url, 3600); // 1 hour access
+        // Check if user is in admins table
+        const { data: admin, error } = await supabase
+            .from('admins')
+            .select('*')
+            .eq('user_id', user.id)
+            .single();
 
-                    const signedSamples = await Promise.all((req.work_sample_urls || []).map(async (path: string) => {
-                        const { data } = await supabase.storage
-                            .from('documents')
-                            .createSignedUrl(path, 3600);
-                        return data?.signedUrl;
-                    }));
+        if (error || !admin) {
+            router.push('/dashboard'); // Kick out non-admins
+            return;
+        }
 
-                    return {
-                        ...req,
-                        signed_id_url: idData?.signedUrl,
-                        signed_sample_urls: signedSamples
-                    };
-                }));
-                setRequests(enrichedRequests as VerificationRequest[]);
-            }
-            setLoading(false);
-        };
+        fetchVerifications();
+    };
 
-        fetchRequests();
-    }, [router]);
+    const fetchVerifications = async () => {
+        const supabase = createClient();
+        const { data, error } = await supabase
+            .from('verifications')
+            .select('*')
+            .eq('status', 'pending')
+            .order('created_at', { ascending: false });
 
-    const handleAction = async (id: string, action: 'approved' | 'rejected') => {
+        if (data) setVerifications(data);
+        setLoading(false);
+    };
+
+    const handleStatusUpdate = async (id: string, newStatus: string) => {
         const supabase = createClient();
         const { error } = await supabase
             .from('verifications')
-            .update({ status: action })
+            .update({ status: newStatus })
             .eq('id', id);
 
-        if (error) {
-            alert("Error updating status: " + error.message);
+        if (!error) {
+            fetchVerifications(); // Refresh list
         } else {
-            setRequests(requests.filter(req => req.id !== id));
-            alert(`Request ${action} successfully`);
+            alert("Error updating status: " + error.message);
         }
     };
 
-    if (loading) {
-        return (
-            <div className="min-h-screen bg-[#faf7f2] flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#6f5c46]"></div>
-            </div>
-        );
+    if (loading) return <div className="min-h-screen flex items-center justify-center">Loading Admin...</div>;
+
+    const getFileUrl = (path: string) => {
+        if (!path) return '#';
+        const supabase = createClient();
+        return supabase.storage.from('documents').getPublicUrl(path).data.publicUrl;
     }
 
     return (
-        <div className="min-h-screen bg-[#faf7f2] py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-7xl mx-auto">
-                <h1 className="text-3xl font-display font-bold text-[#6f5c46] mb-8">
-                    Admin Verification Dashboard
-                </h1>
+        <div className="min-h-screen bg-gray-50 py-24 px-4">
+            <div className="max-w-6xl mx-auto">
+                <h1 className="text-3xl font-bold text-gray-800 mb-8">{t("admin.title")}</h1>
 
-                {requests.length === 0 ? (
-                    <div className="bg-white p-12 rounded-2xl shadow-sm text-center">
-                        <p className="text-gray-500 text-lg">No pending verification requests.</p>
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <div className="p-6 border-b border-gray-200 flex justify-between items-center">
+                        <h2 className="text-xl font-semibold">{t("admin.pendingRequests")}</h2>
+                        <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-bold">
+                            {verifications.length} Pending
+                        </span>
                     </div>
-                ) : (
-                    <div className="grid gap-6">
-                        {requests.map((req) => (
-                            <div key={req.id} className="bg-white p-6 rounded-2xl shadow-md border border-[#e5d1bf] flex flex-col md:flex-row gap-6 animate-slide-up">
-                                <div className="flex-1 space-y-2">
-                                    <div className="flex items-center justify-between">
-                                        <h2 className="text-xl font-bold text-[#6f5c46]">
-                                            {req.profiles.full_name || "Unknown Artisan"}
-                                        </h2>
-                                        <span className="bg-[#e5d1bf] text-[#6f5c46] px-3 py-1 rounded-full text-xs font-semibold uppercase">
-                                            {req.profiles.craft || "Craft Unknown"}
-                                        </span>
-                                    </div>
-                                    <p className="text-gray-600 text-sm">{req.profiles.email}</p>
-                                    <p className="text-xs text-gray-400">Submitted: {new Date(req.submitted_at).toLocaleDateString()}</p>
 
-                                    <div className="mt-4">
-                                        <h3 className="font-semibold text-sm text-[#6f5c46] mb-2">Documents:</h3>
-                                        <div className="flex gap-4 overflow-x-auto pb-2">
-                                            {req.signed_id_url && (
-                                                <a
-                                                    href={req.signed_id_url}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="text-[#c65d51] underline text-sm hover:text-[#a84e44]"
-                                                >
-                                                    View ID Proof
-                                                </a>
-                                            )}
-                                            {req.signed_sample_urls?.map((url, idx) => (
-                                                url && (
-                                                    <a
-                                                        key={idx}
-                                                        href={url}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="text-[#c65d51] underline text-sm hover:text-[#a84e44]"
+                    {verifications.length === 0 ? (
+                        <div className="p-12 text-center text-gray-500">
+                            {t("admin.noRequests")}
+                        </div>
+                    ) : (
+                        <div className="overflow-x-auto">
+                            <table className="w-full text-left">
+                                <thead className="bg-gray-50 text-gray-500 font-medium text-sm uppercase">
+                                    <tr>
+                                        <th className="p-4">UserID</th>
+                                        <th className="p-4">{t("admin.bank")}</th>
+                                        <th className="p-4">{t("admin.status")}</th>
+                                        <th className="p-4">{t("admin.viewProof")}</th>
+                                        <th className="p-4 text-right">{t("admin.action")}</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-gray-100">
+                                    {verifications.map((v) => (
+                                        <tr key={v.id} className="hover:bg-gray-50 transition-colors">
+                                            <td className="p-4 text-sm font-mono text-gray-500">
+                                                {v.user_id.substring(0, 8)}...
+                                            </td>
+                                            <td className="p-4">
+                                                <div className="text-sm">
+                                                    <p className="font-bold">{v.gst_number || "No GST"}</p>
+                                                    <p className="text-gray-500">{v.bank_account_number || "N/A"}</p>
+                                                    <span className="text-xs text-gray-400">{v.ifsc_code}</span>
+                                                </div>
+                                            </td>
+                                            <td className="p-4">
+                                                <span className="bg-orange-100 text-orange-700 px-2 py-1 rounded text-xs font-bold uppercase">
+                                                    {v.status}
+                                                </span>
+                                            </td>
+                                            <td className="p-4">
+                                                <div className="flex gap-2">
+                                                    <a href={getFileUrl(v.id_proof_url)} target="_blank" className="text-blue-600 hover:underline text-xs">ID</a>
+                                                    <a href={getFileUrl(v.bank_proof_url)} target="_blank" className="text-blue-600 hover:underline text-xs">Bank</a>
+                                                    <a href={getFileUrl(v.work_sample_urls?.[v.work_sample_urls.length - 1])} target="_blank" className="text-blue-600 hover:underline text-xs">Selfie</a>
+                                                </div>
+                                            </td>
+                                            <td className="p-4 text-right">
+                                                <div className="flex gap-2 justify-end">
+                                                    <button
+                                                        onClick={() => handleStatusUpdate(v.id, 'rejected')}
+                                                        className="px-3 py-1 border border-red-200 text-red-600 rounded-lg text-sm hover:bg-red-50"
                                                     >
-                                                        Sample {idx + 1}
-                                                    </a>
-                                                )
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="flex flex-row md:flex-col gap-3 justify-center border-t md:border-t-0 md:border-l border-[#e5d1bf] pt-4 md:pt-0 md:pl-6">
-                                    <button
-                                        onClick={() => handleAction(req.id, 'approved')}
-                                        className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-smooth font-semibold shadow-sm whitespace-nowrap"
-                                    >
-                                        Approve
-                                    </button>
-                                    <button
-                                        onClick={() => handleAction(req.id, 'rejected')}
-                                        className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition-smooth font-semibold shadow-sm whitespace-nowrap"
-                                    >
-                                        Reject
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
+                                                        {t("admin.reject")}
+                                                    </button>
+                                                    <button
+                                                        onClick={() => handleStatusUpdate(v.id, 'verified')}
+                                                        className="px-3 py-1 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 shadow-sm"
+                                                    >
+                                                        {t("admin.approve")}
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );
