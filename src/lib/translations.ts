@@ -203,6 +203,30 @@ export const translations = {
       checking: "Checking...",
       processing: "Processing...",
       total: "Total to Pay"
+    },
+    verification_page: {
+      title: "Verify Your Craft",
+      whyTitle: "Why we need this?",
+      whyDesc: "We want to ensure every product on Kaarigar Connect is 100% handmade by real artisans like you. This protects your hard work from resellers.",
+      step1Title: "1. The \"Proof of Work\" Selfie",
+      step1Desc: "Please upload a photo of YOU holding your product or working in your workshop.",
+      takePhoto: "Take a Photo",
+      clickUpload: "Click to upload",
+      step2Title: "2. Identity Proof",
+      step2Desc: "Aadhar Card, PAN Card, or Artisan Card",
+      uploadId: "Upload Identity Proof",
+      uploadDoc: "Upload Document",
+      step3Title: "3. Work Samples",
+      step3Desc: "Photos of your best products (Optional but recommended)",
+      uploadSamples: "Upload Work Samples",
+      selectPhotos: "Select up to 5 photos",
+      submit: "Submit for Verification",
+      uploading: "Uploading Documents...",
+      success: "Verification submitted successfully!",
+      alertId: "Please upload an ID proof",
+      alertSelfie: "Please upload a selfie with your work",
+      selected: "Selected",
+      filesSelected: "files selected"
     }
   },
   hi: {
@@ -386,6 +410,30 @@ export const translations = {
     messages: {
       inbox: "संदेश",
       noMessages: "अभी तक कोई संदेश नहीं"
+    },
+    verification_page: {
+      title: "अपने शिल्प का सत्यापन करें",
+      whyTitle: "हमें इसकी आवश्यकता क्यों है?",
+      whyDesc: "हम यह सुनिश्चित करना चाहते हैं कि कारीगर कनेक्ट पर हर उत्पाद 100% आपके जैसे असली कारीगरों द्वारा हस्तनिर्मित है। यह आपकी मेहनत को पुनर्विक्रेताओं (resellers) से बचाता है।",
+      step1Title: "1. \"प्रूफ ऑफ वर्क\" सेल्फी",
+      step1Desc: "कृपया अपने उत्पाद को पकड़े हुए या अपनी कार्यशाला में काम करते हुए अपनी एक फोटो अपलोड करें।",
+      takePhoto: "फोटो लें",
+      clickUpload: "अपलोड करने के लिए क्लिक करें",
+      step2Title: "2. पहचान प्रमाण",
+      step2Desc: "आधार कार्ड, पैन कार्ड, या कारीगर कार्ड",
+      uploadId: "पहचान प्रमाण अपलोड करें",
+      uploadDoc: "दस्तावेज़ अपलोड करें",
+      step3Title: "3. कार्य के नमूने",
+      step3Desc: "आपके सर्वश्रेष्ठ उत्पादों की तस्वीरें (वैकल्पिक लेकिन अनुशंसित)",
+      uploadSamples: "कार्य के नमूने अपलोड करें",
+      selectPhotos: "5 तस्वीरों तक चुनें",
+      submit: "सत्यापन के लिए सबमिट करें",
+      uploading: "दस्तावेज़ अपलोड हो रहे हैं...",
+      success: "सत्यापन सफलतापूर्वक सबमिट किया गया!",
+      alertId: "कृपया एक आईडी प्रमाण अपलोड करें",
+      alertSelfie: "कृपया अपने काम के साथ एक सेल्फी अपलोड करें",
+      selected: "चयनित",
+      filesSelected: "फाइलें चयनित"
     }
   },
   kn: {
@@ -569,6 +617,30 @@ export const translations = {
     messages: {
       inbox: "ಸಂದೇಶಗಳು",
       noMessages: "ಇನ್ನೂ ಯಾವುದೇ ಸಂದೇಶಗಳಿಲ್ಲ"
+    },
+    verification_page: {
+      title: "ನಿಮ್ಮ ಕಲೆಯನ್ನು ಪರಿಶೀಲಿಸಿ",
+      whyTitle: "ನಮಗೆ ಇದು ಏಕೆ ಬೇಕು?",
+      whyDesc: "ಕುಶಲಕರ್ಮಿ ಕನೆಕ್ಟ್‌ನಲ್ಲಿರುವ ಪ್ರತಿಯೊಂದು ಉತ್ಪನ್ನವು ನಿಮ್ಮಂತಹ ನಿಜವಾದ ಕುಶಲಕರ್ಮಿಗಳಿಂದ 100% ಕೈಯಿಂದ ತಯಾರಿಸಲ್ಪಟ್ಟಿದೆ ಎಂದು ನಾವು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಲು ಬಯಸುತ್ತೇವೆ. ಇದು ನಿಮ್ಮ ಕಠಿಣ ಪರಿಶ್ರಮವನ್ನು ಮರುಮಾರಾಟಗಾರರಿಂದ ರಕ್ಷಿಸುತ್ತದೆ.",
+      step1Title: "1. \" ಕೆಲಸದ ಪುರಾವೆ\" ಸೆಲ್ಫಿ",
+      step1Desc: "ನೀವು ನಿಮ್ಮ ಉತ್ಪನ್ನವನ್ನು ಹಿಡಿದುಕೊಂಡಿರುವ ಅಥವಾ ನಿಮ್ಮ ಕಾರ್ಯಾಗಾರದಲ್ಲಿ ಕೆಲಸ ಮಾಡುತ್ತಿರುವ ಫೋಟೋವನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ.",
+      takePhoto: "ಫೋಟೋ ತೆಗೆದುಕೊಳ್ಳಿ",
+      clickUpload: "ಅಪ್‌ಲೋಡ್ ಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ",
+      step2Title: "2. ಗುರುತಿನ ಚೀಟಿ",
+      step2Desc: "ಆಧಾರ್ ಕಾರ್ಡ್, ಪ್ಯಾನ್ ಕಾರ್ಡ್ ಅಥವಾ ಕುಶಲಕರ್ಮಿ ಕಾರ್ಡ್",
+      uploadId: "ಗುರುತಿನ ಚೀಟಿ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+      uploadDoc: "ದಾಖಲೆಯನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+      step3Title: "3. ಕೆಲಸದ ಮಾದರಿಗಳು",
+      step3Desc: "ನಿಮ್ಮ ಉತ್ತಮ ಉತ್ಪನ್ನಗಳ ಫೋಟೋಗಳು (ಐಚ್ಛಿಕ ಆದರೆ ಶಿಫಾರಸು ಮಾಡಲಾಗಿದೆ)",
+      uploadSamples: "ಕೆಲಸದ ಮಾದರಿಗಳನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+      selectPhotos: "5 ಫೋಟೋಗಳವರೆಗೆ ಆಯ್ಕೆಮಾಡಿ",
+      submit: "ಪರಿಶೀಲನೆಗಾಗಿ ಸಲ್ಲಿಸಿ",
+      uploading: "ದಾಖಲೆಗಳು ಅಪ್‌ಲೋಡ್ ಆಗುತ್ತಿವೆ...",
+      success: "ಪರಿಶೀಲನೆ ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಸಲಾಗಿದೆ!",
+      alertId: "ದಯವಿಟ್ಟು ಗುರುತಿನ ಚೀಟಿಯನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+      alertSelfie: "ದಯವಿಟ್ಟು ನಿಮ್ಮ ಕೆಲಸದೊಂದಿಗೆ ಸೆಲ್ಫಿಯನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+      selected: "ಆಯ್ಕೆಮಾಡಲಾಗಿದೆ",
+      filesSelected: "ಫೈಲ್‌ಗಳನ್ನು ಆಯ್ಕೆಮಾಡಲಾಗಿದೆ"
     }
   }
 };

@@ -4,9 +4,11 @@ import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { ImageVerificationService, ImageCheckResult } from "@/lib/image-verification";
+import { useLanguage } from "@/context/language-context";
 
 export default function VerificationPage() {
     const router = useRouter();
+    const { t } = useLanguage();
     const [uploading, setUploading] = useState(false);
 
     // File State
@@ -17,8 +19,6 @@ export default function VerificationPage() {
     // Verification Feedback State
     const [idStatus, setIdStatus] = useState<ImageCheckResult | null>(null);
     const [selfieStatus, setSelfieStatus] = useState<ImageCheckResult | null>(null);
-    // For work samples, we track generic count or last result for simplicity in this demo
-    // ideally we map index -> result like AddProduct
 
     // Preview URLs
     const [selfiePreview, setSelfiePreview] = useState<string | null>(null);
@@ -53,8 +53,8 @@ export default function VerificationPage() {
     };
 
     const handleUpload = async () => {
-        if (!idFile) return alert("Please upload an ID proof");
-        if (!selfieFile) return alert("Please upload a selfie with your work");
+        if (!idFile) return alert(t("verification_page.alertId"));
+        if (!selfieFile) return alert(t("verification_page.alertSelfie"));
 
         setUploading(true);
 
@@ -93,11 +93,6 @@ export default function VerificationPage() {
             }
 
             // 4. Create Verification Record
-            // Note: Schema might need update for 'selfie_url' if strict, 
-            // but for now we can store it in metadata or wait for schema update.
-            // Assuming 'verifications' has loose columns or we reuse work_sample_urls for now to avoid migration block.
-            // We adding it to work_sample_urls for simplicity in this turn without SQL migration loop
-
             await supabase
                 .from('verifications')
                 .insert({
@@ -106,7 +101,7 @@ export default function VerificationPage() {
                     work_sample_urls: [...sampleUrls, selfieData.path] // Appending selfie to samples for now
                 });
 
-            alert("Verification submitted successfully!");
+            alert(t("verification_page.success"));
             router.push('/dashboard');
 
         } catch (error: any) {
@@ -121,15 +116,15 @@ export default function VerificationPage() {
         <div className="min-h-screen bg-[#faf7f2] py-20 px-4">
             <div className="max-w-2xl mx-auto">
                 <h1 className="text-3xl font-display font-bold text-[#6f5c46] mb-8 text-center animate-fade-in">
-                    Verify Your Craft
+                    {t("verification_page.title")}
                 </h1>
 
                 {/* Friendly Guidelines */}
                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-[#e5d1bf] mb-8 animate-fade-in">
-                    <h3 className="font-bold text-[#6f5c46] mb-4">Why we need this?</h3>
+                    <h3 className="font-bold text-[#6f5c46] mb-4">{t("verification_page.whyTitle")}</h3>
                     <div className="flex items-start gap-3 text-sm text-gray-600">
                         <span className="text-xl">🛡️</span>
-                        <p>We want to ensure every product on Kaarigar Connect is 100% handmade by real artisans like you. This protects your hard work from resellers.</p>
+                        <p>{t("verification_page.whyDesc")}</p>
                     </div>
                 </div>
 
@@ -138,8 +133,8 @@ export default function VerificationPage() {
 
                         {/* 1. "Proof of Work" Selfie */}
                         <div>
-                            <label className="block text-lg font-bold text-[#6f5c46] mb-2">1. The &quot;Proof of Work&quot; Selfie</label>
-                            <p className="text-sm text-gray-500 mb-4">Please upload a photo of YOU holding your product or working in your workshop.</p>
+                            <label className="block text-lg font-bold text-[#6f5c46] mb-2">{t("verification_page.step1Title")}</label>
+                            <p className="text-sm text-gray-500 mb-4">{t("verification_page.step1Desc")}</p>
 
                             <div className="border-2 border-dashed border-[#d4776f]/30 rounded-xl p-6 text-center hover:bg-[#faf7f2] transition-smooth cursor-pointer relative overflow-hidden group">
                                 {selfiePreview ? (
@@ -155,8 +150,8 @@ export default function VerificationPage() {
                                 ) : (
                                     <>
                                         <div className="text-4xl mb-2">🤳</div>
-                                        <p className="font-semibold text-[#6f5c46]">Take a Photo</p>
-                                        <p className="text-sm text-gray-500 mt-1">Click to upload</p>
+                                        <p className="font-semibold text-[#6f5c46]">{t("verification_page.takePhoto")}</p>
+                                        <p className="text-sm text-gray-500 mt-1">{t("verification_page.clickUpload")}</p>
                                     </>
                                 )}
                                 <input
@@ -170,8 +165,8 @@ export default function VerificationPage() {
 
                         {/* 2. ID Proof Section */}
                         <div>
-                            <label className="block text-lg font-bold text-[#6f5c46] mb-2">2. Identity Proof</label>
-                            <p className="text-sm text-gray-500 mb-4">Aadhar Card, PAN Card, or Artisan Card</p>
+                            <label className="block text-lg font-bold text-[#6f5c46] mb-2">{t("verification_page.step2Title")}</label>
+                            <p className="text-sm text-gray-500 mb-4">{t("verification_page.step2Desc")}</p>
 
                             <div className="border-2 border-dashed border-[#d4776f]/30 rounded-xl p-6 text-center hover:bg-[#faf7f2] transition-smooth cursor-pointer relative">
                                 <input
@@ -181,9 +176,9 @@ export default function VerificationPage() {
                                     onChange={(e) => handleFileChange(e, 'id')}
                                 />
                                 <div className="text-4xl mb-2">🆔</div>
-                                <p className="font-semibold text-[#6f5c46]">Upload Identity Proof</p>
+                                <p className="font-semibold text-[#6f5c46]">{t("verification_page.uploadId")}</p>
                                 <p className="text-sm text-gray-500 mt-1">
-                                    {idFile ? `Selected: ${idFile.name}` : "Upload Document"}
+                                    {idFile ? `${t("verification_page.selected")}: ${idFile.name}` : t("verification_page.uploadDoc")}
                                 </p>
                                 {idStatus && idStatus.status !== 'success' && (
                                     <p className="text-xs text-orange-500 mt-2 font-bold">{idStatus.message}</p>
@@ -193,8 +188,8 @@ export default function VerificationPage() {
 
                         {/* 3. Work Samples */}
                         <div>
-                            <label className="block text-lg font-bold text-[#6f5c46] mb-2">3. Work Samples</label>
-                            <p className="text-sm text-gray-500 mb-4">Photos of your best products (Optional but recommended)</p>
+                            <label className="block text-lg font-bold text-[#6f5c46] mb-2">{t("verification_page.step3Title")}</label>
+                            <p className="text-sm text-gray-500 mb-4">{t("verification_page.step3Desc")}</p>
 
                             <div className="border-2 border-dashed border-[#b87d4b]/30 rounded-xl p-6 text-center hover:bg-[#faf7f2] transition-smooth cursor-pointer relative">
                                 <input
@@ -205,9 +200,9 @@ export default function VerificationPage() {
                                     onChange={(e) => handleFileChange(e, 'work')}
                                 />
                                 <div className="text-4xl mb-2">🎨</div>
-                                <p className="font-semibold text-[#6f5c46]">Upload Work Samples</p>
+                                <p className="font-semibold text-[#6f5c46]">{t("verification_page.uploadSamples")}</p>
                                 <p className="text-sm text-gray-500 mt-1">
-                                    {workSamples.length > 0 ? `${workSamples.length} files selected` : "Select up to 5 photos"}
+                                    {workSamples.length > 0 ? `${workSamples.length} ${t("verification_page.filesSelected")}` : t("verification_page.selectPhotos")}
                                 </p>
                             </div>
                         </div>
@@ -218,7 +213,7 @@ export default function VerificationPage() {
                             disabled={uploading}
                             className="w-full bg-[#6f5c46] text-white py-4 rounded-xl font-bold hover:shadow-xl hover:scale-[1.02] transition-all disabled:opacity-50"
                         >
-                            {uploading ? "Uploading Documents..." : "Submit for Verification"}
+                            {uploading ? t("verification_page.uploading") : t("verification_page.submit")}
                         </button>
                     </div>
                 </div>
