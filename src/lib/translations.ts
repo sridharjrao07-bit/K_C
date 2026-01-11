@@ -182,6 +182,27 @@ export const translations = {
     messages: {
       inbox: "Messages",
       noMessages: "No messages yet"
+    },
+    checkout: {
+      title: "Checkout",
+      shippingDetails: "Shipping Details",
+      fullName: "Full Name",
+      phone: "Phone Number",
+      address: "Address",
+      city: "City",
+      state: "State",
+      pincode: "Pincode",
+      landmark: "Landmark (Optional)",
+      checkDelivery: "Check Devlivery",
+      placeOrder: "Place Order",
+      deliveryAvailable: "Delivery available to this location!",
+      deliveryUnavailable: "Sorry, we do not ship to this location yet.",
+      orderSuccess: "Order Placed Successfully!",
+      orderSuccessDesc: "Thank you for supporting traditional artisans.",
+      backToHome: "Back to Home",
+      checking: "Checking...",
+      processing: "Processing...",
+      total: "Total to Pay"
     }
   },
   hi: {

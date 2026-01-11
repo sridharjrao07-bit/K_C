@@ -130,11 +130,12 @@ export default function CartDrawer() {
               <span className="text-2xl font-bold text-[#6f5c46]">₹{total.toLocaleString()}</span>
             </div>
             <Link
-              href="/cart"
+              href="/checkout"
               onClick={closeCart}
               className="block w-full bg-[#6f5c46] text-white text-center py-4 rounded-xl font-bold hover:bg-[#5a4a38] transition-colors mb-3"
             >
-              View Cart & Checkout
+              data-test="checkout-button"
+              Proceed to Checkout
             </Link>
             <button
               onClick={closeCart}
