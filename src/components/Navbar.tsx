@@ -12,6 +12,7 @@ import CartIcon from "@/components/CartIcon";
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
@@ -30,12 +31,35 @@ export default function Navbar() {
     const checkUser = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       setUser(user);
+
+      if (user) {
+        const { data: admin, error } = await supabase
+          .from('admins')
+          .select('role')
+          .eq('user_id', user.id)
+          .single();
+
+        if (error) console.error("Admin check failed:", error);
+        if (admin) console.log("Admin detected:", admin);
+
+        setIsAdmin(!!admin);
+      }
     };
     checkUser();
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setUser(session?.user ?? null);
+      if (session?.user) {
+        const { data: admin } = await supabase
+          .from('admins')
+          .select('role')
+          .eq('user_id', session.user.id)
+          .single();
+        setIsAdmin(!!admin);
+      } else {
+        setIsAdmin(false);
+      }
     });
 
     return () => subscription.unsubscribe();
@@ -96,6 +120,11 @@ export default function Navbar() {
                 {user.user_metadata?.role !== 'customer' && (
                   <Link href="/dashboard" className={`nav-link font-bold text-white bg-white/10 px-6 py-2 rounded-full hover:bg-white/20 transition-all active:scale-95 ${isActive('/dashboard') ? 'bg-[#c65d51]' : ''}`}>
                     {t("nav.dashboard")}
+                  </Link>
+                )}
+                {isAdmin && (
+                  <Link href="/admin" className={`nav-link font-bold text-white bg-red-600/80 px-4 py-2 rounded-full hover:bg-red-600 transition-all active:scale-95 ${isActive('/admin') ? 'bg-red-700' : ''}`}>
+                    Admin
                   </Link>
                 )}
                 <button
@@ -161,6 +190,11 @@ export default function Navbar() {
                 {user.user_metadata?.role !== 'customer' && (
                   <Link href="/dashboard" className="block px-4 py-4 text-lg font-bold text-[#c65d51] hover:bg-[#e5d1bf]/20 rounded-xl border border-[#c65d51]/30 transition-all uppercase tracking-wider" onClick={() => setIsMenuOpen(false)}>
                     {t("nav.dashboard")}
+                  </Link>
+                )}
+                {isAdmin && (
+                  <Link href="/admin" className="block px-4 py-4 text-lg font-bold text-red-500 hover:bg-red-50 rounded-xl border border-red-200 transition-all uppercase tracking-wider" onClick={() => setIsMenuOpen(false)}>
+                    Admin Panel
                   </Link>
                 )}
                 <button

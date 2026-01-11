@@ -234,7 +234,7 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
-                        <p>&copy; 2024 Kaarigar Connect. All rights reserved.</p>
+                        <p>&copy; {new Date().getFullYear()} Kaarigar Connect. All rights reserved.</p>
                     </div>
                 </div>
             </footer>
