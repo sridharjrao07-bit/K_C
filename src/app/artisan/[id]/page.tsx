@@ -49,6 +49,7 @@ export default async function ArtisanProfile({ params }: { params: Promise<{ id:
                 <div className="max-w-7xl mx-auto text-center relative z-10 animate-fade-in">
                     <div className="w-32 h-32 bg-[#e5d1bf] rounded-full mx-auto overflow-hidden text-[#6f5c46] mb-6 border-4 border-[#8c7358] shadow-xl">
                         {artisan.avatar_url ? (
+                            /* eslint-disable-next-line @next/next/no-img-element */
                             <img src={artisan.avatar_url} alt={artisan.full_name} className="w-full h-full object-cover" />
                         ) : (
                             <div className="w-full h-full flex items-center justify-center text-5xl font-bold">
@@ -98,6 +99,7 @@ export default async function ArtisanProfile({ params }: { params: Promise<{ id:
                                 {/* Image */}
                                 <div className="aspect-[4/5] bg-white relative overflow-hidden p-4 group-hover:bg-gray-50 transition-colors">
                                     {product.images && product.images[0] ? (
+                                        /* eslint-disable-next-line @next/next/no-img-element */
                                         <img
                                             src={product.images[0]}
                                             alt={product.title}

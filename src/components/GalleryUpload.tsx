@@ -24,6 +24,7 @@ export default function GalleryUpload({ artisanId }: { artisanId: string }) {
 
   useEffect(() => {
     fetchGallery();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [artisanId]);
 
   const fetchGallery = async () => {

@@ -86,6 +86,7 @@ export default function MarketplaceContent({ initialProducts }: { initialProduct
             >
               <div className="aspect-[4/5] overflow-hidden bg-gray-100 relative">
                 {product.images && product.images[0] && (
+                  /* eslint-disable-next-line @next/next/no-img-element */
                   <img
                     src={product.images[0]}
                     alt={product.title}

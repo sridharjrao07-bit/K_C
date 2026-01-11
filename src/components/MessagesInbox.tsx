@@ -124,6 +124,7 @@ export default function MessagesInbox() {
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 bg-[#e5d1bf] rounded-full flex items-center justify-center text-[#6f5c46] font-bold overflow-hidden flex-shrink-0">
                   {message.sender?.avatar_url ? (
+                    /* eslint-disable-next-line @next/next/no-img-element */
                     <img src={message.sender.avatar_url} alt="" className="w-full h-full object-cover" />
                   ) : (
                     message.sender?.full_name?.charAt(0) || "U"
@@ -169,6 +170,7 @@ export default function MessagesInbox() {
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-[#e5d1bf] rounded-full flex items-center justify-center text-[#6f5c46] font-bold overflow-hidden">
                   {selectedMessage.sender?.avatar_url ? (
+                    /* eslint-disable-next-line @next/next/no-img-element */
                     <img src={selectedMessage.sender.avatar_url} alt="" className="w-full h-full object-cover" />
                   ) : (
                     selectedMessage.sender?.full_name?.charAt(0) || "U"

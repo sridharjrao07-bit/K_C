@@ -13,10 +13,10 @@ const trainingContent: Record<string, any> = {
             **Price = (Materials + Labor + Overhead) × Margin + Shipping + Taxes**
             
             #### 1. Know Your Costs
-            Don't just count the fabric or clay. Count the electricity, your packaging time, and the tea you drank!
+            Don&apos;t just count the fabric or clay. Count the electricity, your packaging time, and the tea you drank!
             
             #### 2. The Global Context
-            Buyers in Europe or the US look at quality first. Don't underprice your hard work—it makes it look "cheap" instead of "precious".
+            Buyers in Europe or the US look at quality first. Don&apos;t underprice your hard work—it makes it look "cheap" instead of "precious".
             
             #### 3. Platform Fees
             Remember that marketplaces take a small cut (usually 5-15%). Build this into your final price.

@@ -173,8 +173,8 @@ export default function CheckoutForm({ user }: { user: any }) {
                 onClick={checkShipping}
                 disabled={shippingStatus === "checking" || !formData.pincode}
                 className={`w-full px-4 py-2 rounded-lg font-medium transition-smooth ${shippingStatus === "available"
-                    ? "bg-green-100 text-green-700 border border-green-200"
-                    : "bg-[#6f5c46] text-white hover:bg-[#5a4a38]"
+                  ? "bg-green-100 text-green-700 border border-green-200"
+                  : "bg-[#6f5c46] text-white hover:bg-[#5a4a38]"
                   } disabled:opacity-50 disabled:cursor-not-allowed`}
               >
                 {shippingStatus === "checking" ? t("checkout.checking") : t("checkout.checkDelivery")}
@@ -267,6 +267,7 @@ export default function CheckoutForm({ user }: { user: any }) {
             {items.map((item) => (
               <div key={item.id} className="flex gap-4 py-4 border-b border-gray-100 last:border-0">
                 <div className="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   {item.image && <img src={item.image} alt={item.title} className="w-full h-full object-cover" />}
                 </div>
                 <div className="flex-1">
