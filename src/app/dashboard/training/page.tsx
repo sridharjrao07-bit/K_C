@@ -2,44 +2,23 @@
 
 import Link from "next/link";
 import { useLanguage } from "@/context/language-context";
-
-const modules = [
-    {
-        id: "pricing-strategy",
-        title: "Digital Pricing Strategy",
-        description: "Learn how to calculate costs, handle taxes, and set competitive prices for an international audience.",
-        icon: "💰",
-        duration: "10 mins",
-        level: "Essential"
-    },
-    {
-        id: "product-photography",
-        title: "Handmade Photography",
-        description: "Capture the soul of your craft using just your smartphone and natural lighting.",
-        icon: "📸",
-        duration: "15 mins",
-        level: "Intermediate"
-    },
-    {
-        id: "digital-storytelling",
-        title: "The Power of Storytelling",
-        description: "How to write a bio and product stories that connect emotionally with global buyers.",
-        icon: "✍️",
-        duration: "12 mins",
-        level: "Crucial"
-    },
-    {
-        id: "shipping-packaging",
-        title: "Safe Shipping & Packaging",
-        description: "Design unboxing experiences that protect your craft and wow your customers.",
-        icon: "📦",
-        duration: "8 mins",
-        level: "Practical"
-    }
-];
+import { translations } from "@/lib/translations";
 
 export default function TrainingList() {
-    const { t } = useLanguage();
+    const { language, t } = useLanguage();
+
+    // Get the modules from the translation file based on current language
+    // We need to cast to any because the structure is deep and dynamic
+    const currentModules = (translations[language] as any).training?.modules || {};
+
+    // Convert object to array for mapping
+    const modulesList = Object.keys(currentModules).map(key => ({
+        id: key,
+        ...currentModules[key],
+        // Icons are not in translations, so we map them separately or keep them static
+        icon: getModuleIcon(key)
+    }));
+
     return (
         <div className="min-h-screen bg-[#faf7f2] py-12 px-4 sm:px-6 lg:px-8 pt-24">
             <div className="max-w-5xl mx-auto">
@@ -54,7 +33,7 @@ export default function TrainingList() {
                 </header>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {modules.map((module, index) => (
+                    {modulesList.map((module: any, index: number) => (
                         <div
                             key={module.id}
                             className="bg-white p-8 rounded-3xl shadow-sm border border-[#e5d1bf] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col animate-slide-up"
@@ -72,7 +51,7 @@ export default function TrainingList() {
                                 </span>
                             </div>
                             <h2 className="text-2xl font-bold text-[#6f5c46] mb-4 group-hover:text-[#c65d51] transition-colors">{module.title}</h2>
-                            <p className="text-gray-600 leading-relaxed mb-8 flex-grow">
+                            <p className="text-gray-600 leading-relaxed mb-8 flex-grow line-clamp-3">
                                 {module.description}
                             </p>
                             <Link
@@ -92,10 +71,22 @@ export default function TrainingList() {
                         <p className="text-gray-300">{t("training.certSubtitle")}</p>
                     </div>
                     <div className="bg-white/10 backdrop-blur-md px-6 py-3 rounded-full border border-white/20 font-bold opacity-50 cursor-not-allowed">
-                        0/4 {t("training.modulesComplete")}
+                        0/5 {t("training.modulesComplete")}
                     </div>
                 </div>
             </div>
         </div>
     );
+}
+
+// Helper to get icons (keeping them out of translations for now as they are universal)
+function getModuleIcon(id: string) {
+    switch (id) {
+        case 'pricing-strategy': return '💰';
+        case 'product-photography': return '📸';
+        case 'digital-storytelling': return '✍️';
+        case 'shipping-packaging': return '📦';
+        case 'marketplace-verification': return '✅';
+        default: return '📚';
+    }
 }

@@ -140,7 +140,49 @@ export const translations = {
       certification: "Kaarigar Certification",
       certSubtitle: "Complete all basic modules to earn a 'Digital Ready' badge on your public profile.",
       modulesComplete: "Modules Complete",
-      read: "read"
+      read: "read",
+      modules: {
+        "pricing-strategy": {
+          title: "Digital Pricing Strategy",
+          description: "Learn how to calculate costs, handle taxes, and set competitive prices for an international audience.",
+          level: "Essential",
+          duration: "10 mins",
+          content: "Selling online is different from selling in a local haat. You need to account for hidden costs.\n\n### The Pricing Formula\n**Price = (Materials + Labor + Overhead) × Margin + Shipping + Taxes**\n\n#### 1. Know Your Costs\nDon't just count the fabric or clay. Count the electricity, your packaging time, and the tea you drank!\n\n#### 2. The Global Context\nBuyers in Europe or the US look at quality first. Don't underprice your hard work—it makes it look \"cheap\" instead of \"precious\".\n\n#### 3. Platform Fees\nRemember that marketplaces take a small cut (usually 5-15%). Build this into your final price.",
+          tips: ["Never price based on desperation.", "Research similar premium products.", "Offer free shipping by including it in the price."]
+        },
+        "product-photography": {
+          title: "Handmade Photography",
+          description: "Capture the soul of your craft using just your smartphone and natural lighting.",
+          level: "Intermediate",
+          duration: "15 mins",
+          content: "Your photos are the only thing your customer can touch before they buy.\n\n### The Three Pillars\n\n#### 1. Light is Everything\nUse natural window light. Avoid direct harsh sun. Early morning or late afternoon light is \"golden\".\n\n#### 2. Clean Backgrounds\nEarthy, neutral backgrounds like light wood, stone, or white linen work best for traditional crafts.\n\n#### 3. The Detail Shot\nBuyers want to see the weave, the brushstroke, and the texture. Take at least one close-up macro shot.",
+          tips: ["Clean your phone lens.", "Use a tripod (or a stack of books).", "No flashy filters—keep it real."]
+        },
+        "digital-storytelling": {
+          title: "The Power of Storytelling",
+          description: "How to write a bio and product stories that connect emotionally with global buyers.",
+          level: "Crucial",
+          duration: "12 mins",
+          content: "People don't just buy a pot; they buy the hands that made it.\n\n### Your Story Matters\n\n#### 1. The 'Why'\nWhy do you do what you do? Is it a family tradition? A passion you found later in life?\n\n#### 2. The Process\nExplain the difficulty. \"It takes 40 hours to weave one sari.\" This justifies the price.\n\n#### 3. The Impact\nBuying from you supports your village, your family, or a dying art form. Say that proudly.",
+          tips: ["Write like you speak.", "Use 'I' and 'My', not 'We' (unless it's a co-op).", "Share your failures too."]
+        },
+        "shipping-packaging": {
+          title: "Safe Shipping & Packaging",
+          description: "Design unboxing experiences that protect your craft and wow your customers.",
+          level: "Practical",
+          duration: "8 mins",
+          content: "Broken product = Broken trust.\n\n### Packaging Basics\n\n#### 1. The Drop Test\nPack your item, seal it, and drop it from waist height. If it breaks, pack it better.\n\n#### 2. Eco-Friendly is Better\nInternational buyers love sustainable packaging. Use newspaper, cardboard, or cloth scraps instead of bubble wrap if possible.\n\n#### 3. The Personal Note\nAlways include a handwritten thank you note. It creates a loyal customer for life.",
+          tips: ["Double-box fragile items.", "Take a photo of the package before shipping.", "Brand your box with a stamp."]
+        },
+        "marketplace-verification": {
+          title: "Marketplace Verification (Amazon/Flipkart)",
+          description: "Step-by-step guide to getting verified on major e-commerce platforms.",
+          level: "Advanced",
+          duration: "20 mins",
+          content: "Ready to go big? Here is how to get on Amazon Karigar and Flipkart Samarth.\n\n### What You Need\n\n#### 1. GST Number\nThis is mandatory for online selling. If you don't have one, apply on the government portal. It is free.\n\n#### 2. Artisan Card / Pehchan Card\nThis government ID proves you are a legitimate artisan. It gives you lower commission rates on these platforms.\n\n#### 3. Bank Account\nMust be in your name or your business name. No joint accounts with non-business partners.\n\n### The Process\n1. Go to Amazon Karigar or Flipkart Samarth seller portal.\n2. Upload your GST and Cancelled Cheque.\n3. Upload your Artisan Card in the 'Certificates' section.\n4. Wait for 48-72 hours for approval.",
+          tips: ["Keep your Artisan Card updated.", "Ensure name on Bank Account matches GST exactly.", "Start with 5-10 best products."]
+        }
+      }
     },
     home: {
       artisanShowcase: {
@@ -368,7 +410,49 @@ export const translations = {
       certification: "कारीगर प्रमाणन",
       certSubtitle: "अपने सार्वजनिक प्रोफाइल पर 'डिजिटल रेडी' बैज अर्जित करने के लिए सभी बुनियादी मॉड्यूल पूरे करें।",
       modulesComplete: "मॉड्यूल पूरे हुए",
-      read: "पढ़ें"
+      read: "पढ़ें",
+      modules: {
+        "pricing-strategy": {
+          title: "डिजिटल मूल्य निर्धारण रणनीति",
+          description: "लागत की गणना करना, करों को संभालना और अंतरराष्ट्रीय दर्शकों के लिए प्रतिस्पर्धी मूल्य निर्धारित करना सीखें।",
+          level: "आवश्यक",
+          duration: "10 मिनट",
+          content: "ऑनलाइन बेचना स्थानीय हाट में बेचने से अलग है। आपको छिपी हुई लागतों का हिसाब देना होगा।\n\n### मूल्य निर्धारण का सूत्र\n**मूल्य = (सामग्री + श्रम + उपरिव्यय) × मार्जिन + शिपिंग + कर**\n\n#### 1. अपनी लागत जानें\nकेवल कपड़े या मिट्टी की गिनती न करें। बिजली, अपने पैकेजिंग समय और आपके द्वारा पी गई चाय की भी गिनती करें!\n\n#### 2. वैश्विक संदर्भ\nयूरोप या अमेरिका के खरीदार सबसे पहले गुणवत्ता देखते हैं। अपनी मेहनत की कीमत कम न आँकें—इससे यह \"कीमती\" के बजाय \"सस्ता\" दिखता है।\n\n#### 3. प्लेटफ़ॉर्म शुल्क\nयाद रखें कि बाज़ार एक छोटा हिस्सा लेते हैं (आमतौर पर 5-15%)। इसे अपनी अंतिम कीमत में शामिल करें।",
+          tips: ["कभी भी हताशा के आधार पर कीमत न तय करें।", "समान प्रीमियम उत्पादों पर शोध करें।", "निःशुल्क शिपिंग की पेशकश करें और इसे कीमत में शामिल करें।"]
+        },
+        "product-photography": {
+          title: "हस्तशिल्प फोटोग्राफी",
+          description: "केवल अपने स्मार्टफोन और प्राकृतिक रोशनी का उपयोग करके अपने शिल्प की आत्मा को कैद करें।",
+          level: "मध्यम",
+          duration: "15 मिनट",
+          content: "आपकी तस्वीरें एकमात्र ऐसी चीज हैं जिसे खरीदने से पहले आपका ग्राहक छू सकता है।\n\n### तीन स्तंभ\n\n#### 1. रोशनी ही सब कुछ है\nखिड़की की प्राकृतिक रोशनी का प्रयोग करें। सीधी तेज धूप से बचें। सुबह-सुबह या देर दोपहर की रोशनी \"सुनहरी\" होती है।\n\n#### 2. साफ पृष्ठभूमि\nहल्की लकड़ी, पत्थर, या सफेद लिनन जैसी मिट्टी की, तटस्थ पृष्ठभूमि पारंपरिक शिल्प के लिए सबसे अच्छा काम करती है।\n\n#### 3. विवरण शॉट\nखरीदार बुनाई, ब्रशस्ट्रोक और बनावट देखना चाहते हैं। कम से कम एक क्लोज़-अप मैक्रो शॉट लें।",
+          tips: ["अपने फोन के लेंस को साफ करें।", "ट्राइपॉड (या किताबों के ढेर) का उपयोग करें।", "कोई आकर्षक फिल्टर नहीं—इसे असली रखें।"]
+        },
+        "digital-storytelling": {
+          title: "कहानी सुनाने की शक्ति",
+          description: "वैश्विक खरीदारों के साथ भावनात्मक रूप से जुड़ने के लिए एक बायो और उत्पाद की कहानियां कैसे लिखें।",
+          level: "महत्वपूर्ण",
+          duration: "12 मिनट",
+          content: "लोग सिर्फ बर्तन नहीं खरीदते; वे उन हाथों को खरीदते हैं जिन्होंने इसे बनाया है।\n\n### आपकी कहानी मायने रखती है\n\n#### 1. 'क्यों'\nआप जो करते हैं वह क्यों करते हैं? क्या यह एक पारिवारिक परंपरा है? एक जुनून जो आपने बाद में जीवन में पाया?\n\n#### 2. प्रक्रिया\nकठिनाई बताएं। \"एक साड़ी को बुनने में 40 घंटे लगते हैं।\" यह कीमत को सही ठहराता है।\n\n#### 3. प्रभाव\nआपसे खरीदना आपके गांव, आपके परिवार या मरती हुई कला का समर्थन करता है। इसे गर्व से कहें।",
+          tips: ["जैसे आप बोलते हैं वैसे लिखें।", "'मैं' और 'मेरा' का प्रयोग करें, 'हम' का नहीं (जब तक कि यह सहकारी न हो)।", "अपनी असफलताओं को भी साझा करें।"]
+        },
+        "shipping-packaging": {
+          title: "सुरक्षित शिपिंग और पैकेजिंग",
+          description: "अनबॉक्सिंग अनुभव डिज़ाइन करें जो आपके शिल्प की सुरक्षा करें और आपके ग्राहकों को वाह कर दें।",
+          level: "व्यावहारिक",
+          duration: "8 मिनट",
+          content: "टूटा हुआ उत्पाद = टूटा हुआ विश्वास।\n\n### पैकेजिंग मूल बातें\n\n#### 1. ड्रॉप टेस्ट\nअपने आइटम को पैक करें, इसे सील करें, और इसे कमर की ऊंचाई से गिराएं। अगर यह टूट जाता है, तो इसे बेहतर पैक करें।\n\n#### 2. पर्यावरण के अनुकूल बेहतर है\nअंतरराष्ट्रीय खरीदार टिकाऊ पैकेजिंग पसंद करते हैं। यदि संभव हो तो बबल रैप के बजाय समाचार पत्र, कार्डबोर्ड या कपड़े के टुकड़ों का उपयोग करें।\n\n#### 3. व्यक्तिगत नोट\nहमेशा एक हस्तलिखित धन्यवाद नोट शामिल करें। यह जीवन भर के लिए एक वफादार ग्राहक बनाता है।",
+          tips: ["नाजुक वस्तुओं को डबल-बॉक्स करें।", "शिपिंग से पहले पैकेज की एक फोटो लें।", "अपने बॉक्स को स्टैम्प के साथ ब्रांड करें।"]
+        },
+        "marketplace-verification": {
+          title: "मार्केटप्लेस सत्यापन (Amazon/Flipkart)",
+          description: "प्रमुख ई-कॉमर्स प्लेटफॉर्म पर सत्यापित होने के लिए चरण-दर-चरण मार्गदर्शिका।",
+          level: "उन्नत",
+          duration: "20 मिनट",
+          content: "बड़ा करने के लिए तैयार हैं? यहां बताया गया है कि Amazon Karigar और Flipkart Samarth पर कैसे आएं।\n\n### आपको क्या चाहिए\n\n#### 1. GST नंबर\nऑनलाइन बिक्री के लिए यह अनिवार्य है। यदि आपके पास यह नहीं है, तो सरकारी पोर्टल पर आवेदन करें। यह मुफ़्त है।\n\n#### 2. कारीगर कार्ड / पहचान कार्ड\nयह सरकारी आईडी साबित करती है कि आप एक वैध कारीगर हैं। यह आपको इन प्लेटफॉर्म पर कम कमीशन दरें देता है।\n\n#### 3. बैंक खाता\nआपके नाम या आपके व्यवसाय के नाम पर होना चाहिए। गैर-व्यावसायिक भागीदारों के साथ कोई संयुक्त खाते नहीं।\n\n### प्रक्रिया\n1. Amazon Karigar या Flipkart Samarth विक्रेता पोर्टल पर जाएं।\n2. अपना GST और रद्द चेक अपलोड करें।\n3. 'प्रमाणपत्र' अनुभाग में अपना कारीगर कार्ड अपलोड करें।\n4. अनुमोदन के लिए 48-72 घंटे प्रतीक्षा करें।",
+          tips: ["अपना कारीगर कार्ड अपडेट रखें।", "सुनिश्चित करें कि बैंक खाते पर नाम बिल्कुल GST से मेल खाता है।", "5-10 सर्वश्रेष्ठ उत्पादों के साथ शुरुआत करें।"]
+        }
+      }
     },
     home: {
       artisanShowcase: {
@@ -575,7 +659,49 @@ export const translations = {
       certification: "ಕುಶಲಕರ್ಮಿ ಪ್ರಮಾಣೀಕರಣ",
       certSubtitle: "ನಿಮ್ಮ ಸಾರ್ವಜನಿಕ ಪ್ರೊಫೈಲ್‌ನಲ್ಲಿ 'ಡಿಜಿಟಲ್ ರೆಡಿ' ಬ್ಯಾಡ್ಜ್ ಪಡೆಯಲು ಎಲ್ಲಾ ಮೂಲಭೂತ ತರಬೇತಿಗಳನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ.",
       modulesComplete: "ತರಬೇತಿಗಳು ಪೂರ್ಣಗೊಂಡಿವೆ",
-      read: "ಓದಿ"
+      read: "ಓದಿ",
+      modules: {
+        "pricing-strategy": {
+          title: "ಡಿಜಿಟಲ್ ಬೆಲೆ ತಂತ್ರ",
+          description: "ವೆಚ್ಚಗಳನ್ನು ಲೆಕ್ಕಹಾಕುವುದು, ತೆರಿಗೆಗಳನ್ನು ನಿರ್ವಹಿಸುವುದು ಮತ್ತು ಅಂತರರಾಷ್ಟ್ರೀಯ ಗ್ರಾಹಕರಿಗೆ ಸ್ಪರ್ಧಾತ್ಮಕ ಬೆಲೆಗಳನ್ನು ನಿಗದಿಪಡಿಸುವುದನ್ನು ಕಲಿಯಿರಿ.",
+          level: "ಅಗತ್ಯ",
+          duration: "10 ನಿಮಿಷ",
+          content: "ಆನ್‌ಲೈನ್‌ನಲ್ಲಿ ಮಾರಾಟ ಮಾಡುವುದು ಸ್ಥಳೀಯ ಸಂತೆಗಳಲ್ಲಿ ಮಾರಾಟ ಮಾಡುವುದಕ್ಕಿಂತ ಭಿನ್ನವಾಗಿದೆ. ನೀವು ಗುಪ್ತ ವೆಚ್ಚಗಳನ್ನು ಲೆಕ್ಕಹಾಕಬೇಕು.\n\n### ಬೆಲೆ ಸೂತ್ರ\n**ಬೆಲೆ = (ವಸ್ತುಗಳು + ಶ್ರಮ + ಮೇುವೆಚ್ಚ) × ಲಾಭಾಂಶ + ಶಿಪ್ಪಿಂಗ್ + ತೆರಿಗೆಗಳು**\n\n#### 1. ನಿಮ್ಮ ವೆಚ್ಚಗಳನ್ನು ತಿಳಿಯಿರಿ\nಕೇವಲ ಬಟ್ಟೆ ಅಥವಾ ಮಣ್ಣನ್ನು ಲೆಕ್ಕಿಸಬೇಡಿ. ವಿದ್ಯುತ್, ನಿಮ್ಮ ಪ್ಯಾಕೇಜಿಂಗ್ ಸಮಯ ಮತ್ತು ನೀವು ಕುಡಿದ ಚಹಾವನ್ನು ಕೂಡ ಲೆಕ್ಕಿಸಿ!\n\n#### 2. ಜಾಗತಿಕ ಸನ್ನಿವೇಶ\nಯುರೋಪ್ ಅಥವಾ ಅಮೆರಿಕದ ಖರೀದಿದಾರರು ಮೊದಲು ಗುಣಮಟ್ಟವನ್ನು ನೋಡುತ್ತಾರೆ. ನಿಮ್ಮ ಕಠಿಣ ಪರಿಶ್ರಮದ ಬೆಲೆಯನ್ನು ಕಡಿಮೆ ಮಾಡಬೇಡಿ—ಇದು \"ಅಮೂಲ್ಯ\" ಎನ್ನುವ ಬದಲು \"ಅಗ್ಗ\" ಎಂದು ತೋರುತ್ತದೆ.\n\n#### 3. ಪ್ಲಾಟ್‌ಫಾರ್ಮ್ ಶುಲ್ಕಗಳು\nಮಾರುಕಟ್ಟೆಗಳು ಸಣ್ಣ ಪಾಲನ್ನು ತೆಗೆದುಕೊಳ್ಳುತ್ತವೆ ಎಂಬುದನ್ನು ನೆನಪಿಡಿ (ಸಾಮಾನ್ಯವಾಗಿ 5-15%). ಇದನ್ನು ನಿಮ್ಮ ಅಂತಿಮ ಬೆಲೆಯಲ್ಲಿ ಸೇರಿಸಿ.",
+          tips: ["ಹತಾಶೆಯ ಆಧಾರದ ಮೇಲೆ ಎಂದಿಗೂ ಬೆಲೆ ನಿಗದಿಪಡಿಸಬೇಡಿ.", "ಅದೇ ರೀತಿಯ ಪ್ರೀಮಿಯಂ ಉತ್ಪನ್ನಗಳನ್ನು ಸಂಶೋಧಿಸಿ.", "ಬೆಲೆಯಲ್ಲಿ ಸೇರಿಸುವ ಮೂಲಕ ಉಚಿತ ಶಿಪ್ಪಿಂಗ್ ನೀಡಿ."]
+        },
+        "product-photography": {
+          title: "ಕರಕುಶಲ ಛಾಯಾಗ್ರಹಣ",
+          description: "ನಿಮ್ಮ ಸ್ಮಾರ್ಟ್‌ಫೋನ್ ಮತ್ತು ನೈಸರ್ಗಿಕ ಬೆಳಕನ್ನು ಬಳಸಿ ನಿಮ್ಮ ಕಲೆಯ ಆತ್ಮವನ್ನು ಸೆರೆಹಿಡಿಯಿರಿ.",
+          level: "ಮಧ್ಯಮ",
+          duration: "15 ನಿಮಿಷ",
+          content: "ನಿಮ್ಮ ಫೋಟೋಗಳು ನಿಮ್ಮ ಗ್ರಾಹಕರು ಖರೀದಿಸುವ ಮೊದಲು ಸ್ಪರ್ಶಿಸಬಹುದಾದ ಏಕೈಕ ವಿಷಯವಾಗಿದೆ.\n\n### ಮೂರು ಸ್ತಂಭಗಳು\n\n#### 1. ಬೆಳಕೇ ಎಲ್ಲವೂ\nನೈಸರ್ಗಿಕ ಕಿಟಕಿ ಬೆಳಕನ್ನು ಬಳಸಿ. ನೇರ ಬಿಸಿಲನ್ನು ತಪ್ಪಿಸಿ. ಮುಂಜಾನೆ ಅಥವಾ ಸಂಜೆಯ ಬೆಳಕು \"ಚಿನ್ನದಂತಿರುತ್ತದೆ\".\n\n#### 2. ಸ್ವಚ್ಛ ಹಿನ್ನೆಲೆಗಳು\nತಿಳಿ ಮರ, ಕಲ್ಲು ಅಥವಾ ಬಿಳಿ ಲಿನಿನ್‌ನಂತಹ ಮಣ್ಣಿನ, ತಟಸ್ಥ ಹಿನ್ನೆಲೆಗಳು ಸಾಂಪ್ರದಾಯಿಕ ಕಲೆಗಳಿಗೆ ಉತ್ತಮವಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತವೆ.\n\n#### 3. ವಿವರವಾದ ಶಾಟ್\nಖರೀದಿದಾರರು ನೇಯ್ಗೆ, ಕುಂಚದ ಹೊಡೆತ ಮತ್ತು ವಿನ್ಯಾಸವನ್ನು ನೋಡಲು ಬಯಸುತ್ತಾರೆ. ಕನಿಷ್ಠ ಒಂದು ಕ್ಲೋಸ್-ಅಪ್ ಮ್ಯಾಕ್ರೋ ಶಾಟ್ ತೆಗೆದುಕೊಳ್ಳಿ.",
+          tips: ["ನಿಮ್ಮ ಫೋನ್ ಲೆನ್ಸ್ ಸ್ವಚ್ಛಗೊಳಿಸಿ.", "ಟ್ರೈಪಾಡ್ (ಅಥವಾ ಪುಸ್ತಕಗಳ ರಾಶಿ) ಬಳಸಿ.", "ಯಾವುದೇ ಆಕರ್ಷಕ ಫಿಲ್ಟರ್‌ಗಳಿಲ್ಲ—ಅದನ್ನು ನೈಜವಾಗಿಡಿ."]
+        },
+        "digital-storytelling": {
+          title: "ಕಥೆ ಹೇಳುವ ಶಕ್ತಿ",
+          description: "ಜಾಗತಿಕ ಖರೀದಿದಾರರೊಂದಿಗೆ ಭಾವನಾತ್ಮಕವಾಗಿ ಸಂಪರ್ಕ ಸಾಧಿಸಲು ಬಯೋ ಮತ್ತು ಉತ್ಪನ್ನ ಕಥೆಗಳನ್ನು ಬರೆಯುವುದು ಹೇಗೆ.",
+          level: "ಮುಖ್ಯ",
+          duration: "12 ನಿಮಿಷ",
+          content: "ಜನರು ಕೇವಲ ಮಡಕೆ ಖರೀದಿಸುವುದಿಲ್ಲ; ಅವರು ಅದನ್ನು ಮಾಡಿದ ಕೈಗಳನ್ನು ಖರೀದಿಸುತ್ತಾರೆ.\n\n### ನಿಮ್ಮ ಕಥೆ ಮುಖ್ಯ\n\n#### 1. 'ಏಕೆ'\nನೀವು ಮಾಡುವುದನ್ನು ನೀವು ಏಕೆ ಮಾಡುತ್ತೀರಿ? ಇದು ಕೌಟುಂಬಿಕ ಸಂಪ್ರದಾಯವೇ? ನೀವು ನಂತರ ಕಂಡುಕೊಂಡ ಹವ್ಯಾಸವೇ?\n\n#### 2. ಪ್ರಕ್ರಿಯೆ\nಕಷ್ಟವನ್ನು ವಿವರಿಸಿ. \"ಒಂದು ಸೀರೆಯನ್ನು ನೇಯ್ಗೆ ಮಾಡಲು 40 ಗಂಟೆಗಳು ಬೇಕಾಗುತ್ತದೆ.\" ಇದು ಬೆಲೆಯನ್ನು ಸಮರ್ಥಿಸುತ್ತದೆ.\n\n#### 3. ಪರಿಣಾಮ\nನಿಮ್ಮಿಂದ ಖರೀದಿಸುವುದು ನಿಮ್ಮ ಹಳ್ಳಿಯನ್ನು, ನಿಮ್ಮ ಕುಟುಂಬವನ್ನು ಅಥವಾ ಸಾಯುತ್ತಿರುವ ಕಲೆಯನ್ನು ಬೆಂಬಲಿಸುತ್ತದೆ. ಅದನ್ನು ಹೆಮ್ಮೆಯಿಂದ ಹೇಳಿ.",
+          tips: ["ನೀವು ಮಾತನಾಡುವಂತೆಯೇ ಬರೆಯಿರಿ.", "'ನಾನು' ಮತ್ತು 'ನನ್ನ' ಬಳಸಿ, 'ನಾವು' ಅಲ್ಲ (ಇದು ಸಹಕಾರ ಸಂಘವಲ್ಲದಿದ್ದರೆ).", "ನಿಮ್ಮ ವೈಫಲ್ಯಗಳನ್ನು ಸಹ ಹಂಚಿಕೊಳ್ಳಿ."]
+        },
+        "shipping-packaging": {
+          title: "ಸುರಕ್ಷಿತ ಶಿಪ್ಪಿಂಗ್ ಮತ್ತು ಪ್ಯಾಕೇಜಿಂಗ್",
+          description: "ನಿಮ್ಮ ಕಲೆಯನ್ನು ರಕ್ಷಿಸುವ ಮತ್ತು ನಿಮ್ಮ ಗ್ರಾಹಕರನ್ನು ಬೆರಗುಗೊಳಿಸುವ ಅನ್ಬಾಕ್ಸಿಂಗ್ ಅನುಭವಗಳನ್ನು ವಿನ್ಯಾಸಗೊಳಿಸಿ.",
+          level: "ಪ್ರಾಯೋಗಿಕ",
+          duration: "8 ನಿಮಿಷ",
+          content: "ಮುರಿದ ಉತ್ಪನ್ನ = ಮುರಿದ ನಂಬಿಕೆ.\n\n### ಪ್ಯಾಕೇಜಿಂಗ್ ಮೂಲಗಳು\n\n#### 1. ಡ್ರಾಪ್ ಟೆಸ್ಟ್\nನಿಮ್ಮ ವಸ್ತುವನ್ನು ಪ್ಯಾಕ್ ಮಾಡಿ, ಅದನ್ನು ಸೀಲ್ ಮಾಡಿ ಮತ್ತು ನಡು ಎತ್ತರದಿಂದ ಕೆಳಕ್ಕೆ ಬಿಡಿ. ಅದು ಮುರಿದರೆ, ಅದನ್ನು ಉತ್ತಮವಾಗಿ ಪ್ಯಾಕ್ ಮಾಡಿ.\n\n#### 2. ಪರಿಸರ ಸ್ನೇಹಿ ಉತ್ತಮ\nಅಂತರರಾಷ್ಟ್ರೀಯ ಖರೀದಿದಾರರು ಸುಸ್ಥಿರ ಪ್ಯಾಕೇಜಿಂಗ್ ಅನ್ನು ಇಷ್ಟಪಡುತ್ತಾರೆ. ಸಾಧ್ಯವಾದರೆ ಬಬಲ್ ರಾಪ್ ಬದಲಿಗೆ ಪತ್ರಿಕೆ, ರಟ್ಟಿನ ಪೆಟ್ಟಿಗೆ ಅಥವಾ ಬಟ್ಟೆ ತುಂಡುಗಳನ್ನು ಬಳಸಿ.\n\n#### 3. ವೈಯಕ್ತಿಕ ಟಿಪ್ಪಣಿ\nಯಾವಾಗಲೂ ಕೈಬರಹದ ಧನ್ಯವಾದ ಟಿಪ್ಪಣಿಯನ್ನು ಸೇರಿಸಿ. ಇದು ಜೀವಿತಾವಧಿಯವರೆಗೆ ನಿಷ್ಠಾವಂತ ಗ್ರಾಹಕರನ್ನು ಸೃಷ್ಟಿಸುತ್ತದೆ.",
+          tips: ["ನಾಜೂಕು ವಸ್ತುಗಳನ್ನು ಡಬಲ್-ಬಾಕ್ಸ್ ಮಾಡಿ.", "ಶಿಪ್ಪಿಂಗ್ ಮಾಡುವ ಮೊದಲು ಪ್ಯಾಕೇಜ್‌ನ ಫೋಟೋ ತೆಗೆದುಕೊಳ್ಳಿ.", "ನಿಮ್ಮ ಬಾಕ್ಸ್ ಅನ್ನು ಸ್ಟ್ಯಾಂಪ್‌ನೊಂದಿಗೆ ಬ್ರ್ಯಾಂಡ್ ಮಾಡಿ."]
+        },
+        "marketplace-verification": {
+          title: "ಮಾರುಕಟ್ಟೆ ಪರಿಶೀಲನೆ (Amazon/Flipkart)",
+          description: "ಪ್ರಮುಖ ಇ-ಕಾಮರ್ಸ್ ವೇದಿಕೆಗಳಲ್ಲಿ ಪರಿಶೀಲನೆ ಪಡೆಯಲು ಹಂತ-ಹಂತದ ಮಾರ್ಗದರ್ಶಿ.",
+          level: "ಮುಂದುವರಿದ",
+          duration: "20 ನಿಮಿಷ",
+          content: "ದೊಡ್ಡದಾಗಿ ಬೆಳೆಯಲು ಸಿದ್ಧರಿದ್ದೀರಾ? Amazon Karigar ಮತ್ತು Flipkart Samarth ನಲ್ಲಿ ಹೇಗೆ ಸೇರಬೇಕೆಂಬುದು ಇಲ್ಲಿದೆ.\n\n### ನಿಮಗೆ ಬೇಕಾಗುವ ದಾಖಲೆಗಳು\n\n#### 1. GST ಸಂಖ್ಯೆ\nಆನ್‌ಲೈನ್ ಮಾರಾಟಕ್ಕೆ ಇದು ಕಡ್ಡಾಯವಾಗಿದೆ. ನಿಮ್ಮ ಬಳಿ ಇಲ್ಲದಿದ್ದರೆ, ಸರ್ಕಾರಿ ಪೋರ್ಟಲ್‌ನಲ್ಲಿ ಅರ್ಜಿ ಸಲ್ಲಿಸಿ. ಇದು ಉಚಿತವಾಗಿದೆ.\n\n#### 2. ಕುಶಲಕರ್ಮಿ ಕಾರ್ಡ್ / ಪೆಹಚಾನ್ ಕಾರ್ಡ್\nಈ ಸರ್ಕಾರಿ ಐಡಿ ನೀವು ಕಾನೂನುಬದ್ಧ ಕುಶಲಕರ್ಮಿ ಎಂದು ಸಾಬೀತುಪಡಿಸುತ್ತದೆ. ಇದು ಈ ಪ್ಲಾಟ್‌ಫಾರ್ಮ್‌ಗಳಲ್ಲಿ ನಿಮಗೆ ಕಡಿಮೆ ಆಯೋಗದ ದರಗಳನ್ನು ನೀಡುತ್ತದೆ.\n\n#### 3. ಬ್ಯಾಂಕ್ ಖಾತೆ\nನಿಮ್ಮ ಹೆಸರಿನಲ್ಲಿ ಅಥವಾ ನಿಮ್ಮ ವ್ಯಾಪಾರದ ಹೆಸರಿನಲ್ಲಿರಬೇಕು. ವ್ಯಾಪಾರೇತರ ಪಾಲುದಾರರೊಂದಿಗೆ ಜಂಟಿ ಖಾತೆಗಳಿಲ್ಲ.\n\n### ಪ್ರಕ್ರಿಯೆ\n1. Amazon Karigar ಅಥವಾ Flipkart Samarth ಮಾರಾಟಗಾರರ ಪೋರ್ಟಲ್‌ಗೆ ಹೋಗಿ.\n2. ನಿಮ್ಮ GST ಮತ್ತು ರದ್ದುಗೊಳಿಸಿದ ಚೆಕ್ ಅನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ.\n3. 'ಪ್ರಮಾಣಪತ್ರಗಳು' ವಿಭಾಗದಲ್ಲಿ ನಿಮ್ಮ ಕುಶಲಕರ್ಮಿ ಕಾರ್ಡ್ ಅನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ.\n4. ಅನುಮೋದನೆಗಾಗಿ 48-72 ಗಂಟೆಗಳ ಕಾಲ ಕಾಯಿರಿ.",
+          tips: ["ನಿಮ್ಮ ಕುಶಲಕರ್ಮಿ ಕಾರ್ಡ್ ಅನ್ನು ನವೀಕರಿಸಿ.", "ಬ್ಯಾಂಕ್ ಖಾತೆಯಲ್ಲಿನ ಹೆಸರು GST ಗೆ ನಿಖರವಾಗಿ ಹೊಂದಿಕೆಯಾಗಿದೆಯೇ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ.", "5-10 ಅತ್ಯುತ್ತಮ ಉತ್ಪನ್ನಗಳೊಂದಿಗೆ ಪ್ರಾರಂಭಿಸಿ."]
+        }
+      }
     },
     home: {
       artisanShowcase: {
