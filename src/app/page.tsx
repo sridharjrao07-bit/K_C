@@ -17,6 +17,7 @@ export default function Home() {
             setUser(user);
         };
         checkUser();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
