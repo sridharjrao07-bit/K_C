@@ -20,24 +20,47 @@ export default function UpdatePasswordPage() {
             return;
         }
 
+        if (password.length < 6) {
+            alert("Password must be at least 6 characters long.");
+            return;
+        }
+
         setIsLoading(true);
+        console.log("Starting password update...");
 
         try {
             const supabase = createClient();
+
+            // Check if user is authenticated
+            const { data: { session } } = await supabase.auth.getSession();
+            console.log("Session:", session ? "exists" : "missing");
+
+            if (!session) {
+                alert("Session expired. Please request a new password reset link.");
+                setIsLoading(false);
+                router.push("/forgot-password");
+                return;
+            }
+
+            console.log("Updating password...");
             const { error } = await supabase.auth.updateUser({
                 password: password
             });
 
             if (error) {
+                console.error("Password update error:", error);
                 alert(error.message);
-            } else {
-                alert(t("auth.passwordUpdated"));
-                router.push("/dashboard");
-                router.refresh();
+                setIsLoading(false);
+                return;
             }
+
+            console.log("Password updated successfully!");
+            alert(t("auth.passwordUpdated"));
+            router.push("/login");
+            router.refresh();
         } catch (error) {
-            console.error(error);
-            alert("An error occurred.");
+            console.error("Unexpected error:", error);
+            alert("An error occurred: " + (error as Error).message);
         } finally {
             setIsLoading(false);
         }
