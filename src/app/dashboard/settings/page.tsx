@@ -9,6 +9,7 @@ export default function ArtisanSettings() {
     const router = useRouter();
     const [loading, setLoading] = useState(true);
     const [updating, setUpdating] = useState(false);
+    const [updatingPassword, setUpdatingPassword] = useState(false);
     const [avatarFile, setAvatarFile] = useState<File | null>(null);
     const [formData, setFormData] = useState({
         full_name: "",
@@ -16,6 +17,10 @@ export default function ArtisanSettings() {
         phone: "",
         bio: "",
         avatar_url: ""
+    });
+    const [passwordData, setPasswordData] = useState({
+        newPassword: "",
+        confirmPassword: ""
     });
 
     useEffect(() => {
@@ -105,6 +110,39 @@ export default function ArtisanSettings() {
             alert("Error updating profile: " + error.message);
         } finally {
             setUpdating(false);
+        }
+    };
+
+    const handlePasswordChange = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        if (passwordData.newPassword !== passwordData.confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+
+        if (passwordData.newPassword.length < 6) {
+            alert("Password must be at least 6 characters long.");
+            return;
+        }
+
+        setUpdatingPassword(true);
+
+        try {
+            const supabase = createClient();
+            const { error } = await supabase.auth.updateUser({
+                password: passwordData.newPassword
+            });
+
+            if (error) throw error;
+
+            alert("Password updated successfully!");
+            setPasswordData({ newPassword: "", confirmPassword: "" });
+        } catch (error: any) {
+            console.error(error);
+            alert("Error updating password: " + error.message);
+        } finally {
+            setUpdatingPassword(false);
         }
     };
 
@@ -212,6 +250,61 @@ export default function ArtisanSettings() {
 
                     </form>
                 </div>
+
+                {/* Password Reset Section */}
+                <div className="bg-white p-8 rounded-2xl shadow-lg border border-[#e5d1bf] mt-6 animate-slide-up" style={{ animationDelay: '100ms' }}>
+                    <h2 className="text-2xl font-display font-bold text-[#6f5c46] mb-6">Change Password</h2>
+                    <form onSubmit={handlePasswordChange} className="space-y-6">
+                        <div>
+                            <label className="block text-sm font-medium text-[#6f5c46] mb-2">New Password</label>
+                            <input
+                                type="password"
+                                required
+                                minLength={6}
+                                className="w-full px-4 py-3 rounded-lg border border-[#e5d1bf] focus:ring-2 focus:ring-[#c65d51]/20 focus:border-[#c65d51] outline-none transition-all duration-300 focus:scale-[1.01]"
+                                value={passwordData.newPassword}
+                                onChange={e => setPasswordData({ ...passwordData, newPassword: e.target.value })}
+                                placeholder="Enter new password"
+                            />
+                            <p className="text-xs text-gray-500 mt-1">Minimum 6 characters</p>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-[#6f5c46] mb-2">Confirm New Password</label>
+                            <input
+                                type="password"
+                                required
+                                minLength={6}
+                                className="w-full px-4 py-3 rounded-lg border border-[#e5d1bf] focus:ring-2 focus:ring-[#c65d51]/20 focus:border-[#c65d51] outline-none transition-all duration-300 focus:scale-[1.01]"
+                                value={passwordData.confirmPassword}
+                                onChange={e => setPasswordData({ ...passwordData, confirmPassword: e.target.value })}
+                                placeholder="Confirm new password"
+                            />
+                            {passwordData.newPassword && passwordData.confirmPassword && passwordData.newPassword !== passwordData.confirmPassword && (
+                                <p className="text-xs text-red-500 mt-1 animate-shake">Passwords do not match!</p>
+                            )}
+                        </div>
+
+                        <button
+                            type="submit"
+                            disabled={updatingPassword || !passwordData.newPassword || !passwordData.confirmPassword}
+                            className="w-full bg-gradient-to-r from-[#b87d4b] to-[#d4776f] text-white py-4 rounded-xl font-bold hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
+                        >
+                            {updatingPassword ? (
+                                <>
+                                    <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    Updating Password...
+                                </>
+                            ) : (
+                                "Update Password"
+                            )}
+                        </button>
+                    </form>
+                </div>
+
             </div>
         </div>
     );

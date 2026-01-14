@@ -107,7 +107,7 @@ export default function LoginPage() {
                                 name="email"
                                 type="email"
                                 required
-                                className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] focus:border-transparent transition-smooth"
+                                className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] focus:border-transparent transition-all duration-300 focus:scale-[1.01] focus:shadow-lg"
                                 placeholder={t("auth.placeholderEmail")}
                                 value={formData.email}
                                 onChange={handleChange}
@@ -120,7 +120,7 @@ export default function LoginPage() {
                                 <label htmlFor="password" className="text-sm font-medium text-[#6f5c46]">
                                     {t("auth.password")}
                                 </label>
-                                <Link href="/forgot-password" className="text-sm font-medium text-[#c65d51] hover:text-[#a84e44]">
+                                <Link href="/forgot-password" className="text-sm font-medium text-[#c65d51] hover:text-[#a84e44] transition-colors">
                                     {t("auth.forgotPassword")}
                                 </Link>
                             </div>
@@ -129,7 +129,7 @@ export default function LoginPage() {
                                 name="password"
                                 type="password"
                                 required
-                                className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] focus:border-transparent transition-smooth"
+                                className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] focus:border-transparent transition-all duration-300 focus:scale-[1.01] focus:shadow-lg"
                                 placeholder={t("auth.placeholderPassword")}
                                 value={formData.password}
                                 onChange={handleChange}
@@ -141,7 +141,7 @@ export default function LoginPage() {
                             <button
                                 type="submit"
                                 disabled={isLoading}
-                                className="w-full bg-gradient-to-r from-[#b87d4b] to-[#d4776f] text-white py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
+                                className="w-full bg-gradient-to-r from-[#b87d4b] to-[#d4776f] text-white py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center"
                             >
                                 {isLoading ? (
                                     <>

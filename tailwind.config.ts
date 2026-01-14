@@ -68,29 +68,61 @@ const config: Config = {
                 display: ['var(--font-outfit)', 'system-ui', 'sans-serif'],
             },
             animation: {
-                'fade-in': 'fadeIn 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
-                'slide-up': 'slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
-                'slide-down': 'slideDown 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
-                'scale-in': 'scaleIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+                'fade-in': 'fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                'fade-out': 'fadeOut 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                'slide-up': 'slideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                'slide-down': 'slideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                'slide-left': 'slideLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                'slide-right': 'slideRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                'scale-in': 'scaleIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                'scale-out': 'scaleOut 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                'bounce-in': 'bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards',
                 'float': 'float 6s ease-in-out infinite',
                 'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                 'shimmer': 'shimmer 2.5s linear infinite',
+                'wiggle': 'wiggle 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both',
+                'shake': 'shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both',
+                'glow': 'glow 2s ease-in-out infinite alternate',
+                'spin-slow': 'spin 3s linear infinite',
+                'ping-slow': 'ping 3s cubic-bezier(0, 0, 0.2, 1) infinite',
             },
             keyframes: {
                 fadeIn: {
                     '0%': { opacity: '0' },
                     '100%': { opacity: '1' },
                 },
+                fadeOut: {
+                    '0%': { opacity: '1' },
+                    '100%': { opacity: '0' },
+                },
                 slideUp: {
-                    '0%': { transform: 'translateY(40px)', opacity: '0' },
+                    '0%': { transform: 'translateY(30px)', opacity: '0' },
                     '100%': { transform: 'translateY(0)', opacity: '1' },
                 },
                 slideDown: {
                     '0%': { transform: 'translateY(-20px)', opacity: '0' },
                     '100%': { transform: 'translateY(0)', opacity: '1' },
                 },
+                slideLeft: {
+                    '0%': { transform: 'translateX(30px)', opacity: '0' },
+                    '100%': { transform: 'translateX(0)', opacity: '1' },
+                },
+                slideRight: {
+                    '0%': { transform: 'translateX(-30px)', opacity: '0' },
+                    '100%': { transform: 'translateX(0)', opacity: '1' },
+                },
                 scaleIn: {
-                    '0%': { transform: 'scale(0.95)', opacity: '0' },
+                    '0%': { transform: 'scale(0.9)', opacity: '0' },
+                    '100%': { transform: 'scale(1)', opacity: '1' },
+                },
+                scaleOut: {
+                    '0%': { transform: 'scale(1)', opacity: '1' },
+                    '100%': { transform: 'scale(0.9)', opacity: '0' },
+                },
+                bounceIn: {
+                    '0%': { transform: 'scale(0.3)', opacity: '0' },
+                    '50%': { transform: 'scale(1.05)' },
+                    '70%': { transform: 'scale(0.9)' },
                     '100%': { transform: 'scale(1)', opacity: '1' },
                 },
                 shimmer: {
@@ -100,6 +132,20 @@ const config: Config = {
                 float: {
                     '0%, 100%': { transform: 'translateY(0px)' },
                     '50%': { transform: 'translateY(-15px)' },
+                },
+                wiggle: {
+                    '0%, 100%': { transform: 'rotate(0deg)' },
+                    '25%': { transform: 'rotate(-3deg)' },
+                    '75%': { transform: 'rotate(3deg)' },
+                },
+                shake: {
+                    '0%, 100%': { transform: 'translateX(0)' },
+                    '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-4px)' },
+                    '20%, 40%, 60%, 80%': { transform: 'translateX(4px)' },
+                },
+                glow: {
+                    '0%': { boxShadow: '0 0 5px rgba(212, 119, 111, 0.2), 0 0 10px rgba(212, 119, 111, 0.1)' },
+                    '100%': { boxShadow: '0 0 20px rgba(212, 119, 111, 0.4), 0 0 30px rgba(212, 119, 111, 0.2)' },
                 },
             },
             backgroundImage: {

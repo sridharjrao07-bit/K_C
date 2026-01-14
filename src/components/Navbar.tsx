@@ -65,11 +65,36 @@ export default function Navbar() {
     return () => subscription.unsubscribe();
   }, [supabase]);
 
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
-    router.push("/login");
-    router.refresh();
+    if (isLoggingOut) return; // Prevent multiple clicks
+
+    setIsLoggingOut(true);
+    setIsMenuOpen(false); // Close mobile menu immediately
+
+    try {
+      const { error } = await supabase.auth.signOut();
+
+      if (error) {
+        console.error("Logout error:", error);
+        alert("Failed to log out. Please try again.");
+        setIsLoggingOut(false);
+        return;
+      }
+
+      // Clear local state
+      setUser(null);
+      setIsAdmin(false);
+
+      // Navigate to login
+      router.push("/login");
+      router.refresh();
+    } catch (error) {
+      console.error("Unexpected logout error:", error);
+      alert("An unexpected error occurred during logout.");
+      setIsLoggingOut(false);
+    }
   };
 
   const isActive = (path: string) => pathname === path;
@@ -129,9 +154,18 @@ export default function Navbar() {
                 )}
                 <button
                   onClick={handleLogout}
-                  className={`${mutedTextColor} ${hoverColor} transition-colors flex items-center gap-2`}
+                  disabled={isLoggingOut}
+                  className={`${mutedTextColor} ${hoverColor} transition-all flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 active:scale-95`}
+                  title="Log out"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+                  {isLoggingOut ? (
+                    <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                  ) : (
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+                  )}
                 </button>
               </>
             ) : (
@@ -199,9 +233,20 @@ export default function Navbar() {
                 )}
                 <button
                   onClick={handleLogout}
-                  className="w-full text-left px-4 py-4 text-lg font-medium text-gray-400 hover:text-[#c65d51] transition-all uppercase tracking-wider"
+                  disabled={isLoggingOut}
+                  className="w-full text-left px-4 py-4 text-lg font-medium text-gray-400 hover:text-[#c65d51] hover:bg-white/5 rounded-xl transition-all uppercase tracking-wider disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-3"
                 >
-                  Log Out
+                  {isLoggingOut ? (
+                    <>
+                      <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Logging out...
+                    </>
+                  ) : (
+                    "Log Out"
+                  )}
                 </button>
               </>
             ) : (

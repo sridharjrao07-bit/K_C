@@ -142,4 +142,57 @@ body::before {
   .transition-smooth {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
+
+  .transition-spring {
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .transition-bounce {
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+}
+
+/* Enhanced Button Styles */
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-to-r from-[#b87d4b] to-[#d4776f] text-white px-6 py-3 rounded-full font-bold shadow-lg;
+    @apply hover:shadow-xl hover:scale-[1.02] active:scale-[0.98];
+    @apply transition-all duration-300 ease-out;
+    @apply disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100;
+  }
+
+  .btn-secondary {
+    @apply bg-white/10 text-white px-6 py-3 rounded-full font-medium border border-white/20;
+    @apply hover:bg-white/20 hover:scale-105 active:scale-95;
+    @apply transition-all duration-300 ease-out;
+  }
+
+  /* Enhanced Input Focus */
+  .input-enhanced {
+    @apply transition-all duration-300 ease-out;
+    @apply focus:ring-2 focus:ring-[#d4776f]/50 focus:border-[#d4776f];
+    @apply focus:scale-[1.01] focus:shadow-lg;
+  }
+
+  /* Card Hover Effect */
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
+    @apply hover:shadow-2xl hover:-translate-y-1;
+    @apply hover:border-[#d4776f]/30;
+  }
+
+  /* Glow Effect on Hover */
+  .glow-on-hover {
+    @apply transition-all duration-300;
+    @apply hover:shadow-[0_0_20px_rgba(212, 119, 111, 0.3)];
+  }
+
+  /* Smooth Underline Animation */
+  .underline-animate {
+    @apply relative;
+    @apply after:content-[''] after:absolute after:bottom-0 after:left-0;
+    @apply after:w-0 after:h-0.5 after:bg-[#c65d51];
+    @apply after:transition-all after:duration-300;
+    @apply hover:after:w-full;
+  }
 }

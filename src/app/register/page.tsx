@@ -90,8 +90,8 @@ export default function Register() {
                                 type="button"
                                 onClick={() => setRole("artisan")}
                                 className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${role === "artisan"
-                                        ? "bg-[#6f5c46] text-white shadow-md"
-                                        : "text-gray-500 hover:text-[#6f5c46]"
+                                    ? "bg-[#6f5c46] text-white shadow-md"
+                                    : "text-gray-500 hover:text-[#6f5c46]"
                                     }`}
                             >
                                 I am an Artisan
@@ -100,8 +100,8 @@ export default function Register() {
                                 type="button"
                                 onClick={() => setRole("customer")}
                                 className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${role === "customer"
-                                        ? "bg-[#c65d51] text-white shadow-md"
-                                        : "text-gray-500 hover:text-[#c65d51]"
+                                    ? "bg-[#c65d51] text-white shadow-md"
+                                    : "text-gray-500 hover:text-[#c65d51]"
                                     }`}
                             >
                                 I am a Shopper
@@ -126,7 +126,7 @@ export default function Register() {
                                 id="fullName"
                                 type="text"
                                 required
-                                className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] transition-smooth"
+                                className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] transition-all duration-300 focus:scale-[1.01] focus:shadow-lg"
                                 placeholder="Enter your full name"
                                 value={formData.fullName}
                                 onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
@@ -142,7 +142,7 @@ export default function Register() {
                                     </label>
                                     <select
                                         id="craft"
-                                        className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] transition-smooth"
+                                        className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] transition-all duration-300 focus:scale-[1.01] focus:shadow-lg"
                                         value={formData.craft}
                                         onChange={(e) => setFormData({ ...formData, craft: e.target.value })}
                                         required={role === "artisan"}
@@ -164,7 +164,7 @@ export default function Register() {
                                         id="phone"
                                         type="tel"
                                         required={role === "artisan"}
-                                        className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] transition-smooth"
+                                        className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] transition-all duration-300 focus:scale-[1.01] focus:shadow-lg"
                                         placeholder="+91..."
                                         value={formData.phone}
                                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -182,7 +182,7 @@ export default function Register() {
                                 id="email"
                                 type="email"
                                 required
-                                className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] transition-smooth"
+                                className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] transition-all duration-300 focus:scale-[1.01] focus:shadow-lg"
                                 placeholder="you@example.com"
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -198,7 +198,7 @@ export default function Register() {
                                 id="password"
                                 type="password"
                                 required
-                                className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] transition-smooth"
+                                className="w-full px-4 py-3 rounded-lg bg-white border border-[#e8dcc9] focus:outline-none focus:ring-2 focus:ring-[#d4776f] transition-all duration-300 focus:scale-[1.01] focus:shadow-lg"
                                 placeholder="••••••••"
                                 value={formData.password}
                                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
@@ -210,9 +210,9 @@ export default function Register() {
                             <button
                                 type="submit"
                                 disabled={isLoading}
-                                className={`w-full text-white py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center ${role === "artisan"
-                                        ? "bg-gradient-to-r from-[#b87d4b] to-[#d4776f]"
-                                        : "bg-gradient-to-r from-[#c65d51] to-[#e89b87]"
+                                className={`w-full text-white py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center ${role === "artisan"
+                                    ? "bg-gradient-to-r from-[#b87d4b] to-[#d4776f]"
+                                    : "bg-gradient-to-r from-[#c65d51] to-[#e89b87]"
                                     }`}
                             >
                                 {isLoading ? (
