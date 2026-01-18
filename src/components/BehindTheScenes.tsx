@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { useLanguage } from "@/context/language-context";
 
 interface GalleryItem {
@@ -78,12 +79,16 @@ export default function BehindTheScenes({ galleryItems }: BehindTheScenesProps) 
             onClick={() => setSelectedImage(item)}
           >
             <div className="relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={item.image_url}
-                alt={item.caption || "Behind the scenes"}
-                className="w-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
+              <div className="relative w-full aspect-square">
+                <Image
+                  src={item.image_url}
+                  alt={item.caption || "Behind the scenes"}
+                  fill
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
               {item.caption && (
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                   <p className="text-white text-sm font-medium line-clamp-2">{item.caption}</p>
@@ -145,12 +150,15 @@ export default function BehindTheScenes({ galleryItems }: BehindTheScenesProps) 
             className="max-w-5xl max-h-[85vh] mx-4 animate-slide-up"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={selectedImage.image_url}
-              alt={selectedImage.caption || "Gallery image"}
-              className="max-w-full max-h-[75vh] object-contain rounded-lg shadow-2xl"
-            />
+            <div className="relative w-full h-[75vh]">
+              <Image
+                src={selectedImage.image_url}
+                alt={selectedImage.caption || "Gallery image"}
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
             {selectedImage.caption && (
               <div className="mt-4 text-center">
                 <p className="text-white text-lg">{selectedImage.caption}</p>

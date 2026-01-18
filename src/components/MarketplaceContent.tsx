@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useLanguage } from "@/context/language-context";
 
 interface Product {
@@ -86,14 +87,18 @@ export default function MarketplaceContent({ initialProducts }: { initialProduct
             >
               <div className="aspect-[4/5] overflow-hidden bg-gray-100 relative">
                 {product.images && product.images[0] && (
-                  /* eslint-disable-next-line @next/next/no-img-element */
-                  <img
-                    src={product.images[0]}
-                    alt={product.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={product.images[0]}
+                      alt={product.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
                 )}
-                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#6f5c46]">
+                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#6f5c46] z-10">
                   {product.category}
                 </div>
               </div>

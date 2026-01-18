@@ -2,6 +2,7 @@
 
 import { useLanguage } from "@/context/language-context";
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState, useMemo } from "react";
 import { createClient } from "@/lib/supabase/client";
 import FavoriteButton from "@/components/FavoriteButton";
@@ -68,11 +69,13 @@ const ArtisanShowcase = () => {
                 <div className="absolute top-4 right-4 z-10">
                   <FavoriteButton artisanId={artisan.id} artisanName={artisan.full_name} size="sm" />
                 </div>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={artisan.avatar_url || 'https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&q=80&w=400'}
                   alt={artisan.full_name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
                 <div className="absolute bottom-0 left-0 right-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform">

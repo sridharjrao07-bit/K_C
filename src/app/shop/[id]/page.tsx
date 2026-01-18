@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import ProductPageClient from '@/components/ProductPageClient'
 
@@ -43,17 +44,22 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                     <div className="animate-slide-up">
                         <div className="aspect-[4/5] bg-white rounded-2xl shadow-sm border border-[#e5d1bf] overflow-hidden p-6 relative group">
                             {product.images?.[0] ? (
-                                /* eslint-disable-next-line @next/next/no-img-element */
-                                <img
-                                    src={product.images[0]}
-                                    alt={product.title}
-                                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700"
-                                />
+                                <div className="relative w-full h-full">
+                                    <Image
+                                        src={product.images[0]}
+                                        alt={product.title}
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                        className="object-contain group-hover:scale-105 transition-transform duration-700"
+                                        priority
+                                    />
+                                </div>
                             ) : (
                                 <div className="flex items-center justify-center h-full text-gray-300">
                                     <span className="text-lg">No Image Available</span>
                                 </div>
-                            )}
+                            )
+                            }
 
                             {/* Artisan Badge/Tag */}
                             <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm border border-[#e5d1bf]">
@@ -72,7 +78,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
 
                         <div className="flex items-center space-x-4 mb-8">
                             <Link href={`/artisan/${product.artisan_id}`} className="flex items-center space-x-2 group">
-                                <div className="w-10 h-10 bg-[#e5d1bf] rounded-full flex items-center justify-center text-[#6f5c46] font-bold group-hover:bg-[#d4a574] transition-colors">
+                                <div className="w-10 h-10 bg-[#e5d1bf] rounded-full flex items-center justify-center text-[#6f5c46] font-bold group-hover:bg-[#d4a574] transition-colors relative overflow-hidden">
                                     {product.profiles?.full_name?.charAt(0) || "A"}
                                 </div>
                                 <div>

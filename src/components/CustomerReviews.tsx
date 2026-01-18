@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { createClient } from "@/lib/supabase/client";
 import { useLanguage } from "@/context/language-context";
 
@@ -242,8 +243,15 @@ export default function CustomerReviews({ artisanId, initialReviews = [] }: Cust
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-[#e5d1bf] rounded-full flex items-center justify-center text-[#6f5c46] font-bold text-lg overflow-hidden flex-shrink-0">
                   {review.reviewer?.avatar_url ? (
-                    /* eslint-disable-next-line @next/next/no-img-element */
-                    <img src={review.reviewer.avatar_url} alt="" className="w-full h-full object-cover" />
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={review.reviewer.avatar_url}
+                        alt=""
+                        fill
+                        sizes="48px"
+                        className="object-cover"
+                      />
+                    </div>
                   ) : (
                     review.reviewer?.full_name?.charAt(0) || "U"
                   )}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useCart } from "@/context/cart-context";
 import { createClient } from "@/lib/supabase/client";
 import { useLanguage } from "@/context/language-context";
@@ -267,8 +268,17 @@ export default function CheckoutForm({ user }: { user: any }) {
             {items.map((item) => (
               <div key={item.id} className="flex gap-4 py-4 border-b border-gray-100 last:border-0">
                 <div className="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  {item.image && <img src={item.image} alt={item.title} className="w-full h-full object-cover" />}
+                  {item.image && (
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        sizes="64px"
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
                 </div>
                 <div className="flex-1">
                   <h4 className="font-semibold text-gray-800 line-clamp-1">{item.title}</h4>
