@@ -2,9 +2,11 @@
 
 import { useCart } from "@/context/cart-context";
 import Link from "next/link";
+import { useLanguage } from "@/context/language-context";
 import Image from "next/image";
 
 export default function CartDrawer() {
+  const { t } = useLanguage();
   const { items, isOpen, closeCart, removeFromCart, updateQuantity, total, itemCount } = useCart();
 
   if (!isOpen) return null;
@@ -25,7 +27,7 @@ export default function CartDrawer() {
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
-            <h2 className="text-xl font-bold">Your Cart</h2>
+            <h2 className="text-xl font-bold">{t("cart.title")}</h2>
             {itemCount > 0 && (
               <span className="bg-[#c65d51] text-white text-sm px-2 py-0.5 rounded-full">
                 {itemCount}
@@ -51,13 +53,13 @@ export default function CartDrawer() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-bold text-[#6f5c46] mb-2">Your cart is empty</h3>
-              <p className="text-gray-500 mb-6">Discover our handcrafted treasures</p>
+              <h3 className="text-lg font-bold text-[#6f5c46] mb-2">{t("cart.empty")}</h3>
+              <p className="text-gray-500 mb-6">{t("cart.emptyDesc")}</p>
               <button
                 onClick={closeCart}
                 className="bg-[#c65d51] text-white px-6 py-2 rounded-full font-semibold hover:bg-[#a84e44] transition-colors"
               >
-                Continue Shopping
+                {t("cart.continueShopping")}
               </button>
             </div>
           ) : (
@@ -94,7 +96,7 @@ export default function CartDrawer() {
                       className="text-sm text-gray-500 hover:text-[#c65d51] transition-colors"
                       onClick={closeCart}
                     >
-                      by {item.artisanName}
+                      {t("common.by")} {item.artisanName}
                     </Link>
                     <p className="text-[#c65d51] font-bold mt-1">₹{item.price}</p>
                   </div>
@@ -135,7 +137,7 @@ export default function CartDrawer() {
         {items.length > 0 && (
           <div className="border-t border-[#e5d1bf] p-6 bg-white">
             <div className="flex items-center justify-between mb-4">
-              <span className="text-gray-600">Subtotal</span>
+              <span className="text-gray-600">{t("checkout.subtotal")}</span>
               <span className="text-2xl font-bold text-[#6f5c46]">₹{total.toLocaleString()}</span>
             </div>
             <Link
@@ -143,7 +145,7 @@ export default function CartDrawer() {
               onClick={closeCart}
               className="block w-full bg-[#6f5c46] text-white text-center py-4 rounded-xl font-bold hover:bg-[#5a4a38] transition-colors mb-3"
             >
-              Proceed to Checkout
+              {t("cart.proceed")}
             </Link>
             <button
               onClick={closeCart}
