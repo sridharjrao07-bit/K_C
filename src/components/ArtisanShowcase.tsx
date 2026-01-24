@@ -67,7 +67,12 @@ const ArtisanShowcase = () => {
               <div className="relative aspect-[3/4] rounded-3xl overflow-hidden mb-6 shadow-xl border border-[#e5d1bf]">
                 {/* Favorite Button */}
                 <div className="absolute top-4 right-4 z-10">
-                  <FavoriteButton artisanId={artisan.id} artisanName={artisan.full_name} size="sm" />
+                  <FavoriteButton
+                    itemId={artisan.id}
+                    type="artisan"
+                    itemName={artisan.full_name}
+                    size="sm"
+                  />
                 </div>
                 <Image
                   src={artisan.avatar_url || 'https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&q=80&w=400'}

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import ProductPageClient from '@/components/ProductPageClient'
+import FavoriteButton from '@/components/FavoriteButton'
 
 export const revalidate = 0;
 
@@ -62,10 +63,18 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                             }
 
                             {/* Artisan Badge/Tag */}
-                            <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm border border-[#e5d1bf]">
-                                <p className="text-xs font-bold text-[#c65d51] uppercase tracking-wider">
-                                    Authentic {product.profiles?.craft || "Handcraft"}
-                                </p>
+                            <div className="absolute top-6 right-6 flex flex-col items-end gap-2">
+                                <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm border border-[#e5d1bf]">
+                                    <p className="text-xs font-bold text-[#c65d51] uppercase tracking-wider">
+                                        Authentic {product.profiles?.craft || "Handcraft"}
+                                    </p>
+                                </div>
+                                <FavoriteButton
+                                    itemId={product.id}
+                                    type="product"
+                                    itemName={product.title}
+                                    size="md"
+                                />
                             </div>
                         </div>
                     </div>

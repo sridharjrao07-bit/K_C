@@ -4,13 +4,20 @@ import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 interface FavoriteButtonProps {
-  artisanId: string;
-  artisanName?: string;
+  itemId: string;
+  type?: "artisan" | "product";
+  itemName?: string;
   size?: "sm" | "md" | "lg";
   showCount?: boolean;
 }
 
-export default function FavoriteButton({ artisanId, artisanName, size = "md", showCount = false }: FavoriteButtonProps) {
+export default function FavoriteButton({
+  itemId,
+  type = "artisan",
+  itemName,
+  size = "md",
+  showCount = false
+}: FavoriteButtonProps) {
   const supabase = createClient();
   const [isFavorite, setIsFavorite] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -24,6 +31,8 @@ export default function FavoriteButton({ artisanId, artisanName, size = "md", sh
     lg: "w-12 h-12 text-2xl"
   };
 
+  const dbColumn = type === "product" ? "product_id" : "artisan_id";
+
   useEffect(() => {
     const checkFavorite = async () => {
       try {
@@ -36,7 +45,7 @@ export default function FavoriteButton({ artisanId, artisanName, size = "md", sh
             const { count } = await supabase
               .from('favorites')
               .select('*', { count: 'exact', head: true })
-              .eq('artisan_id', artisanId);
+              .eq(dbColumn, itemId);
             setCount(count || 0);
           } catch (e) {
             // Table might not exist
@@ -50,7 +59,7 @@ export default function FavoriteButton({ artisanId, artisanName, size = "md", sh
               .from('favorites')
               .select('id')
               .eq('user_id', user.id)
-              .eq('artisan_id', artisanId)
+              .eq(dbColumn, itemId)
               .single();
             setIsFavorite(!!data);
           } catch (e) {
@@ -63,7 +72,7 @@ export default function FavoriteButton({ artisanId, artisanName, size = "md", sh
     };
 
     checkFavorite();
-  }, [artisanId, supabase, showCount]);
+  }, [itemId, type, dbColumn, supabase, showCount]);
 
   const toggleFavorite = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -83,17 +92,19 @@ export default function FavoriteButton({ artisanId, artisanName, size = "md", sh
           .from('favorites')
           .delete()
           .eq('user_id', user.id)
-          .eq('artisan_id', artisanId);
+          .eq(dbColumn, itemId);
 
         setIsFavorite(false);
         setCount((c) => Math.max(0, c - 1));
       } else {
+        const insertData: any = {
+          user_id: user.id
+        };
+        insertData[dbColumn] = itemId;
+
         await supabase
           .from('favorites')
-          .insert({
-            user_id: user.id,
-            artisan_id: artisanId
-          });
+          .insert(insertData);
 
         setIsFavorite(true);
         setCount((c) => c + 1);
@@ -112,7 +123,7 @@ export default function FavoriteButton({ artisanId, artisanName, size = "md", sh
         onClick={toggleFavorite}
         disabled={loading}
         className={`${sizeClasses[size]} bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md hover:shadow-lg transition-all hover:scale-110 ${animating ? 'scale-125' : ''} ${loading ? 'opacity-50' : ''}`}
-        title={isFavorite ? `Remove ${artisanName || 'artisan'} from favorites` : `Add ${artisanName || 'artisan'} to favorites`}
+        title={isFavorite ? `Remove ${itemName || type} from favorites` : `Add ${itemName || type} to favorites`}
       >
         <span className={`transition-all ${isFavorite ? 'text-red-500' : 'text-gray-400 hover:text-red-400'}`}>
           {isFavorite ? '❤️' : '🤍'}

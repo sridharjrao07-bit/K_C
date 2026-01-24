@@ -19,8 +19,9 @@ export default function ArtisanProfileClient({ artisanId, artisanName }: Artisan
       {/* Action Buttons */}
       <div className="flex items-center justify-center gap-4 mt-6">
         <FavoriteButton
-          artisanId={artisanId}
-          artisanName={artisanName}
+          itemId={artisanId}
+          type="artisan"
+          itemName={artisanName}
           size="lg"
           showCount
         />
