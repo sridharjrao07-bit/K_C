@@ -200,9 +200,16 @@ export const translations = {
     },
     favorites: {
       title: "Your Favorites",
+      subtitle: "Artisans and products you've saved",
       noFavorites: "No favorites yet",
+      noFavoritesDesc: "Browse our talented artisans and their products, then click the heart icon to save your favorites!",
       addedTo: "Added to favorites",
-      removedFrom: "Removed from favorites"
+      removedFrom: "Removed from favorites",
+      exploreShop: "Explore Shop",
+      favoriteProducts: "Favorite Products",
+      favoriteArtisans: "Favorite Artisans",
+      viewProfile: "View Profile",
+      dashboard: "Dashboard"
     },
     contact: {
       title: "Contact Artisan",
@@ -513,9 +520,16 @@ export const translations = {
     },
     favorites: {
       title: "आपके पसंदीदा",
+      subtitle: "आपके द्वारा सहेजे गए कारीगर और उत्पाद",
       noFavorites: "अभी तक कोई पसंदीदा नहीं",
+      noFavoritesDesc: "हमारे प्रतिभाशाली कारीगरों और उनके उत्पादों को ब्राउज़ करें, फिर अपने पसंदीदा सहेजने के लिए हृदय आइकन पर क्लिक करें!",
       addedTo: "पसंदीदा में जोड़ा गया",
-      removedFrom: "पसंदीदा से हटाया गया"
+      removedFrom: "पसंदीदा से हटाया गया",
+      exploreShop: "दुकान देखें",
+      favoriteProducts: "पसंदीदा उत्पाद",
+      favoriteArtisans: "पसंदीदा कारीगर",
+      viewProfile: "प्रोफ़ाइल देखें",
+      dashboard: "डैशबोर्ड"
     },
     contact: {
       title: "कारीगर से संपर्क करें",
@@ -845,9 +859,16 @@ export const translations = {
     },
     favorites: {
       title: "ನಿಮ್ಮ ಮೆಚ್ಚಿನವುಗಳು",
+      subtitle: "ನೀವು ಉಳಿಸಿದ ಕುಶಲಕರ್ಮಿಗಳು ಮತ್ತು ಉತ್ಪನ್ನಗಳು",
       noFavorites: "ಇನ್ನೂ ಮೆಚ್ಚಿನವುಗಳಿಲ್ಲ",
+      noFavoritesDesc: "ನಮ್ಮ ಪ್ರತಿಭಾವಂತ ಕುಶಲಕರ್ಮಿಗಳು ಮತ್ತು ಅವರ ಉತ್ಪನ್ನಗಳನ್ನು ಬ್ರೌಸ್ ಮಾಡಿ, ನಂತರ ನಿಮ್ಮ ಮೆಚ್ಚಿನವುಗಳನ್ನು ಉಳಿಸಲು ಹೃದಯ ಐಕಾನ್ ಕ್ಲಿಕ್ ಮಾಡಿ!",
       addedTo: "ಮೆಚ್ಚಿನವುಗಳಿಗೆ ಸೇರಿಸಲಾಗಿದೆ",
-      removedFrom: "ಮೆಚ್ಚಿನವುಗಳಿಂದ ತೆಗೆದುಹಾಕಲಾಗಿದೆ"
+      removedFrom: "ಮೆಚ್ಚಿನವುಗಳಿಂದ ತೆಗೆದುಹಾಕಲಾಗಿದೆ",
+      exploreShop: "ಅಂಗಡಿ ಅನ್ವೇಷಿಸಿ",
+      favoriteProducts: "ಮೆಚ್ಚಿನ ಉತ್ಪನ್ನಗಳು",
+      favoriteArtisans: "ಮೆಚ್ಚಿನ ಕುಶಲಕರ್ಮಿಗಳು",
+      viewProfile: "ಪ್ರೊಫೈಲ್ ನೋಡಿ",
+      dashboard: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್"
     },
     contact: {
       title: "ಕುಶಲಕರ್ಮಿಯನ್ನು ಸಂಪರ್ಕಿಸಿ",
