@@ -18,30 +18,50 @@ export default async function FavoritesPage() {
   const { data: favorites, error } = await supabase
     .from('favorites')
     .select(`
-            id,
-            created_at,
-            artisan:profiles!artisan_id(
-                id,
-                full_name,
-                craft,
-                location,
-                avatar_url,
-                bio
-            ),
-            product:products!product_id(
-                id,
-                title,
-                price,
-                images,
-                artisan_id,
-                profiles(full_name)
-            )
-        `)
+      id,
+      created_at,
+      artisan_id,
+      product_id
+    `)
     .eq('user_id', user.id)
     .order('created_at', { ascending: false });
 
-  const favoriteArtisans = favorites?.filter((f: any) => f.artisan) || [];
-  const favoriteProducts = favorites?.filter((f: any) => f.product) || [];
+  // Separate artisan and product favorites
+  const artisanFavoriteIds = favorites?.filter((f: any) => f.artisan_id).map((f: any) => f.artisan_id) || [];
+  const productFavoriteIds = favorites?.filter((f: any) => f.product_id).map((f: any) => f.product_id) || [];
+
+  // Fetch artisan details
+  let artisansData: any[] = [];
+  if (artisanFavoriteIds.length > 0) {
+    const { data: artisans } = await supabase
+      .from('profiles')
+      .select('id, full_name, craft, location, avatar_url, bio')
+      .in('id', artisanFavoriteIds);
+    artisansData = artisans || [];
+  }
+
+  // Fetch product details
+  let productsData: any[] = [];
+  if (productFavoriteIds.length > 0) {
+    const { data: products } = await supabase
+      .from('products')
+      .select('id, title, price, images, artisan_id, profiles(full_name)')
+      .in('id', productFavoriteIds);
+    productsData = products || [];
+  }
+
+  // Map favorites with their related data
+  const favoriteArtisans = favorites?.filter((f: any) => f.artisan_id).map((f: any) => ({
+    id: f.id,
+    created_at: f.created_at,
+    artisan: artisansData.find((a: any) => a.id === f.artisan_id)
+  })).filter((f: any) => f.artisan) || [];
+
+  const favoriteProducts = favorites?.filter((f: any) => f.product_id).map((f: any) => ({
+    id: f.id,
+    created_at: f.created_at,
+    product: productsData.find((p: any) => p.id === f.product_id)
+  })).filter((f: any) => f.product) || [];
 
   return (
     <div className="min-h-screen bg-[#faf7f2] py-8 px-4">
@@ -69,7 +89,7 @@ export default async function FavoritesPage() {
         </div>
 
         {/* Empty State */}
-        {(!favorites || favorites.length === 0) ? (
+        {(favoriteArtisans.length === 0 && favoriteProducts.length === 0) ? (
           <div className="text-center py-20 bg-white rounded-3xl border border-dashed border-[#e5d1bf] animate-fade-in">
             <div className="w-20 h-20 bg-[#faf7f2] rounded-full flex items-center justify-center mx-auto mb-6">
               <span className="text-4xl opacity-50">💔</span>
