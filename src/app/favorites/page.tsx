@@ -11,7 +11,7 @@ export default async function FavoritesPage() {
   const { data: { user } } = await supabase.auth.getUser()
 
   if (!user) {
-    redirect('/login?redirect=/dashboard/favorites')
+    redirect('/login?redirect=/favorites')
   }
 
   // Fetch user's favorite items (artisans and products)

@@ -140,6 +140,12 @@ export default function Navbar() {
               {t("nav.shop")}
               <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-[#c65d51] transition-all duration-300 group-hover:w-full ${isActive('/shop') ? 'w-full' : ''}`}></span>
             </Link>
+            {user && (
+              <Link href="/favorites" className={`font-medium transition-all relative group ${isActive('/favorites') ? 'text-[#c65d51] font-bold' : `${textColor} ${hoverColor}`}`} title="Favorites">
+                <span className="text-xl">❤️</span>
+                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-[#c65d51] transition-all duration-300 group-hover:w-full ${isActive('/favorites') ? 'w-full' : ''}`}></span>
+              </Link>
+            )}
             {user ? (
               <>
                 {user.user_metadata?.role !== 'customer' && (
@@ -221,6 +227,10 @@ export default function Navbar() {
             </Link>
             {user ? (
               <>
+                <Link href="/favorites" className="block px-4 py-4 text-lg font-medium text-gray-300 hover:text-white hover:bg-white/5 rounded-xl border border-transparent hover:border-white/10 transition-all uppercase tracking-wider flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
+                  <span>Favorites</span>
+                  <span className="text-xl">❤️</span>
+                </Link>
                 {user.user_metadata?.role !== 'customer' && (
                   <Link href="/dashboard" className="block px-4 py-4 text-lg font-bold text-[#c65d51] hover:bg-[#e5d1bf]/20 rounded-xl border border-[#c65d51]/30 transition-all uppercase tracking-wider" onClick={() => setIsMenuOpen(false)}>
                     {t("nav.dashboard")}
