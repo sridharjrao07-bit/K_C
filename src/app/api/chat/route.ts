@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Groq from 'groq-sdk';
 
-const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
-});
+// Initialize Groq lazily to avoid build errors if the environment variable isn't set yet during build time
+const getGroqClient = () => {
+  if (!process.env.GROQ_API_KEY) {
+    throw new Error('The GROQ_API_KEY environment variable is missing.');
+  }
+  return new Groq({ apiKey: process.env.GROQ_API_KEY });
+};
 
 const SYSTEM_PROMPT = `You are "Kaarigar AI", a friendly and knowledgeable assistant for the Kaarigar Connect platform — a marketplace that empowers traditional Indian artisans (kaarigars).
 
@@ -34,7 +38,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const chatCompletion = await groq.chat.completions.create({
+    const client = getGroqClient();
+    const chatCompletion = await client.chat.completions.create({
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
         ...messages.slice(-10), // Keep last 10 messages for context window
