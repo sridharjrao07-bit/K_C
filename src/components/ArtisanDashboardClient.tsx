@@ -86,6 +86,18 @@ export default function DashboardClient({ user, initialProducts }: { user: User,
           </Link>
         </div>
 
+        {/* Messages Card */}
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-[#e5d1bf] hover:shadow-md transition-smooth">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-bold text-[#6f5c46]">{t("dashboard.messages")}</h2>
+            <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-medium">{t("dashboard.inbox")}</span>
+          </div>
+          <p className="text-gray-600 text-sm mb-4">{t("dashboard.messagesDesc")}</p>
+          <Link href="/dashboard/messages" className="w-full block text-center bg-[#6f5c46] text-white py-2 rounded-lg hover:bg-[#5a4a38] transition-smooth">
+            {t("dashboard.viewMessages")}
+          </Link>
+        </div>
+
         <div className="bg-white p-6 rounded-2xl shadow-sm border border-[#e5d1bf] hover:shadow-md transition-smooth flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-4">
@@ -156,6 +168,6 @@ export default function DashboardClient({ user, initialProducts }: { user: User,
           </div>
         )}
       </div>
-    </div>
+    </div >
   );
 }

@@ -3,15 +3,17 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useLanguage } from "@/context/language-context";
+import { sendMessage } from "@/app/actions";
 
 interface ContactArtisanModalProps {
   artisanId: string;
   artisanName: string;
   isOpen: boolean;
   onClose: () => void;
+  currentUser?: any;
 }
 
-export default function ContactArtisanModal({ artisanId, artisanName, isOpen, onClose }: ContactArtisanModalProps) {
+export default function ContactArtisanModal({ artisanId, artisanName, isOpen, onClose, currentUser }: ContactArtisanModalProps) {
   const { t } = useLanguage();
   const supabase = createClient();
   const [subject, setSubject] = useState("");
@@ -19,26 +21,43 @@ export default function ContactArtisanModal({ artisanId, artisanName, isOpen, on
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<any>(currentUser || null);
+  const [checkingUser, setCheckingUser] = useState(!currentUser);
 
   useEffect(() => {
+    // If we already have the user from props, no need to fetch
+    if (currentUser) {
+      setCheckingUser(false);
+      return;
+    }
+
     const getUser = async () => {
+      setCheckingUser(true);
       const { data: { user } } = await supabase.auth.getUser();
       setUser(user);
+      setCheckingUser(false);
     };
     getUser();
-  }, [supabase]);
+  }, [supabase, currentUser]);
 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      // Re-check user when opening if not provided via props (in case session expired)
+      if (!currentUser) {
+        const checkSession = async () => {
+          const { data: { user } } = await supabase.auth.getUser();
+          setUser(user);
+        }
+        checkSession();
+      }
     } else {
       document.body.style.overflow = 'unset';
     }
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [isOpen]);
+  }, [isOpen, currentUser, supabase]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,28 +66,35 @@ export default function ContactArtisanModal({ artisanId, artisanName, isOpen, on
     setSubmitting(true);
     setError("");
 
-    const { error } = await supabase
-      .from('messages')
-      .insert({
-        sender_id: user.id,
-        recipient_id: artisanId,
-        subject,
-        content: message
-      });
+    try {
+      console.log("Sending message via Server Action...");
 
-    if (error) {
-      setError("Failed to send message. Please try again.");
-    } else {
-      setSuccess(true);
-      setSubject("");
-      setMessage("");
-      setTimeout(() => {
-        setSuccess(false);
-        onClose();
-      }, 2000);
+      const formData = new FormData();
+      formData.append("recipientId", artisanId);
+      formData.append("subject", subject);
+      formData.append("content", message);
+
+      const result = await sendMessage(formData);
+
+      if (result.error) {
+        console.error("Server Action error:", result.error);
+        setError("Failed to send: " + result.error);
+      } else {
+        console.log("Message sent successfully via Server Action");
+        setSuccess(true);
+        setSubject("");
+        setMessage("");
+        setTimeout(() => {
+          setSuccess(false);
+          onClose();
+        }, 2000);
+      }
+    } catch (err: any) {
+      console.error("Submission exception:", err);
+      setError("Error: " + (err?.message || "Unexpected error occurred"));
+    } finally {
+      setSubmitting(false);
     }
-
-    setSubmitting(false);
   };
 
   if (!isOpen) return null;
@@ -107,7 +133,12 @@ export default function ContactArtisanModal({ artisanId, artisanName, isOpen, on
 
         {/* Body */}
         <div className="p-6">
-          {!user ? (
+          {checkingUser ? (
+            <div className="flex flex-col items-center justify-center py-12">
+              <div className="w-10 h-10 border-4 border-[#e5d1bf] border-t-[#c65d51] rounded-full animate-spin mb-4"></div>
+              <p className="text-gray-500">Verifying session...</p>
+            </div>
+          ) : !user ? (
             <div className="text-center py-8">
               <div className="w-16 h-16 bg-[#faf7f2] rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg className="w-8 h-8 text-[#6f5c46]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -148,7 +179,7 @@ export default function ContactArtisanModal({ artisanId, artisanName, isOpen, on
                   type="text"
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
-                  className="w-full px-4 py-3 border border-[#e5d1bf] rounded-xl focus:ring-2 focus:ring-[#c65d51] focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 border border-[#e5d1bf] rounded-xl focus:ring-2 focus:ring-[#c65d51] focus:border-transparent transition-all text-gray-900"
                   placeholder="e.g., Question about custom orders"
                   required
                 />
@@ -162,7 +193,7 @@ export default function ContactArtisanModal({ artisanId, artisanName, isOpen, on
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   rows={5}
-                  className="w-full px-4 py-3 border border-[#e5d1bf] rounded-xl focus:ring-2 focus:ring-[#c65d51] focus:border-transparent transition-all resize-none"
+                  className="w-full px-4 py-3 border border-[#e5d1bf] rounded-xl focus:ring-2 focus:ring-[#c65d51] focus:border-transparent transition-all resize-none text-gray-900"
                   placeholder="Write your message here..."
                   required
                 />

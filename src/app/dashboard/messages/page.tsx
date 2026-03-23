@@ -14,6 +14,19 @@ export default async function MessagesPage() {
     redirect('/login?redirect=/dashboard/messages')
   }
 
+  const { data: messages } = await supabase
+    .from('messages')
+    .select(`
+      id,
+      subject,
+      content,
+      is_read,
+      created_at,
+      sender:profiles!sender_id(full_name, avatar_url)
+    `)
+    .eq('recipient_id', user.id)
+    .order('created_at', { ascending: false });
+
   return (
     <div className="min-h-screen bg-[#faf7f2] py-8 px-4">
       <div className="max-w-4xl mx-auto">
@@ -25,7 +38,7 @@ export default async function MessagesPage() {
         </div>
 
         {/* Messages Inbox Component */}
-        <MessagesInbox />
+        <MessagesInbox initialMessages={messages || []} />
       </div>
     </div>
   )

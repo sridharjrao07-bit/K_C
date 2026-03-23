@@ -85,7 +85,9 @@ export const translations = {
       exploreAll: "Explore All Crafts",
       by: "by",
       inStock: "In Stock",
-      soldOut: "Sold Out"
+      soldOut: "Sold Out",
+      unknown: "Unknown",
+      to: "to"
     },
     dashboard: {
       welcome: "Namaste",
@@ -109,7 +111,11 @@ export const translations = {
       totalEarnings: "Total Earnings",
       storeViews: "Store Views",
       activeProducts: "Active Products",
-      pendingItems: "Pending Items"
+      pendingItems: "Pending Items",
+      messages: "Messages",
+      messagesDesc: "Check messages from customers.",
+      inbox: "Inbox",
+      viewMessages: "View Messages"
     },
     auth: {
       signIn: "Sign In",
@@ -230,6 +236,7 @@ export const translations = {
     },
     messages: {
       inbox: "Messages",
+      sent: "Sent",
       noMessages: "No messages yet"
     },
     checkout: {
@@ -398,7 +405,9 @@ export const translations = {
       exploreAll: "सभी शिल्पों का अन्वेषण करें",
       by: "द्वारा",
       inStock: "स्टॉक में",
-      soldOut: "बिक गया"
+      soldOut: "बिक गया",
+      unknown: "अज्ञात",
+      to: "को"
     },
     dashboard: {
       welcome: "नमस्ते",
@@ -422,7 +431,11 @@ export const translations = {
       totalEarnings: "कुल कमाई",
       storeViews: "स्टोर व्यूज",
       activeProducts: "सक्रिय उत्पाद",
-      pendingItems: "लंबित आइटम"
+      pendingItems: "लंबित आइटम",
+      messages: "संदेश",
+      messagesDesc: "ग्राहकों के संदेश देखें।",
+      inbox: "इनबॉक्स",
+      viewMessages: "संदेश देखें"
     },
     auth: {
       signIn: "साइन इन करें",
@@ -550,6 +563,7 @@ export const translations = {
     },
     messages: {
       inbox: "संदेश",
+      sent: "भेजा गया",
       noMessages: "अभी तक कोई संदेश नहीं"
     },
     verification_page: {
@@ -709,7 +723,9 @@ export const translations = {
       exploreAll: "ಎಲ್ಲಾ ಕಲೆಗಳನ್ನು ಅನ್ವೇಷಿಸಿ",
       by: "ಇವರಿಂದ",
       inStock: "ದಾಸ್ತಾನು ಇದೆ",
-      soldOut: "ಖಾಲಿಯಾಗಿದೆ"
+      soldOut: "ಖಾಲಿಯಾಗಿದೆ",
+      unknown: "ಅಜ್ಞಾತ",
+      to: "ಗೆ"
     },
     dashboard: {
       welcome: "ನಮಸ್ಕಾರ",
@@ -733,7 +749,11 @@ export const translations = {
       totalEarnings: "ಒಟ್ಟು ಗಳಿಕೆ",
       storeViews: "ಮಳಿಗೆಯ ವೀಕ್ಷಣೆಗಳು",
       activeProducts: "ಸಕ್ರಿಯ ಉತ್ಪನ್ನಗಳು",
-      pendingItems: "ಬಾಕಿ ಇರುವ ಐಟಂಗಳು"
+      pendingItems: "ಬಾಕಿ ಇರುವ ಐಟಂಗಳು",
+      messages: "ಸಂದೇಶಗಳು",
+      messagesDesc: "ಗ್ರಾಹಕರಿಂದ ಬಂದ ಸಂದೇಶಗಳನ್ನು ಪರಿಶೀಲಿಸಿ.",
+      inbox: "ಇನ್‌ಬಾಕ್ಸ್",
+      viewMessages: "ಸಂದೇಶಗಳನ್ನು ವೀಕ್ಷಿಸಿ"
     },
     auth: {
       signIn: "ಸೈನ್ ಇನ್",
@@ -889,6 +909,7 @@ export const translations = {
     },
     messages: {
       inbox: "ಸಂದೇಶಗಳು",
+      sent: "ಕಳುಹಿಸಲಾಗಿದೆ",
       noMessages: "ಇನ್ನೂ ಯಾವುದೇ ಸಂದೇಶಗಳಿಲ್ಲ"
     },
     verification_page: {

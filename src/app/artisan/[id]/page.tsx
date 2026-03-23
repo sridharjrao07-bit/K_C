@@ -34,6 +34,8 @@ export default async function ArtisanProfile({ params }: { params: Promise<{ id:
         .eq('artisan_id', id)
         .order('created_at', { ascending: false });
 
+    const { data: { user } } = await supabase.auth.getUser();
+
     // 3. Fetch Gallery Items
     const { data: galleryItems } = await supabase
         .from('gallery_items')
@@ -70,7 +72,7 @@ export default async function ArtisanProfile({ params }: { params: Promise<{ id:
                     <p className="text-xl text-[#e5d1bf] mb-4 uppercase tracking-wider font-semibold">{artisan.craft || "Master Artisan"}</p>
                     <div className="flex flex-col items-center gap-6">
                         <ShareProfile artisanId={id} artisanName={artisan.full_name} />
-                        <ArtisanProfileClient artisanId={id} artisanName={artisan.full_name} />
+                        <ArtisanProfileClient artisanId={id} artisanName={artisan.full_name} currentUser={user} />
                         <div className="inline-block bg-white/10 backdrop-blur-md px-6 py-2 rounded-full border border-white/20">
                             <span className="text-sm">Verified Kaarigar Connect Partner</span>
                         </div>

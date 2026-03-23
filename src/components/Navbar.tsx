@@ -37,7 +37,7 @@ export default function Navbar() {
           .from('admins')
           .select('role')
           .eq('user_id', user.id)
-          .single();
+          .maybeSingle();
 
         if (error) console.error("Admin check failed:", error);
         if (admin) console.log("Admin detected:", admin);
@@ -55,7 +55,7 @@ export default function Navbar() {
           .from('admins')
           .select('role')
           .eq('user_id', session.user.id)
-          .single();
+          .maybeSingle();
         setIsAdmin(!!admin);
       } else {
         setIsAdmin(false);
@@ -74,26 +74,23 @@ export default function Navbar() {
     setIsMenuOpen(false); // Close mobile menu immediately
 
     try {
-      const { error } = await supabase.auth.signOut();
-
-      if (error) {
-        console.error("Logout error:", error);
-        alert("Failed to log out. Please try again.");
-        setIsLoggingOut(false);
-        return;
-      }
+      // Race between signOut and a 2-second timeout
+      // This ensures we don't get stuck in a loading state if the network hangs
+      await Promise.race([
+        supabase.auth.signOut(),
+        new Promise((resolve) => setTimeout(resolve, 2000))
+      ]);
 
       // Clear local state
       setUser(null);
       setIsAdmin(false);
 
-      // Navigate to login
-      router.push("/login");
-      router.refresh();
+      // Force full reload to clear all states/caches
+      window.location.href = "/login";
     } catch (error) {
-      console.error("Unexpected logout error:", error);
-      alert("An unexpected error occurred during logout.");
-      setIsLoggingOut(false);
+      console.error("Logout validation error:", error);
+      // Fallback: Always redirect even if something fails
+      window.location.href = "/login";
     }
   };
 

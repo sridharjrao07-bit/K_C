@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import ChatBot from "@/components/ChatBot";
 import { LanguageProvider } from "@/context/language-context";
 import { CartProvider } from "@/context/cart-context";
 import CartDrawer from "@/components/CartDrawer";
@@ -43,6 +44,7 @@ export default function RootLayout({
                         <Navbar />
                         <main>{children}</main>
                         <CartDrawer />
+                        <ChatBot />
                     </CartProvider>
                 </LanguageProvider>
             </body>

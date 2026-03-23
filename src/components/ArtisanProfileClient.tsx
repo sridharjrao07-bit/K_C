@@ -8,9 +8,10 @@ import { useLanguage } from "@/context/language-context";
 interface ArtisanProfileClientProps {
   artisanId: string;
   artisanName: string;
+  currentUser?: any;
 }
 
-export default function ArtisanProfileClient({ artisanId, artisanName }: ArtisanProfileClientProps) {
+export default function ArtisanProfileClient({ artisanId, artisanName, currentUser }: ArtisanProfileClientProps) {
   const { t } = useLanguage();
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
@@ -42,6 +43,7 @@ export default function ArtisanProfileClient({ artisanId, artisanName }: Artisan
         artisanName={artisanName}
         isOpen={isContactModalOpen}
         onClose={() => setIsContactModalOpen(false)}
+        currentUser={currentUser}
       />
     </>
   );
